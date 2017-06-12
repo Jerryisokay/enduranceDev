@@ -46,7 +46,7 @@
 
         var titWidth  = $('#header').offset().width;
         setTimeout(function () {
-            appcan.frame.open("content", "ZyPatientListFilter.html", titWidth, titHeight, 'filter');
+            appcan.frame.open("content", "PatientListFilter.html", titWidth, titHeight, 'filter');
         }, 500);
 
         //关闭窗口
@@ -56,7 +56,7 @@
         $('.j-open-filter').on('tap', function () {
 //            var s = 'toggleFilter()';
 //            uexWindow.evaluatePopoverScript('','content',s);
-            appcan.window.publish('EDZY/YyPatientList.toggleFilter','');
+            appcan.window.publish('EDZY/PatientList.toggleFilter','');
         });
 
     });

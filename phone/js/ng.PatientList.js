@@ -77,8 +77,12 @@ angular.module("myApp", ["ngTouch", "ngq"]).service("Data", function() {
   return function(t) {
     return 3 == t.flowType && 4 == t.state ? void appcan.window.alert("提示", "无法查看封存的数据", "知道了") : (console.log(t), localStorage.setItem("EDZY/PatientDetail.patientId", t.id), void appcan.window.open("EDZY_PatientDetail", "PatientDetail.html", 10))
   }
-}]).controller("ItemListController", ["$scope", "$timeout", "Data", "getList", "openDetail", "getStatTxt", function(t, e, i, a, n, o) {
-  t.openDetail = n, t.getStatTxt = o, a()
+}]).service("openZyList", ["$timeout", "Data", function(t, e) {
+  return function(t) {
+    return 3 == t.flowType && 4 == t.state ? void appcan.window.alert("提示", "无法查看封存的数据", "知道了") : (console.log(t), localStorage.setItem("EDZY/PatientDetail.patientId", t.id), void appcan.window.open("EDZY_ZyPatientDetail", "ZyPatientDetail.html", 10))
+  }
+}]).controller("ItemListController", ["$scope", "$timeout", "Data", "getList", "openDetail","openZyList", "getStatTxt", function(t, e, i, a, n, z, o) {
+  t.openDetail = n, t.openZyList= z, t.getStatTxt = o, a()
 }]).controller("GlbController", ["$scope", "$timeout", "Data", "subscribe", "getList", function(t, e, i, a, n) {
   t.Data = i, t.sMAP = {
     "": "全部",

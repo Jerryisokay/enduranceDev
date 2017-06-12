@@ -17,7 +17,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     };
     console.log(n), appcan.window.openToast(CR.TOAST_WAITING), appcan.request.ajax({
       type: "GET",
-      url: SimcereConfig.server.edzy + "med/given",
+      url: SimcereConfig.server.edzy + "givencyc",
       data: n,
       contentType: "application/json",
       dataType: "json",
