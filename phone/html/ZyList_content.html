@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html ng-jq class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/ui-box.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/ui-base.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/ui-color.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/appcan.icon.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/appcan.control.css">
+    <link rel="stylesheet" href="../vendor/angular/angular-csp.css"/>
+    <!---->
+    <link rel="stylesheet" href="../vendor/appcan-base/css/bundle.nec.size.css"/>
+    <link rel="stylesheet" href="../css/lib.css"/>
+    <link rel="stylesheet" href="../css/Zy.css"/>
+</head>
+<body class="um-vp bc-bg vp-bg" ontouchstart ng-controller="GlbController">
+
+<div class="bd-wrap">
+    <div class="filter-info gap-b">
+        <div class="ub ub-ac filter-info-item ng-hide" ng-show="Data.hospitalName">
+            <div class="filter-info-icon fi fi-yiyuan"></div>
+            <div class="filter-info-txt" ng-bind="Data.hospitalName">南京妇幼保健第二人民医院</div>
+            <div class="filter-info-rm" ng-click="clearHospitalName()"></div>
+        </div>
+        <div class="ub ub-ac filter-info-item ng-hide" ng-show="Data.doctorName">
+            <div class="filter-info-icon fi fi-yisheng"></div>
+            <div class="filter-info-txt" ng-bind="Data.doctorName">张三</div>
+            <div class="filter-info-rm" ng-click="clearDoctorName()"></div>
+        </div>
+        <div class="ub ub-ac filter-info-item ng-hide" ng-show="Data.patientName">
+            <div class="filter-info-icon fi fi-huanzhe"></div>
+            <div class="filter-info-txt" ng-bind="Data.patientName">李四</div>
+            <div class="filter-info-rm" ng-click="clearPatient()"></div>
+        </div>
+        <div class="ub ub-ac filter-info-item">
+            <div class="filter-info-icon fi fi-all"></div>
+            <div class="filter-info-txt" ng-bind="sMAP[Data.state]">全部</div>
+            <div class="filter-info-rm ng-hide" ng-show="Data.state!==''" ng-click="clearState()"></div>
+        </div>
+    </div>
+
+    <div class="g-list ph15" ng-controller="ItemListController">
+        <!--spinner-->
+        <div class="g-spinner" ng-hide="Data.itemList.length||Data.itemListEmpty||Data.itemListErr"><i class="fa fa-spinner fa-spin"></i></div>
+        <div class="g-req-empty text-muted ng-hide" ng-show="Data.itemListEmpty">暂无数据</div>
+        <div class="g-req-error text-muted ng-hide" ng-show="Data.itemListErr">查询失败</div>
+
+        <!--row-->
+        <div class="m-doctor c-9 pd20 bd1 bdr-lg bg-light gap-b">
+
+            <div class="ub ub-ac mb16">
+                <div class="ub ub-ac ub-f1">
+                    <i class="f-db w36 h36 fi fi-yisheng"></i>
+                    <div class="fs28 c-3 ml5 w130" ng-bind="item.name">王医生</div>
+                </div>
+                <div class=""><span class="fs28 c-warn" ng-bind="item.times||0">3</span><span class="fs18 c-9">次赠药</span></div>
+                <div class="icon-arrow-r ml20 ng-hide" ng-show="item.giveState==5"></div>
+            </div>
+            <div class="ub ub-ac mt12 fs24 c-9" ng-class="{'mb12': item.doctors.length}">
+                <div class="mr10">用药支数：<span class="c-positive" ng-bind="item.useCount||0">12</span>支</div>
+                <div class="ng-hide" ng-show="item.beginDate&&item.endDate">
+                    <span class="ng-hide">周期:</span>
+                    <span ng-bind="item.beginDate">2015-07-13</span>至<span ng-bind="item.endDate">2016-11-12</span>
+                </div>
+                <div class="ub-f1"></div>
+                <div class="fs18 c-f p-sh" ng-class="{'bg-warn':item.giveState==0,'bg-error':item.giveState==2,'bg-positive':item.giveState==1||item.giveState==3||item.giveState==5,'bg-gray':item.giveState==4||item.giveState==6}" data-state="{{item.giveState}}" ng-bind="sMAP[item.giveState]">可申请</div>
+            </div>
+            <div class="ub c-9 fs24 mb4 ng-hide" ng-show="item.doctors.length" ng-repeat="doctor in item.doctors">
+                <i class="f-db w32 h32 fi fi-yiyuan"></i>
+                <div class="ub-f1 ut-s" ng-bind="doctor.hospitalName">南京第二人民医院</div>
+                <div ng-bind="doctor.name">乔医生</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--<div class="g-filter-page">
+        <div class="m-filter-page">
+            <div class="mt43 lh46 fs24 c-3">医院</div>
+            <div class="bd1 bdr-lg pd19 lh30 fs24 c-9 mb26 icon-arrow-r w-auto">未选择</div>
+
+            <div class="lh46 fs24 c-3">医生名</div>
+            <div class="bd1 bdr-lg pd19 lh30 fs24 c-9 mb26" contenteditable="true">未填写</div>
+
+            <div class="lh46 fs24 c-3">患者名</div>
+            <div class="bd1 bdr-lg pd19 lh30 fs24 c-9 mb26" contenteditable="true">未填写</div>
+
+            <div class="lh46 fs24 c-3 mt50">状态</div>
+            <div class="m-filter-page-stat fs28">
+                <div class="ub mb50">
+                    <a href="javascript:" class="ub ub-con ub-ac ub-pc ub-f1 f-tdn mr38 z-active">全部</a>
+                    <a href="javascript:" class="ub ub-con ub-ac ub-pc ub-f1 f-tdn">可申请的</a>
+                </div>
+                <div class="ub mb50">
+                    <a href="javascript:" class="ub ub-con ub-ac ub-pc ub-f1 f-tdn mr38">已驳回</a>
+                    <a href="javascript:" class="ub ub-con ub-ac ub-pc ub-f1 f-tdn">申请中的</a>
+                </div>
+                <div class="ub">
+                    <a href="javascript:" class="ub ub-con ub-ac ub-pc ub-f1 f-tdn mr38">不可申请的</a>
+                    <a href="javascript:" class="ub ub-con ub-ac ub-pc ub-f1 f-tdn f-ivh"></a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="m-filter-page-fbtn ub h87">
+            <a href="javascript:" class="ub-f1 ub ub-ac ub-pc f-tdn fs30 c-f bg-muted">清空</a>
+            <a href="javascript:" class="ub-f1 ub ub-ac ub-pc f-tdn fs30 c-f bg-positive">确认</a>
+        </div>
+    </div>-->
+</div>
+
+<script src="../vendor/appcan-fesdk/js/appcan.js"></script>
+<script src="../vendor/appcan-fesdk/js/appcan.control.js"></script>
+<script src="../vendor/angular/angular.min.js"></script>
+<script src="../vendor/angular-touch/angular-touch.min.js"></script>
+<script src="../vendor/simcere/js/config.js"></script>
+<script src="../js/lib.js"></script>
+<script src="../js/ng.js"></script>
+<!-- <script src="../js/ng.ZyList.js"></script> -->
+<script>
+    appcan.ready(function () {
+        appcan.frame.setBounce({
+            bounceType: ['0','1'],//0-向下，1-向上
+            color: '#fff',
+            upEndCall: function (type) {
+                //$(window).trigger('zy-list-load');
+                if(type=='0'){
+                    appcan.window.publish('EDZY/ZyList.refresh');
+                }else{
+                    appcan.window.publish('EDZY/ZyList.load');
+                }
+
+                appcan.frame.resetBounce(type);
+            }
+    });
+
+        //angular.bootstrap(document.documentElement, ['myApp']);
+
+        /*var bh = $('body').height();
+        $('.g-filter-page').height(bh);*/
+    });
+
+</script>
+</body>
+</html>

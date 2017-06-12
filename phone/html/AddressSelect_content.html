@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/ui-box.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/ui-base.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/ui-color.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/appcan.icon.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/appcan.control.css">
+    <!---->
+    <link rel="stylesheet" href="../vendor/appcan-base/css/bundle.nec.size.css"/>
+    <link rel="stylesheet" href="../css/lib.css"/>
+
+</head>
+<body class="um-vp bc-bg" ontouchstart>
+
+<div class="g-address f-oh">
+    <div class="ub ub-ac h100 bg-light gap-t gap-b ph30 j-ssqx">
+        <div class="ub-f1 fs30 c-6">所在地区</div>
+        <input type="text" placeholder="请选择所在地区" readonly class="ub-f1 f-tar reset-input mr17 n-ipt-ssqx fs24"/>
+        <div class="fa fa-angle-right"></div>
+    </div>
+
+    <div class="pd30 ub bg-light">
+        <textarea name="" id="" rows="6" placeholder="请填写详细地址。" class="ub-f1 reset-input n-address fs24"></textarea>
+    </div>
+</div>
+
+<script src="../vendor/appcan-fesdk/js/appcan.js"></script>
+<script src="../vendor/appcan-fesdk/js/appcan.control.js"></script>
+<script src="../vendor/simcere/js/config.js"></script>
+<script src="../js/lib.js"></script>
+<script src="../js/AddressSelect.js"></script>
+<script>
+    appcan.ready(function () {
+//        appcan.initBounce();
+
+    });
+
+    $('.j-ssqx').on('tap', function () {
+        openAddressPicker(function (data) {
+            console.log(data);
+            var s = data.data.join(',');
+            $('.n-ipt-ssqx').val(s);
+        });
+    });
+
+</script>
+</body>
+</html>

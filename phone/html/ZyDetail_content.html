@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html ng-jq class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/ui-box.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/ui-base.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/ui-color.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/appcan.icon.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/appcan.control.css">
+    <!---->
+    <link rel="stylesheet" href="../vendor/appcan-base/css/bundle.nec.size.css"/>
+    <link rel="stylesheet" href="../css/lib.css"/>
+
+</head>
+<body class="um-vp bc-bg" ontouchstart ng-controller="GlbController">
+
+
+<div class="g-main pv32 ph20">
+
+    <div class="ub ub-ac m-list-item h69 ph19 bd1 f-oh bg-light gap-b bdr-5" ng-click="openShopSelect()">
+        <div class="pr18 fs24 c-3">领药药店</div>
+        <input type="text" ng-model="Data.shopName" readonly placeholder="未选择(必填)" class="fs24 c-9 mr12 ub-f1 tx-r reset-input"/>
+        <div class="icon-arrow-r"></div>
+    </div>
+
+    <div class="m-list-group bd1  f-oh gap-b bdr-5" ng-init="isPatientDetailActive=false">
+        <!--item-->
+        <div class="ub ub-ac m-list-item bg-light h69 ph19 j-toggle-patient" ng-click="isPatientDetailActive=!isPatientDetailActive" ng-class="{'bd-b':isPatientDetailActive}">
+            <div class="pr18 fs24 c-3">患者</div>
+            <input ng-model="Data.zy.patient.name" type="text" placeholder="未选择(必填)" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <div class="icon-arrow-r f-dn"></div>
+            <div class="ml20 c-9 u-shengluehao"></div>
+        </div>
+
+        <!--患者详情-->
+        <div class="n-patient-detail ng-hide" ng-show="isPatientDetailActive">
+            <!--item-->
+            <div class="ub ub-ac m-list-item bg-light h69 ph19 bd-b">
+                <div class="pr18 fs24 c-3 ub-f1">性别</div>
+                <div class="fs24 c-9 mr12" ng-bind="Data.zy.patient.sexName">女</div>
+                <div class="icon-arrow-r f-dn"></div>
+            </div>
+            <!--item-->
+            <div class="ub ub-ac m-list-item bg-light h69 ph19 bd-b">
+                <div class="pr18 fs24 c-3">身份证号</div>
+                <input type="text" ng-model="Data.zy.patient.idcard" readonly placeholder="未选择(必填)" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+                <div class="icon-arrow-r f-dn"></div>
+            </div>
+            <!--item-->
+            <div class="ub ub-ac m-list-item bg-light h69 ph19 bd-b">
+                <div class="pr18 fs24 c-3">年龄</div>
+                <input type="text" ng-model="Data.zy.patient.age" readonly placeholder="未选择(必填)" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+                <div class="icon-arrow-r f-dn"></div>
+            </div>
+            <!--item-->
+            <div class="ub ub-ac m-list-item bg-light h69 ph19 bd-b">
+                <div class="pr18 fs24 c-3">联系方式</div>
+                <input type="text" ng-model="Data.zy.patient.mobile" readonly placeholder="未选择(必填)" value="18988889999" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+
+                <div class="icon-arrow-r f-dn"></div>
+            </div>
+            <!--item-->
+            <div class="ub ub-ac m-list-item bg-light h69 ph19">
+                <div class="pr18 fs24 c-3">联系地址</div>
+                <input type="text" ng-model="Data.zy.patient.ssqxView" readonly placeholder="未选择(必填)" value="江苏省南京市玄武区" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+                <div class="icon-arrow-r f-dn"></div>
+            </div>
+            <!--item-->
+                        <!---->
+            
+        </div>
+        <!--/患者详情-->
+    </div>
+    
+    <div class="n-patient-detail ng-hide" ng-show="isPatientDetailActive">
+        <div class="m-list-group bd1  f-oh gap-b bdr-5">
+            <div class="ub ub-ac m-list-item bg-light h69 ph19 bd-b">
+                <div class="pr18 fs24 c-3">医保类型</div>
+                <input type="text" ng-model="Data.zy.patient.mitypeName" readonly placeholder="未选择" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+                <div class="icon-arrow-r f-dn"></div>
+            </div>
+            <!--item-->
+            <div class="ub ub-ac m-list-item bg-light h69 ph19 gap-b">
+                <div class="pr18 fs24 c-3">其他保险名称</div>
+                <input type="text" ng-model="otherIns" readonly placeholder="未选择" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+                <div class="icon-arrow-r f-dn"></div>
+            </div>
+        </div>
+        
+        <div class="m-list-group bd1  f-oh gap-b bdr-5">
+            <div class="g-card-img  f-oh bg-light pd22 gap-b">
+                <div class="m-card-img">
+                    <div class="mb30 fs24 c-3">身份证扫描件</div>
+                    <div class="f-cb mb-quits">
+                        <!--item-->
+                        <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.zy.patient.idcardFilesView.length" ng-repeat="item in Data.zy.patient.idcardFilesView">
+                            <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.zy.patient.idcardFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
+                        </div>
+                        <div class="ng-hide u-img-list-empty" ng-show="!Data.zy.patient.idcardFilesView.length">未上传</div>
+                    </div>
+                </div>
+            </div>
+         </div>
+        <div class="m-list-group bd1  f-oh gap-b bdr-5">
+            <div class="g-card-img  f-oh bg-light pd22 gap-b">
+                <div class="m-card-img">
+                    <div class="mb30 fs24 c-3">户口本扫描件</div>
+                    <div class="f-cb mb-quits">
+                        <!--item-->
+                        <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.zy.patient.hkFilesView.length" ng-repeat="item in Data.zy.patient.hkFilesView">
+                            <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.zy.patient.hkFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
+                        </div>
+                        <div class="ng-hide u-img-list-empty" ng-show="!Data.zy.patient.hkFilesView.length">未上传</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+        
+            <!-- <div class="g-card-img  f-oh bg-light pd22 gap-b">
+                <div class="m-card-img">
+                    <div class="mb30 fs24 c-3">首次援助申请评估表扫描件</div>
+                    <div class="f-cb mb-quits">
+                        <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.zy.patient.assApplyFilesView.length" ng-repeat="item in Data.zy.patient.assApplyFilesView">
+                            <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.zy.patient.assApplyFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
+                        </div>
+                        <div class="ng-hide u-img-list-empty" ng-show="!Data.zy.patient.assApplyFilesView.length">未上传</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="g-card-img  f-oh bg-light pd22 gap-b">
+                <div class="m-card-img">
+                    <div class="mb30 fs24 c-3">经济评估表扫描件</div>
+                    <div class="f-cb mb-quits">
+                        <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.zy.patient.ecoEvlFilesView.length" ng-repeat="item in Data.zy.patient.ecoEvlFilesView">
+                            <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.zy.patient.ecoEvlFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
+                        </div>
+                        <div class="ng-hide u-img-list-empty" ng-show="!Data.zy.patient.ecoEvlFilesView.length">未上传</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="g-card-img  f-oh bg-light pd22">
+                <div class="m-card-img">
+                    <div class="mb30 fs24 c-3">患者告知书，知情书同意书扫描件</div>
+                    <div class="f-cb mb-quits">
+                        <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.zy.patient.infNotiCirmFilesView.length" ng-repeat="item in Data.zy.patient.infNotiCirmFilesView">
+                            <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.zy.patient.infNotiCirmFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
+                        </div>
+                        <div class="ng-hide u-img-list-empty" ng-show="!Data.zy.patient.infNotiCirmFilesView.length">未上传</div>
+                    </div>
+                </div>
+            </div> -->
+    
+    <!--<div class="bg-error gap-b">第一次赠药</div>-->
+    <div class="fs18 pd20 bg-light bd1 bdr-5 gap-b ng-hide" ng-show="Data.zy.applys.length" ng-repeat="apply in Data.zy.applys">
+        <div class="ub mb26">
+            <div class="c-3 ub-f1">第<span class="fs28 c-warn" ng-bind="$index">1</span>次赠药</div>
+            <div class="c-9">本次赠药：<span ng-bind="apply.givenCount">xx</span>支</div>
+        </div>
+        <div class="ub">
+            <div class="c-3 ub-f1">发放时间<span ng-bind="apply.givenDate">2016-11-28</span></div>
+            <div class="c-9">领药编码<span ng-bind="apply.givenNo">xxxxxxxxx</span></div>
+        </div>
+    </div>
+
+
+    
+    <!---赠药周期--->
+    <div class="m-list-group bd1 bdr-5 f-oh bg-light gap-b" ng-init="isZyDetailActive=false">
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b" ng-click="isZyDetailActive= !isZyDetailActive">
+            <div class="pr18 ub-f1 fs24 c-3">赠药周期信息</div>
+            <div class="fa-ellipsis-h fa c-9"></div>
+        </div>
+        <!--诊疗信息列表-->
+        <div class="ng-hide" ng-show="isZyDetailActive">
+            <!--用药周期列表-->
+            <div class="pl20">
+                <div class="bd-b m-list-item pt16 pb16">
+                    <div class="ub ub-ac h50 ph19">
+                        <div class="pr18 ub-f1 fs20 c-6">第一次用药</div>
+                        <div class="fs20 c-9">时间段：02-11~03-11</div>
+                    </div>
+                    <div class="ub ub-ac h50 ph19">
+                        <div class="pr18 ub-f1 fs20 c-9">支数：1支</div>
+                        <div class="c-9 fs20">产品：恩度</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!---用药周期--->
+    <div class="m-list-group bd1 bdr-5 f-oh bg-light gap-b" ng-init="isYyDetailActive=false">
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b" ng-click="isYyDetailActive= !isYyDetailActive">
+            <div class="pr18 ub-f1 fs24 c-3">用药周期信息</div>
+            <div class="fa-ellipsis-h fa c-9"></div>
+        </div>
+        <!--诊疗信息列表-->
+        <div class="ng-hide" ng-show="isYyDetailActive">
+            <div class="">
+                <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+                    <div class="pr18 ub-f1 fs20 c-3">诊疗信息1</div>
+                    <div class="c-positive pr30"><span class="fs20">查看</span></div>
+                    <div class="fa-ellipsis-h fa c-9"></div>
+                </div>
+                <!--用药周期列表-->
+                <div class="pl20">
+                    <div class="bd-b m-list-item pt16 pb16">
+                        <div class="ub ub-ac h50 ph19">
+                            <div class="pr18 ub-f1 fs20 c-6">第一次用药</div>
+                            <div class="fs20 c-9">时间段：02-11~03-11</div>
+                        </div>
+                        <div class="ub ub-ac h50 ph19">
+                            <div class="pr18 ub-f1 fs20 c-9">支数：1支</div>
+                            <div class="c-9 fs20">产品：恩度</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="m-list-group bd1 f-oh bg-light bdr-5">
+        <!--item-->
+        <div class="ub ub-ac m-list-item h69 ph19 j-open-flow" ng-click="openFlow()">
+            <div class="u-icon w32 h32 fi fi-shenpiliucheng"></div>
+            <div class="pr18 fs24 c-3 ub-f1">审批流程</div>
+            <div class="icon-splc w69 h69"></div>
+        </div>
+    </div>
+
+</div>
+
+<script src="../vendor/appcan-fesdk/js/appcan.js"></script>
+<script src="../vendor/appcan-fesdk/js/appcan.control.js"></script>
+<script src="../vendor/angular/angular.min.js"></script>
+<script src="../vendor/simcere/js/config.js"></script>
+<script src="../js/lib.js"></script>
+<script src="../js/ng.js"></script>
+<script src="../js/ng.ZyDetail.js"></script>
+<script>
+    appcan.ready(function () {
+//        appcan.initBounce();
+        angular.bootstrap(document.documentElement, ['myApp']);
+    });
+
+    /*$('.j-toggle-patient').on('tap', function () {
+        $(this).toggleClass('bd-b');
+        $('.n-patient-detail').toggleClass('f-dn');
+    });*/
+    /*$('.j-toggle-case').on('tap', function () {
+        $(this).toggleClass('bd-b');
+        $('.n-case-detail').toggleClass('f-dn');
+    });*/
+    /*$('.j-toggle-cycle').on('tap', function () {
+        $(this).toggleClass('bd-b');
+        $('.n-cycle-detail').toggleClass('f-dn');
+    });*/
+    /*$('.j-open-flow').on('tap', function () {
+        qlib.openFlow();
+    });*/
+</script>
+</body>
+</html>

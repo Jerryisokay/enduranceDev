@@ -1,0 +1,5 @@
+body.bc-bg{background:#f2f2f2 url(../images/PatientEntrance/bg.jpg) no-repeat center top;-webkit-background-size:contain;background-size:contain}
+.p-btn-wrap{position:absolute;bottom:0;left:0;right:0;max-width:19.375rem;margin:0 auto;padding-bottom:.8rem;padding-left:2rem;padding-right:2rem}
+.p-hz,.p-bl,.p-yyzq{-webkit-background-size:cover;background-size:cover;display:block;padding-top:33%;height:0;overflow:hidden;text-indent:-9999em;margin-bottom:.9375rem}
+.p-hz{background-image:url(../images/PatientEntrance/hz.png)}.p-bl{background-image:url(../images/PatientEntrance/bl.png)}
+.p-yyzq{background-image:url(../images/PatientEntrance/yyzq.png)}

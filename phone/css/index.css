@@ -1,0 +1,5 @@
+body.bc-bg{background:#fff url(../images/index/bg.jpg) no-repeat center top;-webkit-background-size:contain;background-size:contain}
+.p-btn-wrap{position:absolute;bottom:0;left:0;right:0;max-width:20.5rem;margin:0 auto;padding:.5rem 1rem}
+.p-ysgl,.p-hzgl,.p-zygl{-webkit-background-size:cover;background-size:cover;display:block;padding-top:33%;height:0;overflow:hidden;text-indent:-9999em;margin-bottom:.4rem}
+.p-ysgl{background-image:url(../images/index/ys.png)}.p-hzgl{background-image:url(../images/index/hz.png)}
+.p-zygl{background-image:url(../images/index/zy.png)}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/ui-box.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/ui-base.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/ui-color.css">
+    <!--<link rel="stylesheet" href="../vendor/appcan-fesdk/css/appcan.icon.css">-->
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/appcan.control.css">
+    <!---->
+    <link rel="stylesheet" href="../vendor/appcan-base/css/bundle.nec.size.css"/>
+    <link rel="stylesheet" href="../css/lib.css"/>
+    <link rel="stylesheet" href="../css/ShopSelect.css"/>
+
+    <script type="text/html" id="tpl_list">
+        <div class="m-hospital ph19 pv16 ub bd-b" data-id="<%-rowId%>" data-name="<%-name%>">
+            <div class="fi fi-yiliaopingjia w40 h40 mr12"></div>
+            <div class="fs24 lh40"><%-name%></div>
+        </div>
+    </script>
+
+</head>
+<body class="um-vp bc-bg" ontouchstart>
+
+<div class="g-list bg-light n-list">
+    <!--item-->
+</div>
+
+<script src="../vendor/appcan-fesdk/js/appcan.js"></script>
+<script src="../vendor/appcan-fesdk/js/appcan.control.js"></script>
+<script src="../vendor/simcere/js/config.js"></script>
+<script src="../js/lib.js"></script>
+<script>
+    appcan.ready(function () {
+//        appcan.initBounce();
+
+        var list = qlib.getDict()[DICT_KEY.EVALUATE];
+        var tpl = $('#tpl_list').html();
+        var compiler = _.template(tpl);
+        var html = list.map(function (data) {
+            return compiler(data)
+        }).join('');
+        $('.n-list').append(html);
+
+        $('.m-hospital').on('tap', function () {
+            var $this = $(this);
+            var id = $this.data('id');
+            var name = $this.data('name');
+            var o = {
+                id: id,
+                name: name
+            };
+            var json = JSON.stringify(o);
+            console.log(json);
+
+            localStorage.setItem('EDZY/YlpjSelect.item', json);
+            appcan.window.publish('EDZY/YlpjSelect.selected', '');
+            qlib.closeCurrentWindow();
+        });
+    });
+</script>
+</body>
+</html>
