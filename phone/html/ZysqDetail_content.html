@@ -78,13 +78,13 @@
     
     <div class="n-patient-detail ng-hide" ng-show="isPatientDetailActive">
         <div class="m-list-group bd1  f-oh gap-b bdr-5">
-            <div class="ub ub-ac m-list-item bg-light h69 ph19">
+            <div class="ub ub-ac m-list-item bg-light h69 ph19 bd-b">
                 <div class="pr18 fs24 c-3">医保类型</div>
                 <input type="text" ng-model="Data.patient.mitypeName" readonly placeholder="未选择" class="ub-f1 reset-input f-tar ph12 fs24 "/>
                 <div class="icon-arrow-r f-dn"></div>
             </div>
             <!--item-->
-            <div class="ub ub-ac m-list-item bg-light h69 ph19 ng-hide bd-t" ng-show="Data.patient.mitypeName=='其他'">
+            <div class="ub ub-ac m-list-item bg-light h69 ph19 gap-b">
                 <div class="pr18 fs24 c-3">其他保险名称</div>
                 <input type="text" ng-model="otherIns" readonly placeholder="未选择" class="ub-f1 reset-input f-tar ph12 fs24 "/>
                 <div class="icon-arrow-r f-dn"></div>
@@ -121,11 +121,50 @@
         </div>
     </div>
     
+    
+    <!--<div class="bg-error gap-b">第一次赠药</div>-->
+    <div class="fs18 pd20 bg-light bd1 bdr-5 gap-b ng-hide" ng-show="Data.zy.applys.length" ng-repeat="apply in Data.zy.applys">
+        <div class="ub mb26">
+            <div class="c-3 ub-f1">第<span class="fs28 c-warn" ng-bind="$index">1</span>次赠药</div>
+            <div class="c-9">本次赠药：<span ng-bind="apply.givenCount">xx</span>支</div>
+        </div>
+        <div class="ub">
+            <div class="c-3 ub-f1">发放时间<span ng-bind="apply.givenDate">2016-11-28</span></div>
+            <div class="c-9">领药编码<span ng-bind="apply.givenNo">xxxxxxxxx</span></div>
+        </div>
+    </div>
+
+
+    
+    <!---赠药周期--->
+    <div class="m-list-group bd1 bdr-5 f-oh bg-light gap-b" ng-init="isZyDetailActive=false">
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b" ng-click="isZyDetailActive= !isZyDetailActive">
+            <div class="pr18 ub-f1 fs24 c-3">赠药周期信息</div>
+            <div class="fa-ellipsis-h fa c-9"></div>
+        </div>
+        <!--诊疗信息列表-->
+        <div class="ng-hide" ng-show="isZyDetailActive">
+            <!--用药周期列表-->
+            <div class="pl20">
+                <div class="bd-b m-list-item pt16 pb16">
+                    <div class="ub ub-ac h50 ph19">
+                        <div class="pr18 ub-f1 fs20 c-6">第一次用药</div>
+                        <div class="fs20 c-9">时间段：02-11~03-11</div>
+                    </div>
+                    <div class="ub ub-ac h50 ph19">
+                        <div class="pr18 ub-f1 fs20 c-9">支数：1支</div>
+                        <div class="c-9 fs20">产品：恩度</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!---用药周期--->
     <div class="m-list-group bd1 bdr-5 f-oh bg-light gap-b" ng-init="isYyDetailActive=false">
         <div class="ub ub-ac m-list-item h69 ph19 bd-b" ng-click="isYyDetailActive= !isYyDetailActive">
             <div class="pr18 ub-f1 fs24 c-3">用药周期信息</div>
-            <div class="ml20 c-9 u-shengluehao"></div>
+            <div class="fa-ellipsis-h fa c-9"></div>
         </div>
         <!--诊疗信息列表-->
         <div class="ng-hide" ng-show="isYyDetailActive">
@@ -149,37 +188,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    
-    <!---赠药周期--->
-    <div class="m-list-group bd1 bdr-5 f-oh bg-light gap-b" ng-init="isZyDetailActive=false">
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b" ng-click="isZyDetailActive= !isZyDetailActive">
-            <div class="pr18 ub-f1 fs24 c-3">赠药周期信息</div>
-            <div class="ml20 c-9 u-shengluehao"></div>
-        </div>
-        <!--诊疗信息列表-->
-        <div class="ng-hide" ng-show="isZyDetailActive">
-            <!--用药周期列表-->
-            <div class="g-list pl20" ng-controller="ItemListController">
-                <div class="g-spinner" ng-hide="Data.itemList.length||Data.itemListEmpty||Data.itemListErr"><i class="fa fa-spinner fa-spin"></i></div>
-                <div class="g-req-empty text-muted ng-hide" ng-show="Data.itemListEmpty">暂无数据</div>
-                <div class="g-req-error text-muted ng-hide" ng-show="Data.itemListErr">查询失败</div>
-                <!---item--->
-                <div class="bd-b m-list-item pt16 pb16" ng-click="openZyDetail(item)" ng-show="Data.itemList.length" ng-repeat="item in Data.itemList">
-                    <div class="ub ub-ac h50 ph19">
-                        <div class="pr18 ub-f1 fs20 c-6" ng-cloak>赠药周期{{$index+1}}</div>
-                        <div class="fs20 c-9">时间段：{{item.beginDate}}~{{item.endDate}}</div>
-                    </div>
-                    <div class="ub ub-ac h50 ph19">
-                        <div class="pr18 ub-f1 fs20 c-9">支数：{{item.useCount}}支</div>
-                        <div class="c-9 fs20">产品：{{item.productValue}}</div>
-                    </div>
-                </div>
-            </div>
-            <div class="ub ub-ac h48 pv16 tx-c" ng-click="addZy()">
-                <div class="ub-f1 c-positive">+<span class="fs24">新增用药周期</span></div>
-            </div>   
         </div>
     </div>
     

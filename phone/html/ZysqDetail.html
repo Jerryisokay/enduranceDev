@@ -13,27 +13,6 @@
     <link rel="stylesheet" href="../vendor/appcan-fesdk/css/appcan.control.css">
     <!---->
     <link rel="stylesheet" href="../css/main.css"/>
-    <style>
-        .bc-white{
-            background-color: #FFFFFF;
-        }
-        .padd-tb{
-            padding: .75em 0;
-        }
-        .umar-r-1{
-            margin-right: 3.75em
-        }
-        .tab-item{
-            border-bottom: .25em #FFFFFF solid;
-        }
-        .tab-item.active{
-            color:#00A1EA;
-            border-bottom: .25em #00A1EA solid;
-        }
-        .font-normal{
-            font-size: .95rem;
-        }
-    </style>
 </head>
 <body class="um-vp" ontouchstart>
 <div id="page_0" class="up ub ub-ver bc-bg" tabindex="0">
@@ -42,17 +21,9 @@
         <div class="nav-btn" id="nav-left">
             <div class="fa fa-angle-left fa-2x ub ub-ac"></div>
         </div>
-        <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">恩度赠药管理</h1>
+        <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">恩度赠药详情页</h1>
         <div class="nav-btn" id="nav-right">
-            <div class="fa fa-filter fa-2x ub ub-ac j-open-filter"></div>
-        </div>
-    </div>
-    <div id="tab" class="ub ub-ac tx-c ub-pc bc-white">
-        <div class="padd-tb umar-r-1 active tab-item">
-            <span class="font-normal">首次赠药</span>
-        </div>
-        <div class="padd-tb tab-item">
-            <span class="font-normal">后续赠药</span>
+            
         </div>
     </div>
     <!--header结束-->
@@ -67,28 +38,18 @@
 <script src="../js/lib.js"></script>
 <script>
     appcan.ready(function () {
-        var titHeight = $('#header').offset().height + $('#tab').offset().height;
-        appcan.frame.open("content", "ZyList_content.html", 0, titHeight);
+        var titHeight = $('#header').offset().height;
+        appcan.frame.open("content", "ZysqDetail_content.html", 0, titHeight);
         window.onorientationchange = window.onresize = function () {
             appcan.frame.resize("content", 0, titHeight);
         };
-
-        var titWidth  = $('#header').offset().width;
-        setTimeout(function () {
-            appcan.frame.open("content", "ZyListFilter.html", titWidth, titHeight, 'filter');
-        }, 500);
-
-        //关闭窗口
-        $('#nav-left').on('tap', function () {
-            qlib.closeCurrentWindow();
-        });
-        $('.j-open-filter').on('tap', function () {
-//            var s = 'toggleFilter()';
-//            uexWindow.evaluatePopoverScript('','content',s);
-            appcan.window.publish('EDZY/ZyList.toggleFilter','');
-        });
-
+        
     });
+    //关闭窗口
+    $('#nav-left').on('tap', function () {
+        qlib.closeCurrentWindow();
+    });
+    
 </script>
 </body>
 </html>
