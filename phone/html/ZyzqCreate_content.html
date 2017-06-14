@@ -22,10 +22,10 @@
 <div class="g-main pv32 ph20">
     <div class="m-list-group bd1 bdr-lg f-oh bg-light gap-b">
         <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b" ng-click="openDateRangeSelect()">
             <div class="u-icon w32 h32 fi fi-huanzhe"></div>
             <div class="ph18 fs24 c-3">用药时间段</div>
-            <input type="text" ng-model="Data.date" placeholder="未填写(必填)" readonly="" value="" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <input type="text" ng-model="Data.begin_end_View" placeholder="未填写(必填)" readonly="" value="" class="ub-f1 reset-input f-tar ph12 fs24 "/>
 
             <div class="icon-arrow-r f-ivh"></div>
         </div>
@@ -80,113 +80,17 @@
         
     </div>
 
-    <div class="m-list-group bd1 bdr-lg f-oh bg-light gap-b">
-        <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
-            <div class="u-icon w32 h32 fi fa-money"></div>
-            <div class="ph18 fs24 c-3">夫妻双方年总收入</div>
-            <input type="text" ng-model="Data.saIncome" placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
-
-            <div class="icon-arrow-r f-ivh"></div>
-        </div>
-        <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
-            <div class="u-icon w32 h32 fi fa-money"></div>
-            <div class="ph18 fs24 c-3">其余直系亲属年总收入</div>
-            <input type="text" ng-model="Data.lcaIncome" placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
-
-            <div class="icon-arrow-r f-ivh"></div>
-        </div>
-        <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
-            <div class="u-icon w32 h32 fi fi-yibaoleixing"></div>
-            <div class="ph18 fs24 c-3 ub-f1">是否享受医保</div>
-            <!--switch-->
-            <div class="ub m-switch-radius">
-                <div class="ub-f1 ng-hide"
-                     ng-class="{'z-active':item.rowId==Data.isEmi}"
-                     ng-show="Data.isEmiOptions.length"
-                     ng-bind="item.name"
-                     ng-repeat="item in Data.isEmiOptions"
-                     ng-click="setIsEmi(item)">是</div>
-            </div>
-            <div class="icon-arrow-r f-dn"></div>
-        </div>
-        <!--享受医保展示--->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.isEmiName == '是'"  ng-click="setMiArea()">
-            <div class="u-icon w32 h32 fi fi-lianxidizhi"></div>
-            <div class="ph18 fs24 c-3">医保所属地</div>
-            <input type="text" ng-model="Data.miArea" readonly placeholder="未设置(必填)" class="ub-f1 reset-input f-tar ph12 fs24 "/>
-
-            <div class="icon-arrow-r"></div>
-        </div>
-        <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.isEmiName == '是'" ng-click="openYbTypeSelect()">
-            <div class="u-icon w32 h32 fi fi-yibaoleixing"></div>
-            <div class="ph18 fs24 c-3">医保类型</div>
-            <input type="text" ng-model="Data.mitypeName" readonly placeholder="未选择" class="ub-f1 reset-input f-tar ph12 fs24 "/>
-
-            <div class="icon-arrow-r"></div>
-        </div>
-        <!--选择其他保险的时候显示-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.isEmiName == '是' && Data.mitypeName=='其他'">
-            <div class="u-icon w32 h32 fi fi-qitabaoxianmingcheng"></div>
-            <div class="ph18 fs24 c-3">其他保险名称</div>
-            <input type="text" ng-model="Data.otherIns" placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
-
-            <div class="icon-arrow-r f-ivh"></div>
-        </div>
-        <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
-            <div class="u-icon w32 h32 fi fi-yysjd"></div>
-            <div class="ph18 fs24 c-3 ub-f1">是否需要预约编号</div>
-            <!--switch-->
-            <div class="ub m-switch-radius">
-                <div class="ub-f1 ng-hide"
-                     ng-class="{'z-active':item.rowId==Data.isRnum}"
-                     ng-show="Data.isRnumOptions.length"
-                     ng-bind="item.name"
-                     ng-repeat="item in Data.isRnumOptions"
-                     ng-click="setIsRnum(item)">是</div>
-            </div>
-            <div class="icon-arrow-r f-dn"></div>
-        </div>
-        <!--选择预约编号后展示-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.isRnumName == '是'">
-            <div class="u-icon w32 h32 fi fi-aizhong"></div>
-            <div class="ph18 fs24 c-3 ub-f1">是否肺癌</div>
-            <!--switch-->
-            <div class="ub m-switch-radius">
-                <div class="ub-f1 ng-hide"
-                     ng-class="{'z-active':item.rowId==Data.isLcancer}"
-                     ng-show="Data.isLcancerOptions.length"
-                     ng-bind="item.name"
-                     ng-repeat="item in Data.isLcancerOptions"
-                     ng-click="setIsLcancer(item)">是</div>
-            </div>
-            <div class="icon-arrow-r f-dn"></div>
-        </div>
-        <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 ng-hide" ng-show="Data.isRnumName == '是'" ng-click="openDoctorSelect()">
-            <div class="u-icon w32 h32 fi fi-yisheng"></div>
-            <div class="ph18 fs24 c-3">项目医生</div>
-            <input type="text" ng-model="Data.projDocName" readonly placeholder="未选择" class="ub-f1 reset-input f-tar ph12 fs24 "/>
-
-            <div class="icon-arrow-r"></div>
-        </div>
-        
-    </div>
-
+   
     <!---->
     <div class="g-card-img bdr-lg f-oh bd1 bg-light pd22 gap-b">
         <div class="m-card-img">
-            <div class="mb30 fs24 c-3">身份证扫描件</div>
+            <div class="mb30 fs24 c-3">门诊病历卡/住院小结(体现恩度治疗记录)扫描件</div>
             <div class="f-cb mb-quits" id="id3">
-                <div class="u-card-img-item bdr-lg f-oh icon-camera-p" ng-click="addImage(Data, 'idcardFiles')"></div>
+                <div class="u-card-img-item bdr-lg f-oh icon-camera-p" ng-click="addImage(Data, 'caseCardFiles')"></div>
                 <!--item-->
-                <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.idcardFilesView.length" ng-repeat="item in Data.idcardFilesView">
-                    <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.idcardFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
-                    <i class="u-card-img-rm" ng-click="ngqRemoveImage(Data, 'idcardFiles', $index)"></i>
+                <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.caseCardFilesView.length" ng-repeat="item in Data.caseCardFilesView">
+                    <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.caseCardFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
+                    <i class="u-card-img-rm" ng-click="ngqRemoveImage(Data, 'caseCardFiles', $index)"></i>
                 </div>
             </div>
         </div>
@@ -194,15 +98,52 @@
 
     <div class="g-card-img bdr-lg f-oh bd1 bg-light pd22 gap-b">
         <div class="m-card-img">
-            <div class="mb30 fs24 c-3">户口本扫描件</div>
+            <div class="mb30 fs24 c-3">胸部CT报告(当前)</div>
             <div class="f-cb mb-quits">
-                <div class="u-card-img-item bdr-lg f-oh icon-camera-p" ng-click="addImage(Data, 'hkFiles')"></div>
+                <div class="u-card-img-item bdr-lg f-oh icon-camera-p" ng-click="addImage(Data, 'chestCtbFiles')"></div>
                 <!--item-->
-                <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.hkFilesView.length" ng-repeat="item in Data.hkFilesView">
-                    <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.hkFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
-                    <i class="u-card-img-rm" ng-click="ngqRemoveImage(Data, 'hkFiles', $index)"></i>
+                <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.chestCtbFilesView.length" ng-repeat="item in Data.chestCtbFilesView">
+                    <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.chestCtbFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
+                    <i class="u-card-img-rm" ng-click="ngqRemoveImage(Data, 'chestCtbFilesView', $index)"></i>
                 </div>
             </div>
+        </div>
+    </div>
+    
+    <div class="g-card-img bdr-lg f-oh bd1 bg-light pd22 gap-b">
+        <div class="m-card-img">
+            <div class="mb30 fs24 c-3">后续援助申请表</div>
+            <div class="f-cb mb-quits">
+                <div class="u-card-img-item bdr-lg f-oh icon-camera-p" ng-click="addImage(Data, 'fupApplyFiles')"></div>
+                <!--item-->
+                <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.fupApplyFilesView.length" ng-repeat="item in Data.fupApplyFilesView">
+                    <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.fupApplyFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
+                    <i class="u-card-img-rm" ng-click="ngqRemoveImage(Data, 'fupApplyFiles', $index)"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="g-card-img bdr-lg f-oh bd1 bg-light pd22 gap-b">
+        <div class="m-card-img">
+            <div class="mb30 fs24 c-3">援助药品使用记录</div>
+            <div class="f-cb mb-quits">
+                <div class="u-card-img-item bdr-lg f-oh icon-camera-p" ng-click="addImage(Data, 'aidDrugRecordsFiles')"></div>
+                <!--item-->
+                <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.aidDrugRecordsFilesView.length" ng-repeat="item in Data.aidDrugRecordsFilesView">
+                    <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.aidDrugRecordsFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
+                    <i class="u-card-img-rm" ng-click="ngqRemoveImage(Data, 'aidDrugRecordsFiles', $index)"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="m-list-group bd1  f-oh bg-light" ng-click="openFlow(Data.flowId)">
+        <!--item-->
+        <div class="ub ub-ac m-list-item h69 ph19 j-open-flow">
+            <div class="u-icon w32 h32 fi fi-shenpiliucheng"></div>
+            <div class="ph18 fs24 c-3 ub-f1">审批流程</div>
+            <div class="icon-splc w69 h69"></div>
         </div>
     </div>
 
@@ -223,22 +164,7 @@
         angular.bootstrap(document.documentElement, ['myApp']);
     });
     
-    function openMiArea(e) {
-      if ("undefined" == typeof uexWheelPickView) return void e({
-        data: ["江苏省", "南京市", "玄武区"],
-        index: [0, 0, 0]
-      });
-      var i = {
-          src: "wgt://data/ssq.json",
-          select: [0, 0, 0]
-        },
-        n = JSON.stringify(i);
-      uexWheelPickView.onConfirmClick = function(i) {
-        var n = i.replace(/'/g, '"'),
-          s = JSON.parse(n);
-        e(s)
-      }, uexWheelPickView.open(n)
-    }
+    
     
     
 </script>

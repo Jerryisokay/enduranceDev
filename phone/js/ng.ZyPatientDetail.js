@@ -76,8 +76,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
   }
 }]).service("addZy", ["$timeout", "Data", function(e, t) {
   return function() {
-      alert(1);
-    return console.log("patientId: %s", t.id), localStorage.setItem("EDZY/ZyzqDetail.patientId", t.id), void appcan.window.open("EDZY_ZyzqCreate", "ZyzqCreate.html", 10)
+    localStorage.setItem("EDZY/ZyzqDetail.patientId", t.id), void appcan.window.open("EDZY_ZyzqCreate", "ZyzqCreate.html", 10)
   }
 }]).service("openZyDetail", ["$timeout", "Data", function(t, e) {
   return function(t) {
