@@ -49,6 +49,10 @@ var CR = {
     'ADDRESS_SSQX_EMPTY': '请填写完整地址',
     'ADDRESS_ADDR_EMPTY': '请填写完整地址',
     'ADDRESS_ADDR_SELECTED': '地址已选择',
+    
+    'TREATMENT_EMPTY': '请选择治疗方案',
+    'COMBINE_TREATMENT_EMPTY':'请选择联合治疗方案',
+    'CHEMO_TREATMENT_EMPTY':'请选择化疗方案',
 };
 //
 var DICT_KEY = {

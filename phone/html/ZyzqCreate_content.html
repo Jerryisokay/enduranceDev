@@ -23,7 +23,7 @@
     <div class="m-list-group bd1 bdr-lg f-oh bg-light gap-b">
         <!--item-->
         <div class="ub ub-ac m-list-item h69 ph19 bd-b" ng-click="openDateRangeSelect()">
-            <div class="u-icon w32 h32 fi fi-huanzhe"></div>
+            <div class="u-icon w32 h32 fi fi-yysjd"></div>
             <div class="ph18 fs24 c-3">用药时间段</div>
             <input type="text" ng-model="Data.begin_end_View" placeholder="未填写(必填)" readonly="" value="" class="ub-f1 reset-input f-tar ph12 fs24 "/>
 
@@ -31,51 +31,51 @@
         </div>
         <!--item-->
         <div class="ub ub-ac m-list-item h69 ph19 bd-b">
-            <div class="u-icon w32 h32 fi fi-shenfenzheng"></div>
+            <div class="u-icon w32 h32 fi fi-yyzs"></div>
             <div class="ph18 fs24 c-3">用药支数</div>
             <input type="text" ng-model="Data.useCount" placeholder="未填写(必填)" class="ub-f1 reset-input f-tar ph12 fs24 "/>
 
             <div class="icon-arrow-r f-ivh"></div>
         </div>
         <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
-            <div class="u-icon w32 h32 fi fi-nianling"></div>
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b" ng-click="openProductSelect()">
+            <div class="u-icon w32 h32 fi fi-chanpin"></div>
             <div class="ph18 fs24 c-3">产品</div>
-            <input type="text" ng-model="Data.age" placeholder="未填写(必填)" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <input type="text" ng-model="Data.productValue" readonly="" placeholder="未填写(必填)" class="ub-f1 reset-input f-tar ph12 fs24 "/>
 
             <div class="icon-arrow-r f-ivh"></div>
         </div>
         <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b" ng-click="openYlpjSelect()">
             <div class="u-icon w32 h32 fi fi-yiliaopingjia"></div>
             <div class="ph18 fs24 c-3">医疗评价</div>
-            <input type="text" ng-model="Data.mobile" placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <input type="text" ng-model="Data.commentsName" readonly="" placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
 
-            <div class="icon-arrow-r f-ivh"></div>
+            <div class="icon-arrow-r"></div>
         </div>
         <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
-            <div class="u-icon w32 h32 fi fi-yiliaopingjia"></div>
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.commentsName=='PD'" ng-click="openPDtimeSelect()">
+            <div class="u-icon w32 h32 fi fi-yysjd"></div>
             <div class="ph18 fs24 c-3">PD时间</div>
-            <input type="text" ng-model="Data.mobile" placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <input type="text" ng-model="Data.pdTime" readonly="" placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
 
             <div class="icon-arrow-r f-ivh"></div>
         </div>
         <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
-            <div class="u-icon w32 h32 fi fi-yiliaopingjia"></div>
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b" ng-click="setRegimen()">
+            <div class="u-icon w32 h32 fi fi-bingli"></div>
             <div class="ph18 fs24 c-3">治疗方案</div>
-            <input type="text" ng-model="Data.mobile" placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <input type="text" ng-model="Data.RegimenName" readonly="" placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
 
             <div class="icon-arrow-r f-ivh"></div>
         </div>
         <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
-            <div class="u-icon w32 h32 fi fi-yiliaopingjia"></div>
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.combinedTreatName=='化疗'" ng-click="setChemoRegimen()">
+            <div class="u-icon w32 h32 fi fi-bingli"></div>
             <div class="ph18 fs24 c-3">化疗方案</div>
-            <input type="text" ng-model="Data.mobile" placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <input type="text" ng-model="Data.chemoRegimenName" readonly="" placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
 
-            <div class="icon-arrow-r f-ivh"></div>
+            <div class="icon-arrow-r"></div>
         </div>
         
     </div>
@@ -157,7 +157,7 @@
 <script src="../js/lib.js"></script>
 <script src="../js/main.js"></script>
 <script src="../js/ng.js"></script>
-<script src="../js/ng.PatientCreate.js"></script>
+<script src="../js/ng.ZyzqCreate.js"></script>
 <script>
     appcan.ready(function () {
 //        appcan.initBounce();

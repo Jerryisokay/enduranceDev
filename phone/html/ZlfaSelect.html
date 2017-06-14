@@ -23,7 +23,7 @@
         </div>
         <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">治疗方案</h1>
         <div class="nav-btn" id="nav-right">
-            <!--<div class="fa fa-angle-left fa-2x ub ub-ac"></div>-->
+            <div class="ub ub-ac">完成</div>
         </div>
     </div>
     <!--header结束-->
@@ -48,6 +48,10 @@
     $('#nav-left').on('tap', function () {
         qlib.closeCurrentWindow();
     });
+    
+    $('#nav-right').on('tap', function () {
+        appcan.window.publish('EDZY/ZlfaSelect.finish', '');
+    })
 </script>
 </body>
 </html>
