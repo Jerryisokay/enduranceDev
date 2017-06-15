@@ -22,7 +22,6 @@
     <a href="javascript:" class="p-ysgl" data-pagename="DoctorList">医生管理</a>
     <a href="javascript:" class="p-hzgl" data-pagename="PatientEntrance">患者管理</a>
     <a href="javascript:" class="p-zygl" data-pagename="ZyList">赠药管理</a>
-    <div class="zlfa">治疗方案</div>
 </div>
 
 <script src="../vendor/appcan-fesdk/js/appcan.js"></script>
@@ -33,7 +32,7 @@
     });
     $(function () {
         $('.p-btn-wrap > a').on('tap', function () {
-            var alowedModule = ['DoctorList','PatientEntrance','ZyList'];
+            var alowedModule = ['DoctorList','PatientEntrance'];
             var pagename = $(this).data('pagename');
 
             if(alowedModule.indexOf(pagename)==-1){
@@ -43,9 +42,6 @@
 
             appcan.window.open(pagename, pagename + '.html', 10);
         })
-    })
-    appcan.button(".zlfa","btn-act",function(){
-        appcan.window.open("zlfaSelect", 'zlfaSelect.html', 10);
     })
 </script>
 </body>

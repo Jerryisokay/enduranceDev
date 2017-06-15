@@ -79,16 +79,54 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
         })
     }
   }
-}]).service("addZy", ["$timeout", "Data", function(e, t) {
+}]).service("getCycleList", ["$timeout", "Data", function(t, e) {
+    return function(o) {
+        o.detailActive = !o.detailActive;
+        if(!o.onload)
+            //根据诊疗信息Id查询用药周期
+            var n = {
+              caseId: o.id,
+            };
+            console.log(n), appcan.window.openToast(CR.TOAST_WAITING), appcan.request.ajax({
+              type: "GET",
+              url: SimcereConfig.server.edzy + "cycle",
+              data: n,
+              contentType: "application/json",
+              dataType: "json",
+              timeout: REQUEST_TIMEOUT,
+              success: function(i, n, s, r, c) {
+                e.loading = !1, appcan.window.closeToast(), console.log(i), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error") : t(function() {
+                    o.cycleList = e.itemList.concat(i.data)
+                  })
+              },
+              error: function(e, o, t, i) {
+                appcan.window.openToast("网络连接不可用", 2e3), console.error(o)
+              }
+            })
+        
+    }
+}).service("openCaseDetail", ["$timeout", "Data", function(e, t) {
   return function() {
     localStorage.setItem("EDZY/ZyzqDetail.patientId", t.id), void appcan.window.open("EDZY_ZyzqCreate", "ZyzqCreate.html", 10)
   }
-}]).service("openZyDetail", ["$timeout", "Data", function(t, e) {
+}]).service("openCycleDetail", ["$timeout", "Data", function(e, t) {
+  return function() {
+    localStorage.setItem("EDZY/ZyzqDetail.patientId", t.id), void appcan.window.open("EDZY_ZyzqCreate", "ZyzqCreate.html", 10)
+  }
+}]).service("cycleCreate", ["$timeout", "Data", function(e, t) {
+  return function() {
+    localStorage.setItem("EDZY/ZyzqDetail.patientId", t.id), void appcan.window.open("EDZY_ZyzqCreate", "ZyzqCreate.html", 10)
+  }
+}]).service("cyclesubmit", ["$timeout", "Data", function(e, t) {
+  return function() {
+    localStorage.setItem("EDZY/ZyzqDetail.patientId", t.id), void appcan.window.open("EDZY_ZyzqCreate", "ZyzqCreate.html", 10)
+  }
+}]).service("caseCreate", ["$timeout", "Data", function(t, e) {
   return function(t) {
     return console.log("ZyzqId: %s", t.id), localStorage.setItem("EDZY/ZyzqDetail.ZyzqId", t.id), void appcan.window.open("EDZY_ZyzqDetail", "ZyzqDetail.html", 10)
   }
-}]).controller("ItemListController", ["$scope", "$timeout", "Data","getList","openZyDetail", function(e, o, t, i, a, n) {
+}]).controller("ItemListController", ["$scope", "$timeout", "Data","getList","getCycleList", function(e, o, t, i, a, n) {
     e.openZyDetail = a, i();
-}]).controller("GlbController", ["$scope", "$timeout", "Data","getPatientDetail","openFlow", "ngqViewImages","addZy", function(e, o, t, i, a, n, s) {
-  e.Data = t, e.ngqViewImages = n, e.openFlow = a, e.addZy = s, i();
+}]).controller("GlbController", ["$scope", "$timeout", "Data","getPatientDetail","openFlow", "ngqViewImages","caseCreate", function(e, o, t, i, a, n, s) {
+  e.Data = t, e.ngqViewImages = n, e.openFlow = a, e.caseCreate = s, i();
 }]);
