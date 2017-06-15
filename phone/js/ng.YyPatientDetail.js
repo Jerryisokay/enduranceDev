@@ -5,13 +5,11 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     itemListErr: !1,
     itemListLoaded: !1,
     patient: null,
-    shopId: "",
-    shopName: "",
     id:"",
   }
-}).service("subscribe", ["$timeout", "Data", "getZyList", function(t, e, i) {
+}).service("subscribe", ["$timeout", "Data", "getList", function(t, e, i) {
   return function() {
-    appcan.window.subscribe("EDZY/ZyList.refresh", function() {
+    appcan.window.subscribe("EDZY/YyList.refresh", function() {
       i()
     })
   }
@@ -48,8 +46,8 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
       }
     })
   }
-}]).service("getZyList", ["$timeout", "Data", function(t, e) {
-    //获取赠药周期列表
+}]).service("getList", ["$timeout", "Data", function(t, e) {
+    //获取诊疗信息列表
   return function() {
     if (!e.loading) {
         e.loading = !0;
@@ -57,11 +55,12 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
         console.log("Zy patientId: %s", i);
         var n = {
           rId: qlib.getUser().loginId,
-          patientId: i
+          patientId: i,
+          version: '1',
         };
         console.log(n), appcan.window.openToast(CR.TOAST_WAITING), appcan.request.ajax({
           type: "GET",
-          url: SimcereConfig.server.edzy + "givencyc",
+          url: SimcereConfig.server.edzy + "case",
           data: n,
           contentType: "application/json",
           dataType: "json",
@@ -85,10 +84,10 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     localStorage.setItem("EDZY/ZyzqDetail.patientId", t.id), void appcan.window.open("EDZY_ZyzqCreate", "ZyzqCreate.html", 10)
   }
 }]).service("openZyDetail", ["$timeout", "Data", function(t, e) {
-  return function(t) {var n = localStorage.getItem("EDZY/ZyzqDetail.ZyzqId");
+  return function(t) {
     return console.log("ZyzqId: %s", t.id), localStorage.setItem("EDZY/ZyzqDetail.ZyzqId", t.id), void appcan.window.open("EDZY_ZyzqDetail", "ZyzqDetail.html", 10)
   }
-}]).controller("ItemListController", ["$scope", "$timeout", "Data","getZyList","openZyDetail", function(e, o, t, i, a, n) {
+}]).controller("ItemListController", ["$scope", "$timeout", "Data","getList","openZyDetail", function(e, o, t, i, a, n) {
     e.openZyDetail = a, i();
 }]).controller("GlbController", ["$scope", "$timeout", "Data","getPatientDetail","openFlow", "ngqViewImages","addZy", function(e, o, t, i, a, n, s) {
   e.Data = t, e.ngqViewImages = n, e.openFlow = a, e.addZy = s, i();

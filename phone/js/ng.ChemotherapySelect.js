@@ -5,7 +5,6 @@ angular.module("myApp", []).service("Data", function() {
     itemListErr: !1,
     listActive:!1,
     keyword: "",
-    itemName:"",
   }
 }).service("getList",["$timeout", "Data", function(e, t) {
     return function(){
@@ -15,9 +14,7 @@ angular.module("myApp", []).service("Data", function() {
 }]).service("useRegimen", ["Data",function(d) {
   return function(e) {
     var t = angular.toJson(e);
-    d.itemName = e.name;
-    console.log(t), localStorage.setItem("EDZY/ZlfaSelect.regimen", t), appcan.window.publish("EDZY/ZlfaSelect"); //qlib.closeCurrentWindow(-1)
-    console.log("d.itemName-------"+d.itemName);
+    console.log(t), localStorage.setItem("EDZY/HlfsSelect.regimen", t), appcan.window.publish("EDZY/HlfsSelect.selected"); qlib.closeCurrentWindow(-1)
   }
 }]).controller("ItemListController", ["$scope", "getList","useRegimen", function(e, t, u) {
   e.useRegimen = u, t()

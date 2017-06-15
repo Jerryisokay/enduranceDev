@@ -92,7 +92,7 @@
         </div>
         
         <div class="m-list-group bd1  f-oh gap-b bdr-5">
-            <div class="g-card-img  f-oh bg-light pd22 gap-b">
+            <div class="g-card-img  f-oh bg-light pd22">
                 <div class="m-card-img">
                     <div class="mb30 fs24 c-3">身份证扫描件</div>
                     <div class="f-cb mb-quits">
@@ -105,8 +105,8 @@
                 </div>
             </div>
          </div>
-        <div class="m-list-group bd1  f-oh gap-b bdr-5">
-            <div class="g-card-img  f-oh bg-light pd22 gap-b">
+        <div class="m-list-group bd1 f-oh gap-b bdr-5">
+            <div class="g-card-img  f-oh bg-light pd22">
                 <div class="m-card-img">
                     <div class="mb30 fs24 c-3">户口本扫描件</div>
                     <div class="f-cb mb-quits">
@@ -163,8 +163,6 @@
             <!--用药周期列表-->
             <div class="g-list pl20" ng-controller="ItemListController">
                 <div class="g-spinner" ng-hide="Data.itemList.length||Data.itemListEmpty||Data.itemListErr"><i class="fa fa-spinner fa-spin"></i></div>
-                <div class="g-req-empty text-muted ng-hide" ng-show="Data.itemListEmpty">暂无数据</div>
-                <div class="g-req-error text-muted ng-hide" ng-show="Data.itemListErr">查询失败</div>
                 <!---item--->
                 <div class="bd-b m-list-item pt16 pb16" ng-click="openZyDetail(item)" ng-show="Data.itemList.length" ng-repeat="item in Data.itemList">
                     <div class="ub ub-ac h50 ph19">

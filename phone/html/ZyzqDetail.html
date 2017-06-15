@@ -51,13 +51,10 @@
     $('#nav-left').on('tap', function () {
         qlib.closeCurrentWindow();
     });
-    $("h1").click(function(){
-        alert($(this).parent().find(".nav-btn").eq(0).css("height"));
-    })
     $('.u-btn-bj').on('tap', function () {
-        var patientId = localStorage.getItem('EDZY/PatientDetail.patientId');
-        localStorage.setItem('EDZY/PatientDetail.patientIdEdit', patientId);
-        appcan.window.open('EDZY_PatientEdit', 'PatientCreate.html', 0);
+        var cycleId = localStorage.getItem('EDZY/ZyzqDetail.ZyzqId');
+        localStorage.setItem('EDZY/ZyzqDetail.ZyzqIdEdit', cycleId);
+        appcan.window.open('EDZY_ZyzqEdit', 'ZyzqCreate.html', 0);
     });
     $('.u-btn-cx').on('tap', function () {
         qlib.abortFlow();

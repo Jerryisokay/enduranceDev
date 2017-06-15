@@ -20,125 +20,100 @@
 <body class="um-vp bc-bg" ontouchstart ng-controller="GlbController">
 
 <div class="g-main pv32 pd20">
-    <div class="m-list-group bd1 bdr-5 f-oh bg-light gap-b" ng-init="patientDetailShow = false">
+    <div class="m-list-group bd1  f-oh gap-b bdr-5" ng-init="isPatientDetailActive==false">
         <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b" ng-click="patientDetailShow=!patientDetailShow">
-            <div class="pr18 ub-f1 fs24 c-3">患者</div>
-            <div class="fa-ellipsis-h fa c-9"></div>
+        <div class="ub ub-ac m-list-item bg-light h69 ph19 j-toggle-patient" ng-click="isPatientDetailActive=!isPatientDetailActive" ng-class="{'bd-b':isPatientDetailActive}">
+            <div class="pr18 fs24 c-3">患者</div>
+            <input ng-model="Data.patient.name" type="text" placeholder="未选择(必填)" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <div class="icon-arrow-r f-dn"></div>
+            <div class="ml20 c-9 u-shengluehao"></div>
         </div>
-        <!--item-->
-        <div class="" ng-show="patientDetailShow">
-            <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+
+        <!--患者详情-->
+        <div class="n-patient-detail ng-hide" ng-show="isPatientDetailActive">
+            <!--item-->
+            <div class="ub ub-ac m-list-item bg-light h69 ph19 bd-b">
                 <div class="pr18 fs24 c-3 ub-f1">性别</div>
-                <div class="fs24 c-9 mr12" ng-bind="Data.patient.sexName"></div>
+                <div class="fs24 c-9 mr12" ng-bind="Data.patient.sexName">女</div>
                 <div class="icon-arrow-r f-dn"></div>
             </div>
             <!--item-->
-            <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+            <div class="ub ub-ac m-list-item bg-light h69 ph19 bd-b">
                 <div class="pr18 fs24 c-3">身份证号</div>
-                <input type="text" ng-model="Data.patient.idcard" readonly placeholder="未填写(必填)" class="ub-f1 reset-input f-tar ph12 fs24 "/>
-    
+                <input type="text" ng-model="Data.patient.idcard" readonly placeholder="未选择(必填)" class="ub-f1 reset-input f-tar ph12 fs24 "/>
                 <div class="icon-arrow-r f-dn"></div>
             </div>
             <!--item-->
-            <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+            <div class="ub ub-ac m-list-item bg-light h69 ph19 bd-b">
                 <div class="pr18 fs24 c-3">年龄</div>
-                <input type="text" ng-model="Data.patient.age" readonly placeholder="未填写(必填)" class="ub-f1 reset-input f-tar ph12 fs24 "/>
-    
+                <input type="text" ng-model="Data.patient.age" readonly placeholder="未选择(必填)" class="ub-f1 reset-input f-tar ph12 fs24 "/>
                 <div class="icon-arrow-r f-dn"></div>
             </div>
             <!--item-->
-            <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+            <div class="ub ub-ac m-list-item bg-light h69 ph19 bd-b">
                 <div class="pr18 fs24 c-3">联系方式</div>
-                <input type="text" ng-model="Data.patient.mobile" readonly placeholder="未填写(必填)" class="ub-f1 reset-input f-tar ph12 fs24 "/>
-    
+                <input type="text" ng-model="Data.patient.mobile" readonly placeholder="未选择(必填)" value="18988889999" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+
                 <div class="icon-arrow-r f-dn"></div>
             </div>
             <!--item-->
-            <div class="ub ub-ac m-list-item h69 ph19 ">
+            <div class="ub ub-ac m-list-item bg-light h69 ph19">
                 <div class="pr18 fs24 c-3">联系地址</div>
-                <input type="text" ng-model="Data.patient.ssqxView" readonly placeholder="未设置(必填)" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+                <input type="text" ng-model="Data.patient.ssqxView" readonly placeholder="未选择(必填)" value="江苏省南京市玄武区" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+                <div class="icon-arrow-r f-dn"></div>
+            </div>
+            <!--item-->
+                        <!---->
+            
+        </div>
+        <!--/患者详情-->
+    </div>
     
+    <div class="n-patient-detail ng-hide" ng-show="isPatientDetailActive">
+        <div class="m-list-group bd1  f-oh gap-b bdr-5">
+            <div class="ub ub-ac m-list-item bg-light h69 ph19">
+                <div class="pr18 fs24 c-3">医保类型</div>
+                <input type="text" ng-model="Data.patient.mitypeName" readonly placeholder="未选择" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+                <div class="icon-arrow-r f-dn"></div>
+            </div>
+            <!--item-->
+            <div class="ub ub-ac m-list-item bg-light h69 ph19 ng-hide bd-t" ng-show="Data.patient.mitypeName=='其他'">
+                <div class="pr18 fs24 c-3">其他保险名称</div>
+                <input type="text" ng-model="otherIns" readonly placeholder="未选择" class="ub-f1 reset-input f-tar ph12 fs24 "/>
                 <div class="icon-arrow-r f-dn"></div>
             </div>
         </div>
         
-    </div>
-
-    <div class="m-list-group bd1 bdr-5 f-oh bg-light gap-b" ng-show="patientDetailShow">
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
-            <div class="pr18 fs24 c-3">夫妻双方年总收入</div>
-            <input type="text" ng-model="" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
-        </div>
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
-            <div class="pr18 fs24 c-3">其余直系亲属年总收入</div>
-            <input type="text" ng-model="" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
-        </div>
-        <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
-            <div class="pr18 fs24 c-3">是否享受医保</div>
-            <input type="text" ng-model="" readonly placeholder="未选择" class="ub-f1 reset-input f-tar ph12 fs24 "/>
-
-            <div class="icon-arrow-r f-dn"></div>
-        </div>
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
-            <div class="pr18 fs24 c-3">医保所属地</div>
-            <input type="text" ng-model="" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
-        </div>
-        <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
-            <div class="pr18 fs24 c-3">医保类型</div>
-            <input type="text" ng-model="Data.patient.mitypeArea" readonly placeholder="未选择" class="ub-f1 reset-input f-tar ph12 fs24 "/>
-
-            <div class="icon-arrow-r f-dn"></div>
-        </div>
-        <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
-            <div class="pr18 fs24 c-3">其他保险名称</div>
-            <input type="text" ng-model="Data.patient.otherIns" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
-
-            <div class="icon-arrow-r f-dn"></div>
-        </div>
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
-            <div class="pr18 fs24 c-3">是否需要预约编号</div>
-            <input type="text" ng-model="" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
-        </div>
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
-            <div class="pr18 fs24 c-3">是否肺癌</div>
-            <input type="text" ng-model="" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
-        </div>
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
-            <div class="pr18 fs24 c-3">项目医生</div>
-            <input type="text" ng-model="" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
-        </div>
-    </div>
-
-    <!---->
-    <div class="g-card-img bdr-5 f-oh bd1 bg-light pd22 gap-b" ng-show="patientDetailShow">
-        <div class="m-card-img">
-            <div class="mb30 fs24 c-3">身份证扫描件</div>
-            <div class="f-cb mb-quits">
-                <!--item-->
-                <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.patient.idcardFilesView.length" ng-repeat="item in Data.patient.idcardFilesView">
-                    <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.patient.idcardFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
+        <div class="m-list-group bd1  f-oh gap-b bdr-5">
+            <div class="g-card-img  f-oh bg-light pd22">
+                <div class="m-card-img">
+                    <div class="mb30 fs24 c-3">身份证扫描件</div>
+                    <div class="f-cb mb-quits">
+                        <!--item-->
+                        <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.patient.idcardFilesView.length" ng-repeat="item in Data.patient.idcardFilesView">
+                            <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.patient.idcardFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
+                        </div>
+                        <div class="ng-hide u-img-list-empty" ng-show="!Data.patient.idcardFilesView.length">未上传</div>
+                    </div>
                 </div>
-                <div class="ng-hide u-img-list-empty" ng-show="!Data.patient.idcardFilesView.length">未上传</div>
+            </div>
+         </div>
+        <div class="m-list-group bd1 f-oh gap-b bdr-5">
+            <div class="g-card-img  f-oh bg-light pd22">
+                <div class="m-card-img">
+                    <div class="mb30 fs24 c-3">户口本扫描件</div>
+                    <div class="f-cb mb-quits">
+                        <!--item-->
+                        <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.patient.hkFilesView.length" ng-repeat="item in Data.patient.hkFilesView">
+                            <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.patient.hkFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
+                        </div>
+                        <div class="ng-hide u-img-list-empty" ng-show="!Data.patient.hkFilesView.length">未上传</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-    <div class="g-card-img bdr-5 f-oh bd1 bg-light pd22 gap-b" ng-show="patientDetailShow">
-        <div class="m-card-img">
-            <div class="mb30 fs24 c-3">户口本扫描件</div>
-            <div class="f-cb mb-quits">
-                <!--item-->
-                <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.patient.hkFilesView.length" ng-repeat="item in Data.patient.hkFilesView">
-                    <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.patient.hkFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
-                </div>
-                <div class="ng-hide u-img-list-empty" ng-show="!Data.patient.hkFilesView.length">未上传</div>
-            </div>
-        </div>
-    </div>
+    
     
     <div class="m-list-group bd1 bdr-5 f-oh bg-light gap-b" ng-init="YyDetailShow=false">
         <div class="ub ub-ac m-list-item h69 ph19 bd-b">

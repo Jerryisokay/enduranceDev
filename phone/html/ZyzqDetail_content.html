@@ -25,49 +25,49 @@
         <div class="ub ub-ac m-list-item h69 ph19 bd-b">
             <div class="u-icon w32 h32 fi fi-huanzhe"></div>
             <div class="ph18 fs24 c-3">用药时间段</div>
-            <input type="text" placeholder="未填写(必填)" ng-model="Data.datePeriod" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <input type="text" placeholder="未填写(必填)" ng-model="Data.cycle.begin_end_View" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
             <div class="icon-arrow-r f-dn"></div>
         </div>
         <!--item-->
         <div class="ub ub-ac m-list-item h69 ph19 bd-b">
             <div class="u-icon w32 h32 fi fi-huanzhe"></div>
             <div class="ph18 fs24 c-3">用药支数</div>
-            <input type="text" placeholder="未填写(必填)" ng-model="Data.useCount" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <input type="text" placeholder="未填写(必填)" ng-model="Data.cycle.useCount" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
             <div class="icon-arrow-r f-dn"></div>
         </div>
         <!--item-->
         <div class="ub ub-ac m-list-item h69 ph19 bd-b">
             <div class="u-icon w32 h32 fi fi-huanzhe"></div>
             <div class="ph18 fs24 c-3">产品名称</div>
-            <input type="text" placeholder="未填写(必填)" ng-model="Data.productValue" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <input type="text" placeholder="未填写(必填)" ng-model="Data.cycle.productValue" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
             <div class="icon-arrow-r f-dn"></div>
         </div>
         <!--item-->
         <div class="ub ub-ac m-list-item h69 ph19 bd-b">
             <div class="u-icon w32 h32 fi fi-huanzhe"></div>
             <div class="ph18 fs24 c-3">医疗评价</div>
-            <input type="text" placeholder="未填写(必填)" ng-model="Data.commentsName" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <input type="text" placeholder="未填写(必填)" ng-model="Data.cycle.commentsName" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
             <div class="icon-arrow-r f-dn"></div>
         </div>
         <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.cycle.commentsName=='PD'">
             <div class="u-icon w32 h32 fi fi-huanzhe"></div>
             <div class="ph18 fs24 c-3">PD时间</div>
-            <input type="text" placeholder="未填写(必填)" ng-model="Data.pdTime" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <input type="text" placeholder="未填写(必填)" ng-model="Data.cycle.pdTime" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
             <div class="icon-arrow-r f-dn"></div>
         </div>
         <!--item-->
         <div class="ub ub-ac m-list-item h69 ph19 bd-b">
             <div class="u-icon w32 h32 fi fi-huanzhe"></div>
             <div class="ph18 fs24 c-3">治疗方案</div>
-            <input type="text" placeholder="未填写(必填)" ng-model="Data.RegimenName" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <input type="text" placeholder="未填写(必填)" ng-model="Data.cycle.RegimenName" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
             <div class="icon-arrow-r f-dn"></div>
         </div>
         <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19">
+        <div class="ub ub-ac m-list-item h69 ph19 ng-hide" ng-show="Data.cycle.combinedTreatName=='化疗'">
             <div class="u-icon w32 h32 fi fi-huanzhe"></div>
             <div class="ph18 fs24 c-3">化疗方案</div>
-            <input type="text" placeholder="未填写(必填)" ng-model="Data.chemoRegimenName" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <input type="text" placeholder="未填写(必填)" ng-model="Data.cycle.chemoRegimenName" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
             <div class="icon-arrow-r f-dn"></div>
         </div>
     </div>
@@ -78,10 +78,10 @@
             <div class="mb30 fs24 c-3">门诊病历卡/住院小结(体现恩度治疗记录)扫描件</div>
             <div class="f-cb mb-quits">
                 <!--item-->
-                <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.caseCardFiles.length" ng-repeat="item in Data.caseCardFiles">
-                    <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.caseCardFiles,url:item})" alt="" class="f-vam img-full bdr-lg"/>
+                <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.cycle.caseCardFilesView.length" ng-repeat="item in Data.cycle.caseCardFilesView">
+                    <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.cycle.caseCardFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
                 </div>
-                <div class="ng-hide u-img-list-empty" ng-show="!Data.caseCardFiles.length">未上传</div>
+                <div class="ng-hide u-img-list-empty" ng-show="!Data.cycle.caseCardFilesView.length">未上传</div>
             </div>
         </div>
     </div>
@@ -92,10 +92,10 @@
             <div class="mb30 fs24 c-3">胸部CT报告(当前)</div>
             <div class="f-cb mb-quits">
                 <!--item-->
-                <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.chestCtbFiles.length" ng-repeat="item in Data.chestCtbFiles">
-                    <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.chestCtbFiles,url:item})" alt="" class="f-vam img-full bdr-lg"/>
+                <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.cycle.chestCtbFilesView.length" ng-repeat="item in Data.cycle.chestCtbFilesView">
+                    <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.cycle.chestCtbFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
                 </div>
-                <div class="ng-hide u-img-list-empty" ng-show="!Data.chestCtbFiles.length">未上传</div>
+                <div class="ng-hide u-img-list-empty" ng-show="!Data.cycle.chestCtbFilesView.length">未上传</div>
             </div>
         </div>
     </div>
@@ -106,10 +106,10 @@
             <div class="mb30 fs24 c-3">后续援助申请表</div>
             <div class="f-cb mb-quits">
                 <!--item-->
-                <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.fupApplyFiles.length" ng-repeat="item in Data.fupApplyFiles">
-                    <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.fupApplyFiles,url:item})" alt="" class="f-vam img-full bdr-lg"/>
+                <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.cycle.fupApplyFilesView.length" ng-repeat="item in Data.cycle.fupApplyFilesView">
+                    <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.cycle.fupApplyFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
                 </div>
-                <div class="ng-hide u-img-list-empty" ng-show="!Data.fupApplyFiles.length">未上传</div>
+                <div class="ng-hide u-img-list-empty" ng-show="!Data.cycle.fupApplyFilesView.length">未上传</div>
             </div>
         </div>
     </div>
@@ -119,15 +119,15 @@
             <div class="mb30 fs24 c-3">援助药品使用记录</div>
             <div class="f-cb mb-quits">
                 <!--item-->
-                <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.aidDrugRecordsFiles.length" ng-repeat="item in Data.aidDrugRecordsFiles">
-                    <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.aidDrugRecordsFiles,url:item})" alt="" class="f-vam img-full bdr-lg"/>
+                <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.cycle.aidDrugRecordsFilesView.length" ng-repeat="item in Data.cycle.aidDrugRecordsFilesView">
+                    <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.cycle.aidDrugRecordsFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
                 </div>
-                <div class="ng-hide u-img-list-empty" ng-show="!Data.aidDrugRecordsFiles.length">未上传</div>
+                <div class="ng-hide u-img-list-empty" ng-show="!Data.cycle.aidDrugRecordsFilesView.length">未上传</div>
             </div>
         </div>
     </div>
 
-    <div class="m-list-group bd1  f-oh bg-light" ng-click="openFlow(Data.patient.flowId)">
+    <div class="m-list-group bd1  f-oh bg-light" ng-click="openFlow(Data.cycle.flowId)">
         <!--item-->
         <div class="ub ub-ac m-list-item h69 ph19 j-open-flow">
             <div class="u-icon w32 h32 fi fi-shenpiliucheng"></div>
