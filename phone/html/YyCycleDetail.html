@@ -21,9 +21,11 @@
         <div class="nav-btn" id="nav-left">
             <div class="fa fa-angle-left fa-2x ub ub-ac"></div>
         </div>
-        <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">新增诊疗信息</h1>
+        <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">用药周期详情</h1>
         <div class="nav-btn" id="nav-right">
-            <div class="ub ub-ac">保存</div>
+            <div class="ub ub-ac u-btn-cx z-disabled">撤消</div>
+            <div class="ub ub-ac u-btn-fc z-disabled">封存</div>
+            <div class="ub ub-ac u-btn-bj z-disabled">编辑</div>
         </div>
     </div>
     <!--header结束-->
@@ -35,11 +37,12 @@
 </div>
 <script src="../vendor/appcan-fesdk/js/appcan.js"></script>
 <script src="../vendor/appcan-fesdk/js/appcan.control.js"></script>
+<script src="../vendor/simcere/js/config.js"></script>
 <script src="../js/lib.js"></script>
 <script>
     appcan.ready(function () {
         var titHeight = $('#header').offset().height;
-        appcan.frame.open("content", "YyDiagnosisCreate_content.html", 0, titHeight);
+        appcan.frame.open("content", "YyCycleDetail_content.html", 0, titHeight);
         window.onorientationchange = window.onresize = function () {
             appcan.frame.resize("content", 0, titHeight);
         }
@@ -48,13 +51,17 @@
     $('#nav-left').on('tap', function () {
         qlib.closeCurrentWindow();
     });
-    //提交
-    $('#nav-right').on('tap', function () {
-        appcan.window.publish('EDZY/PatientCreate.submit', '');
+    $('.u-btn-bj').on('tap', function () {
+        var cycleId = localStorage.getItem('EDZY/ZyzqDetail.ZyzqId');
+        localStorage.setItem('EDZY/ZyzqDetail.ZyzqIdEdit', cycleId);
+        appcan.window.open('EDZY_ZyzqEdit', 'ZyzqCreate.html', 0);
     });
-    function setTitleEdit(){
-        $('h1.ulev-3').text('编辑诊疗信息');
-    }
+    $('.u-btn-cx').on('tap', function () {
+        qlib.abortFlow();
+    });
+    $('.u-btn-fc').on('tap', function () {
+        qlib.deleteFlow();
+    });
 </script>
 </body>
 </html>
