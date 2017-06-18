@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html ng-jq class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/ui-box.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/ui-base.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/ui-color.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/appcan.icon.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/appcan.control.css">
+    <link rel="stylesheet" href="../vendor/angular/angular-csp.css"/>
+    <!---->
+    <link rel="stylesheet" href="../vendor/appcan-base/css/bundle.nec.size.css"/>
+    <link rel="stylesheet" href="../css/lib.css"/>
+
+</head>
+<body class="um-vp bc-bg" ontouchstart ng-controller="GlbController">
+
+<div class="g-main pv32 ">
+    <div class="m-list-group bd1  f-oh bg-light gap-b">
+        <!--item-->
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+            <div class="u-icon w32 h32 fi fi-huanzhe"></div>
+            <div class="ph18 fs24 c-3">用药时间段</div>
+            <input type="text" placeholder="未填写(必填)" ng-model="Data.cycle.begin_end_View" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <div class="icon-arrow-r f-dn"></div>
+        </div>
+        <!--item-->
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+            <div class="u-icon w32 h32 fi fi-huanzhe"></div>
+            <div class="ph18 fs24 c-3">用药支数</div>
+            <input type="text" placeholder="未填写(必填)" ng-model="Data.cycle.useCount" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <div class="icon-arrow-r f-dn"></div>
+        </div>
+        <!--item-->
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+            <div class="u-icon w32 h32 fi fi-huanzhe"></div>
+            <div class="ph18 fs24 c-3">产品</div>
+            <input type="text" placeholder="未填写(必填)" ng-model="Data.cycle.productsView" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <div class="icon-arrow-r f-dn"></div>
+        </div>
+        <!--item-->
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+            <div class="u-icon w32 h32 fi fi-huanzhe"></div>
+            <div class="ph18 fs24 c-3">医疗评价</div>
+            <input type="text" placeholder="未填写(必填)" ng-model="Data.cycle.commentsName" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <div class="icon-arrow-r f-dn"></div>
+        </div>
+        <!--item-->
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.cycle.commentsName=='PD'">
+            <div class="u-icon w32 h32 fi fi-huanzhe"></div>
+            <div class="ph18 fs24 c-3">PD时间</div>
+            <input type="text" placeholder="未填写(必填)" ng-model="Data.cycle.pdTime" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <div class="icon-arrow-r f-dn"></div>
+        </div>
+    </div>
+    
+    <!---->
+    <div class="g-card-img  f-oh bd1 bg-light pd22 gap-b">
+        <div class="m-card-img">
+            <div class="mb30 fs24 c-3">购药发票扫描件</div>
+            <div class="f-cb mb-quits">
+                <!--item-->
+                <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.cycle.invoiceFilesView.length" ng-repeat="item in Data.cycle.invoiceFilesView">
+                    <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.cycle.invoiceFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
+                </div>
+                <div class="ng-hide u-img-list-empty" ng-show="!Data.cycle.invoiceFilesView.length">未上传</div>
+            </div>
+        </div>
+    </div>
+    
+    <!---->
+    <div class="g-card-img  f-oh bd1 bg-light pd22 gap-b">
+        <div class="m-card-img">
+            <div class="mb30 fs24 c-3">门诊病历卡/住院小结(体现恩度治疗记录)扫描件</div>
+            <div class="f-cb mb-quits">
+                <!--item-->
+                <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.cycle.caseCardFilesView.length" ng-repeat="item in Data.cycle.caseCardFilesView">
+                    <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.cycle.caseCardFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
+                </div>
+                <div class="ng-hide u-img-list-empty" ng-show="!Data.cycle.caseCardFilesView.length">未上传</div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="m-list-group bd1  f-oh bg-light" ng-click="openFlow(Data.cycle.flowId)">
+        <!--item-->
+        <div class="ub ub-ac m-list-item h69 ph19 j-open-flow">
+            <div class="u-icon w32 h32 fi fi-shenpiliucheng"></div>
+            <div class="ph18 fs24 c-3 ub-f1">审批流程</div>
+            <div class="icon-splc w69 h69"></div>
+        </div>
+    </div>
+</div>
+
+<script src="../vendor/appcan-fesdk/js/appcan.js"></script>
+<script src="../vendor/appcan-fesdk/js/appcan.control.js"></script>
+<script src="../vendor/angular/angular.min.js"></script>
+<script src="../vendor/simcere/js/config.js"></script>
+<script src="../js/lib.js"></script>
+<script src="../js/ng.js"></script>
+<script src="../js/ng.YyCycleDetail.js"></script>
+<script>
+    appcan.ready(function () {
+//        appcan.initBounce();
+        angular.bootstrap(document.documentElement, ['myApp']);
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+.g-flow{border-left:.0625rem solid #e3e3e3;margin:0 1.25rem 0 1.8125rem;padding-left:1.5625rem}
+.m-flow{position:relative;padding-top:1.25rem}.u-flow{-webkit-box-shadow:0 .03125rem .125rem 0 #ccc;box-shadow:0 .03125rem .125rem 0 #ccc;border-radius:.25rem}
+.icon-flow{position:absolute;left:-2.3125rem;top:2.09375rem;width:1.4375rem;height:1.4375rem;background:url("../images/flow/icon-flow-gray.png") no-repeat center;-webkit-background-size:contain;background-size:contain}
+.m-flow.z-via .icon-flow{background-image:url("../images/flow/icon-flow-green.png")}.m-flow.z-via+.m-flow:not(.z-via) .icon-flow{background-image:url("../images/flow/icon-flow-blue.png")}
+.icon-flow-caret{position:absolute;left:-0.5rem;top:2.40625rem;width:.46875rem;height:.8125rem;background:url("../images/flow/icon-flow-caret.png") no-repeat center;-webkit-background-size:contain;background-size:contain}

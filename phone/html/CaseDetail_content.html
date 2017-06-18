@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html ng-jq class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/ui-box.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/ui-base.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/ui-color.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/appcan.icon.css">
+    <link rel="stylesheet" href="../vendor/appcan-fesdk/css/appcan.control.css">
+    <link rel="stylesheet" href="../vendor/angular/angular-csp.css"/>
+    <!---->
+    <link rel="stylesheet" href="../vendor/appcan-base/css/bundle.nec.size.css"/>
+    <link rel="stylesheet" href="../css/lib.css"/>
+
+</head>
+<body class="um-vp bc-bg" ontouchstart ng-controller="GlbController">
+
+<div class="g-main pv32 ">
+    <div class="m-list-group bd1  f-oh bg-light gap-b">
+        <!--item-->
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+            <div class="u-icon w32 h32 fi fi-huanzhe"></div>
+            <div class="ph18 fs24 c-3">患者</div>
+            <input type="text" ng-model="Data.case.patientName" readonly placeholder="未选择(必填)" value="张三" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+
+            <div class="icon-arrow-r f-dn"></div>
+        </div>
+        <!--item-->
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+            <div class="u-icon w32 h32 fi fi-yiyuan"></div>
+            <div class="ph18 fs24 c-3">医院</div>
+            <input type="text" ng-model="Data.case.hospitalName" readonly placeholder="未选择(必填)" value="鼓楼医院" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+
+            <div class="icon-arrow-r f-dn"></div>
+        </div>
+        <!--item-->
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+            <div class="u-icon w32 h32 fi fi-keshi"></div>
+            <div class="ph18 fs24 c-3">科室</div>
+            <input type="text" ng-model="Data.case.deptName" readonly placeholder="未选择(必填)" value="外科" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+
+            <div class="icon-arrow-r f-dn"></div>
+        </div>
+        <!--item-->
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+            <div class="u-icon w32 h32 fi fi-yisheng"></div>
+            <div class="ph18 fs24 c-3">医生</div>
+            <input type="text" ng-model="Data.case.doctorName" readonly placeholder="未选择(必填)" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+
+            <div class="icon-arrow-r f-dn"></div>
+        </div>
+        <!--item-->
+        <div class="ub ub-ac m-list-item h69 ph19">
+            <div class="u-icon w32 h32 fi fi-aizhong"></div>
+            <div class="ph18 fs24 c-3">癌种</div>
+            <input type="text" ng-model="Data.case.tomourName" readonly placeholder="未选择(必填)" value="肺癌" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+
+            <div class="icon-arrow-r f-dn"></div>
+        </div>
+    </div>
+
+    <div class="m-list-group bd1  f-oh bg-light gap-b">
+        <!--item-->
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+            <!--<div class="u-icon w32 h32 bg-positive"></div>-->
+            <div class="pr18 fs24 c-3 ub-f1">检查结果</div>
+            <!--switch-->
+            <input type="text" ng-model="Data.case.checkResultName" readonly placeholder="未选择(必填)" value="未知" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <div class="icon-arrow-r f-dn"></div>
+        </div>
+        <!--item-->
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+            <!--<div class="u-icon w32 h32 bg-positive"></div>-->
+            <div class="pr18 fs24 c-3 ub-f1">Ⅲ/Ⅳ</div>
+            <input type="text" ng-model="Data.case.isIiiOrIvName" readonly placeholder="未选择(必填)" value="Ⅲ" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <div class="icon-arrow-r f-dn"></div>
+        </div>
+        <!--item-->
+        <div class="ub ub-ac m-list-item h69 ph19">
+            <!--<div class="u-icon w32 h32 bg-positive"></div>-->
+            <div class="pr18 fs24 c-3 ub-f1">是否转移</div>
+            <input type="text" ng-model="Data.case.isMetastasisName" readonly placeholder="未选择(必填)" value="否" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <div class="icon-arrow-r f-dn"></div>
+        </div>
+
+    </div>
+
+    <!---->
+    <div class="g-card-img  f-oh bd1 bg-light pd22 gap-b">
+        <div class="m-card-img">
+            <div class="mb30 fs24 c-3">病例报表扫描件</div>
+            <div class="f-cb mb-quits">
+                <!--item-->
+                <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.case.caseRepFilesView.length" ng-repeat="item in Data.case.caseRepFilesView">
+                    <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.case.caseRepFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
+                </div>
+                <div class="ng-hide u-img-list-empty" ng-show="!Data.case.caseRepFilesView.length">未上传</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="g-card-img  f-oh bd1 bg-light pd22 gap-b">
+        <div class="m-card-img">
+            <div class="mb30 fs24 c-3">门诊病历／住院小结扫描件</div>
+            <div class="f-cb mb-quits">
+                <!--item-->
+                <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.case.caseSummFilesView.length" ng-repeat="item in Data.case.caseSummFilesView">
+                    <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.case.caseSummFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
+                </div>
+                <div class="ng-hide u-img-list-empty" ng-show="!Data.case.caseSummFilesView.length">未上传</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="g-card-img  f-oh bd1 bg-light pd22 gap-b">
+        <div class="m-card-img">
+            <div class="mb30 fs24 c-3">影像学检查报表扫描件</div>
+            <div class="f-cb mb-quits">
+                <!--item-->
+                <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.case.medImagesFilesView.length" ng-repeat="item in Data.case.medImagesFilesView">
+                    <img ng-src="{{item}}" ng-click="ngqViewImages({urls:Data.case.medImagesFilesView,url:item})" alt="" class="f-vam img-full bdr-lg"/>
+                </div>
+                <div class="ng-hide u-img-list-empty" ng-show="!Data.case.medImagesFilesView.length">未上传</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="m-list-group bd1  f-oh bg-light">
+        <!--item-->
+        <div class="ub ub-ac m-list-item h69 ph19" ng-click="openFlow(Data.patient.flowId)">
+            <div class="u-icon w32 h32 fi fi-shenpiliucheng"></div>
+            <div class="ph18 fs24 c-3 ub-f1">审批流程</div>
+            <div class="icon-splc w69 h69"></div>
+        </div>
+    </div>
+
+</div>
+
+<script src="../vendor/appcan-fesdk/js/appcan.js"></script>
+<script src="../vendor/appcan-fesdk/js/appcan.control.js"></script>
+<script src="../vendor/angular/angular.min.js"></script>
+<script src="../vendor/simcere/js/config.js"></script>
+<script src="../js/lib.js"></script>
+<script src="../js/ng.js"></script>
+<script src="../js/ng.CaseDetail.js"></script>
+<script>
+    appcan.ready(function () {
+//        appcan.initBounce();
+        angular.bootstrap(document.documentElement, ['myApp']);
+    });
+</script>
+</body>
+</html>
