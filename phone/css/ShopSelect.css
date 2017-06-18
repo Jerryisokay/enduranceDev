@@ -1,8 +1,0 @@
-.icon-shop-caret-down{background:url("../images/icon-shop-caret-down.png") no-repeat center;-webkit-background-size:contain;background-size:contain}
-.g-address{position:absolute;top:3.15625rem;bottom:0;left:0;right:0}.g-address a,.g-address span{display:block}
-.g-address-province{position:absolute;top:0;bottom:0;left:0;width:10.3125rem;overflow:hidden}
-.g-address-city{position:absolute;top:0;bottom:0;left:10.3125rem;right:0;overflow:hidden}
-.g-address-province span{padding:0 .9375rem}.g-address-province a{line-height:.875rem;color:#1a1a1a;font-size:.875rem;padding:1.125rem 0;border-bottom:1px solid #f0f0f0;text-decoration:none}
-.g-address-province a:last-child span{border-bottom:0}.g-address-city a{padding:0 .9375rem}
-.g-address-city a{text-decoration:none;font-size:.875rem;line-height:.875rem;color:#1a1a1a;padding:1.125rem 0 1.125rem 2.8125rem}
-.g-address-province a.z-active{background-color:#f7f7f7}.g-address-city a.z-active{background-color:#e6e6e6}
