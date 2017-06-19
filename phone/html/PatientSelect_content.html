@@ -52,6 +52,20 @@
 <script>
     appcan.ready(function () {
 //        appcan.initBounce();
+       appcan.frame.setBounce({
+            bounceType: ['0','1'],//0-向下，1-向上
+            color: '#fff',
+            upEndCall: function (type) {
+                //$(window).trigger('zy-list-load');
+                if(type=='0'){
+                    appcan.window.publish('EDZY/YyPatientList.refresh');
+                }else{
+                    appcan.window.publish('EDZY/YyPatientList.load');
+                }
+
+                appcan.frame.resetBounce(type);
+            }
+        });
         angular.bootstrap(document.documentElement, ['myApp']);
     });
 
