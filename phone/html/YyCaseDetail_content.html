@@ -102,6 +102,12 @@
 
             <div class="icon-arrow-r f-dn"></div>
         </div>
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.yycase.pd">
+            <div class="u-icon w32 h32 fi fi-huanzhe"></div>
+            <div class="ph18 fs24 c-3">诊疗周期</div>
+            <input type="text" placeholder="未填写(必填)" ng-model="Data.yycase.pd" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <div class="icon-arrow-r f-dn"></div>
+        </div>
     </div>
 
     <!---->
@@ -170,7 +176,7 @@
         </div>
     </div>
     
-    <div class="g-card-img  f-oh bd1 bg-light pd22">
+    <div class="g-card-img  f-oh bd1 bg-light pd22 gap-b">
         <div class="m-card-img">
             <div class="mb30 fs24 c-3">经济评估表扫描件</div>
             <div class="f-cb mb-quits">
@@ -183,6 +189,14 @@
         </div>
     </div>
     
+    <div class="m-list-group bd1  f-oh bg-light" ng-click="openFlow(Data.yycase.flowId)">
+        <!--item-->
+        <div class="ub ub-ac m-list-item h69 ph19 j-open-flow">
+            <div class="u-icon w32 h32 fi fi-shenpiliucheng"></div>
+            <div class="ph18 fs24 c-3 ub-f1">审批流程</div>
+            <div class="icon-splc w69 h69"></div>
+        </div>
+    </div>
     
 </div>
 

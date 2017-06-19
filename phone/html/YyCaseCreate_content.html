@@ -22,13 +22,13 @@
 <div class="g-main pv32 ph20">
     <div class="m-list-group bd1 bdr-5 f-oh bg-light gap-b">
         <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b" ng-click="openPatientSelect()">
+        <!-- <div class="ub ub-ac m-list-item h69 ph19 bd-b" ng-click="openPatientSelect()">
             <div class="u-icon w32 h32 fi fi-huanzhe"></div>
             <div class="ph18 fs24 c-3">患者</div>
             <input type="text" ng-model="Data.patientName" readonly="" placeholder="未填写(必填)" value="" class="ub-f1 reset-input f-tar ph12 fs24 "/>
 
             <div class="icon-arrow-r"></div>
-        </div>
+        </div> -->
         <!--item-->
         <div class="ub ub-ac m-list-item h69 ph19 bd-b" ng-click="openHospitalSelect()">
             <div class="u-icon w32 h32 fi fi-yiyuan"></div>
@@ -103,14 +103,22 @@
 
             <div class="icon-arrow-r"></div>
         </div>
-        
+        <div class="ub ub-ac m-list-item h69 ph19" ng-click="openPdSelect()">
+            <div class="u-icon w32 h32 fi fi-huanzhe"></div>
+            <div class="ph18 fs24 c-3">诊疗周期</div>
+            <input type="text" ng-model="Data.pdName" readonly="" placeholder="未填写(必填)" value="" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+
+            <div class="icon-arrow-r"></div>
+        </div>
     </div>
 
     <!---->
+    
+    
     <div class="g-card-img bdr-lg f-oh bd1 bg-light pd22 gap-b">
         <div class="m-card-img">
             <div class="mb30 fs24 c-3">病理报表扫描件</div>
-            <div class="f-cb mb-quits" id="id3">
+            <div class="f-cb mb-quits">
                 <div class="u-card-img-item bdr-lg f-oh icon-camera-p" ng-click="addImage(Data, 'caseRepFiles')"></div>
                 <!--item-->
                 <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.caseRepFilesView.length" ng-repeat="item in Data.caseRepFilesView">
@@ -124,7 +132,7 @@
     <div class="g-card-img bdr-lg f-oh bd1 bg-light pd22 gap-b">
         <div class="m-card-img">
             <div class="mb30 fs24 c-3">胸部CT报告（治疗前）</div>
-            <div class="f-cb mb-quits" id="id3">
+            <div class="f-cb mb-quits">
                 <div class="u-card-img-item bdr-lg f-oh icon-camera-p" ng-click="addImage(Data, 'chestCTBFiles')"></div>
                 <!--item-->
                 <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.chestCTBFilesView.length" ng-repeat="item in Data.chestCTBFilesView">

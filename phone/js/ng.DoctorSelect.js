@@ -30,6 +30,7 @@ angular.module("myApp", []).service("Data", function() {
         console.log(o), "2" == o.status && (o.status = "0", o.data = []), "0" != o.status ? (console.error("res error"), t(function() {
           e.itemListErr = !e.itemList.length
         })) : t(function() {
+            console.log("dist----"+JSON.stringify(o.data)),
           e.itemList = e.itemList.concat(o.data), e.itemListEmpty = !e.itemList.length
         })
       },

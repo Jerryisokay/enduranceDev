@@ -45,7 +45,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
   }
 }]).service("getCycleDetail", ["$timeout", "Data", "$filter", "getFlow", "imgSpliter", function(e, o, t, n, a) {
   return function(id) {
-    console.log("CaseId: %s", id);
+    console.log("CycleId: %s", id);
     var i = {};
     console.log(i), appcan.window.openToast(CR.TOAST_WAITING), appcan.request.ajax({
       type: "GET",
@@ -81,13 +81,13 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
   }
 }]).service("submitCycle", ["$timeout", "Data", function(e, t) {
   return function() {
-    var i = localStorage.getItem("EDZY/PatientDetail.patientId");    //EDZY/PatientDetail.patientId
-    console.log("Zy patientId: %s", i);
+    var i = localStorage.getItem("EDZY/YyCaseDetail.CaseId");    //EDZY/PatientDetail.patientId
+    console.log("yy CaseId: %s", i);
     var e = {
       rId: qlib.getUser().loginId,
-      patientId: i
+      caseId:i,
     };
-    $.extend(e, t), console.log(e);
+    $.extend(e, t), console.log("param---"+JSON.stringify(e));
     var o = "";
     //return t.doctorId ? t.patientId ? t.caseId ? t.cycleCount ? t.beginDate && t.endDate ? qlib.checkField("number", t.useCount) ? t.products.length || (o = "请选择产品") : o = "请填写用药支数" : o = "请选择用药时间段" : o = "请选择临床分期" : o = "请选择病例" : o = "请选择患者" : o = "请选择医生", o ? void appcan.window.alert("提示", o, ["知道了"]) : (appcan.window.openToast(CR.TOAST_WAITING), void appcan.request.ajax({
     return t.beginDate && t.endDate ? qlib.checkField("number", t.useCount) ? t.products.length || (o = "请选择产品") : o = "请填写用药支数" : o = "请选择用药时间段" , o ? void appcan.window.alert("提示", o, ["知道了"]) : (appcan.window.openToast(CR.TOAST_WAITING), void appcan.request.ajax({
@@ -98,7 +98,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
       dataType: "json",
       timeout: REQUEST_TIMEOUT,
       success: function(t, o, n, c, i) {
-        console.log(t), "0" != t.status ? (appcan.window.openToast(t.msg || "操作失败", SimcereConfig.ui.toastDuration), console.error("res error")) : (e.id && qlib.closeWindowByName("EDZY_YyCycleDetail"), appcan.window.publish("EDZY/YyList.refresh", ""), appcan.window.openToast(t.msg || "操作失败", SimcereConfig.ui.toastDurationCb), setTimeout(function() {
+        console.log("CycleCreate---"+JSON.stringify(t)), "0" != t.status ? (appcan.window.openToast(t.msg || "操作失败", SimcereConfig.ui.toastDuration), console.error("res error")) : (e.id && qlib.closeWindowByName("EDZY_YyCycleDetail"), appcan.window.publish("EDZY/YyList.refresh", ""), appcan.window.openToast(t.msg || "操作失败", SimcereConfig.ui.toastDurationCb), setTimeout(function() {
           qlib.closeCurrentWindow(-1)
         }, SimcereConfig.ui.toastDurationCb))
       },

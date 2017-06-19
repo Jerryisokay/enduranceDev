@@ -79,7 +79,7 @@ angular.module("myApp", ["ngTouch", "ngq"]).service("Data", function() {
   }
 }]).service("openZyList", ["$timeout", "Data", function(t, e) {
   return function(t) {
-    return 3 == t.flowType && 4 == t.state ? void appcan.window.alert("提示", "无法查看封存的数据", "知道了") : (console.log(JSON.stringify(t)), localStorage.setItem("EDZY/PatientDetail.patientId", t.id), void appcan.window.open("EDZY_ZyPatientDetail", "ZyPatientDetail.html", 10))
+    return 3 == t.flowType && 4 == t.state ? void appcan.window.alert("提示", "无法查看封存的数据", "知道了") : (console.log(JSON.stringify(t)), localStorage.setItem("EDZY/PatientDetail.patientId", t.id), localStorage.setItem("EDZY/PatientDetail.patientRowId", t.id), void appcan.window.open("EDZY_ZyPatientDetail", "ZyPatientDetail.html", 10))
   }
 }]).service("openYyList", ["$timeout", "Data", function(t, e) {
   return function(t) {

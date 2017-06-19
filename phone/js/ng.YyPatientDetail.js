@@ -10,7 +10,10 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
 }).service("subscribe", ["$timeout", "Data", "getList", function(t, e, i) {
   return function() {
     appcan.window.subscribe("EDZY/YyList.refresh", function() {
-      i()
+        i(), YyDetailShow = false, $.each(e.itemList,function(id,v){
+            v.onload = !1;
+            v.detailActive = !1;
+        })
     })
   }
 }]).service("getPatientDetail", ["$timeout", "Data", "$filter", "getFlow", "imgSpliter", function(e, t, o, i, n) {
@@ -66,7 +69,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
           dataType: "json",
           timeout: REQUEST_TIMEOUT,
           success: function(i, n, s, r, c) {
-            e.loading = !1, appcan.window.closeToast(), console.log(i), "2" == i.status && (i.status = "0", i.data = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
+            e.loading = !1, appcan.window.closeToast(), console.log("诊疗信息列表"+JSON.stringify(i)), "2" == i.status && (i.status = "0", i.data = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
                 e.itemListErr = !e.itemList.length
               })) : t(function() {
                 e.itemList = e.itemList.concat(i.data), e.itemListEmpty = !e.itemList.length;
@@ -121,9 +124,9 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
   return function(o) {
     var p = o.id,
       n = {};
-    console.log(n), appcan.window.openToast(CR.TOAST_WAITING), appcan.request.ajax({
+    console.log(p), appcan.window.openToast(CR.TOAST_WAITING), appcan.request.ajax({
       type: "POST",
-      url: SimcereConfig.server.edzy + "case/submit" + p,
+      url: SimcereConfig.server.edzy + "case/submit/" + p,
       data: n,
       dataType: "json",
       timeout: REQUEST_TIMEOUT,
@@ -137,14 +140,15 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
   }
 }]).service("caseCreate", ["$timeout", "Data", "ngqActionSheet", function(t, d, n) {     //新增诊疗信息
   return function() {
-    n("", "取消", ["4赠PD", "6赠PD"], function(e) {
-      "0" == e ? t(function(){
-          localStorage.setItem("EDZY/yyzq.pdType", '4'), void appcan.window.open("EDZY_YyCaseCreate", "YyCaseCreate.html", 10)
-      }) : "1" == e && t(function(){
-          localStorage.setItem("EDZY/yyzq.pdType", '6'), void appcan.window.open("EDZY_YyCaseCreate", "YyCaseCreate.html", 10)
-      })
-        
-    })
+    // n("", "取消", ["4赠PD", "6赠PD"], function(e) {
+      // "0" == e ? t(function(){
+          // localStorage.setItem("EDZY/yyzq.pdType", '4'), void appcan.window.open("EDZY_YyCaseCreate", "YyCaseCreate.html", 10)
+      // }) : "1" == e && t(function(){
+          // localStorage.setItem("EDZY/yyzq.pdType", '6'), void appcan.window.open("EDZY_YyCaseCreate", "YyCaseCreate.html", 10)
+      // })
+//         
+    // })
+    void appcan.window.open("EDZY_YyCaseCreate", "YyCaseCreate.html", 10)
   }
 }]).controller("ItemListController", ["$scope", "$timeout", "Data","getList","getCycleList","openCaseDetail","openCycleDetail","cycleCreate","cycleSubmit", function(e, o, t, i, a, n, d, c, m) {
     e.getCycleList = a, e.openCaseDetail = n, e.openCycleDetail = d, e.cycleCreate = c, e.cycleSubmit = m, i();

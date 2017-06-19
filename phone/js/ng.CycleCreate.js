@@ -120,7 +120,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
       dataType: "json",
       timeout: REQUEST_TIMEOUT,
       success: function(t, o, n, c, i) {
-        console.log(t), "0" != t.status ? (appcan.window.openToast(t.msg || "操作失败", SimcereConfig.ui.toastDuration), console.error("res error")) : (e.id && qlib.closeWindowByName("EDZY_CycleDetail"), appcan.window.publish("EDZY/CycleList.refresh", ""), appcan.window.openToast(t.msg || "操作失败", SimcereConfig.ui.toastDurationCb), setTimeout(function() {
+        console.log(t), "0" != t.status ? (appcan.window.openToast(t.msg || "操作失败", SimcereConfig.ui.toastDuration), console.error("res error")) : (e.id && qlib.closeWindowByName("EDZY_CycleDetail"), appcan.window.publish("EDZY/YyList.refresh", ""), appcan.window.openToast(t.msg || "操作失败", SimcereConfig.ui.toastDurationCb), setTimeout(function() {
           qlib.closeCurrentWindow(-1)
         }, SimcereConfig.ui.toastDurationCb))
       },

@@ -89,6 +89,6 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
       }
     })
   }
-}]).controller("ItemListController", ["$scope", "$timeout", "Data", function(e, o, t) {}]).controller("GlbController", ["$scope", "$timeout", "Data", "subscribe", "getCaseDetail", "ngqViewImages", function(e, o, t, n, a, c) {
-  e.Data = t, e.ngqViewImages = c, n(), a()
+}]).controller("ItemListController", ["$scope", "$timeout", "Data", function(e, o, t) {}]).controller("GlbController", ["$scope", "$timeout", "Data", "subscribe", "getCaseDetail", "ngqViewImages","openFlow", function(e, o, t, n, a, c, i) {
+  e.Data = t, e.ngqViewImages = c, e.openFlow = i, n(), a()
 }]);

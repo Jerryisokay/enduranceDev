@@ -5,9 +5,6 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     itemList: [],
     itemListEmpty: !1,
     itemListErr: !1,
-    patientId: "",
-    patientRowId: "",
-    patientName: "",
     hospitalId: "",
     hospitalName: "",
     deptId: "",
@@ -140,16 +137,29 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
       e(function() {
         t.chemoRegimenRowId = n.rowId, t.chemoRegimenName = n.name
       })
+    }), appcan.window.subscribe("EDZY/pdSelect.selected", function() {
+      //EGR检测
+      var o = localStorage.getItem("EDZY/pdSelect.item"),
+        i = angular.fromJson(o);
+      e(function() {
+        t.pd = i.id, t.pdName = i.name
+      })
+    }),appcan.window.subscribe("EDZY/YyCaseCreate.submit", function() {
+      o()
     })
   }
 }]).service("submitCase", ["$timeout", "Data", function(e, t) {
   return function() {
+    var pId = localStorage.getItem("EDZY/PatientDetail.patientId");
+    var pRowId = localStorage.getItem("EDZY/PatientDetail.patientRowId");
     var e = {
-      rId: qlib.getUser().loginId
+      rId: qlib.getUser().loginId,
+      patientId: pId,
+      patientRowId: pRowId,
     };
     $.extend(e, t), console.log(e);
     var o = "";
-    return t.patientId ? t.hospitalId ? t.deptId ? t.doctorId ? t.tomourId || (o = "请选择癌种") : o = "请选择医生" : o = "请选择科室" : o = "请选择医院" : o = "请选择患者", o ? void appcan.window.alert("提示", o, ["知道了"]) : (appcan.window.openToast(CR.TOAST_WAITING), void appcan.request.ajax({
+    return e.patientId ? e.hospitalId ? e.deptId ? e.doctorId ? e.theraRegimenRowId ? e.egrfRowId ? e.clinicalStagesRowId ? e.cytologyGradeRowId ? e.diseaseDiagRowId || (o = "请选择疾病诊断") : o = "请选择病理学/或细胞学/组织学诊断或分级" : o = "请选择临床分期" : o = "请选择EGRF检测" : o = "请选择治疗方案" : o = "请选择医生" : o = "请选择科室" : o = "请选择医院" : o = "请选择患者", o ? void appcan.window.alert("提示", o, ["知道了"]) : (appcan.window.openToast(CR.TOAST_WAITING), void appcan.request.ajax({
       type: "POST",
       url: SimcereConfig.server.edzy + "case",
       data: e,
@@ -157,7 +167,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
       dataType: "json",
       timeout: REQUEST_TIMEOUT,
       success: function(t, o, i, n, a) {
-        console.log(t), "0" != t.status ? (appcan.window.openToast(t.msg || "操作失败", SimcereConfig.ui.toastDuration), console.error("res error")) : (e.id && qlib.closeWindowByName("EDZY_CaseDetail"), appcan.window.publish("EDZY/CaseList.refresh", ""), appcan.window.openToast(t.msg || "操作失败", SimcereConfig.ui.toastDurationCb), setTimeout(function() {
+        console.log(t), "0" != t.status ? (appcan.window.openToast(t.msg || "操作失败", SimcereConfig.ui.toastDuration), console.error("res error")) : (e.id && qlib.closeWindowByName("EDZY_CaseDetail"), appcan.window.publish("EDZY/YyList.refresh", ""), appcan.window.openToast(t.msg || "操作失败", SimcereConfig.ui.toastDurationCb), setTimeout(function() {
           qlib.closeCurrentWindow(-1)
         }, SimcereConfig.ui.toastDurationCb))
       },
@@ -181,7 +191,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
         if (appcan.window.closeToast(), console.log(o), "0" != o.status) appcan.window.openToast(o.msg, SimcereConfig.ui.toastDuration);
         else {
           var r = o.data;
-          r.caseRepFilesView = i(r.caseRepFiles), r.caseSummFilesView = i(r.caseSummFiles), r.medImagesFilesView = i(r.medImagesFiles), e(function() {
+          r.caseRepFilesView = i(r.caseRepFiles), r.chestCTBFilesView = i(r.chestCTBFiles), r.chestCTFFilesView = i(r.chestCTFFiles), r.assApplyFilesView = i(r.assApplyFiles), r.infNotiCirmFilesView = i(r.infNotiCirmFiles), r.ecoEvlFilesView = i(r.ecoEvlFiles), e(function() {
             angular.extend(t, o.data)
           })
         }
@@ -207,11 +217,13 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
   },e.openEGFRSelect = function(){
       appcan.window.open("EGRFSelect", "EGRFSelect.html", 10)
   },e.openDiseaseSelect = function() {
-      appcan.window.open("DiseaSelect", "DiseaSelect.html", 10)
+      appcan.window.open("DiseaseSelect", "DiseaseSelect.html", 10)
   },e.openZlfaSelect = function(){
       appcan.window.open("ZlfaSelect", "ZlfaSelect.html", 10)
   }, e.openChemotherapySelect = function(){
       return o.combinedTreatRowId ? void appcan.window.open("ChemotherapySelect", "ChemotherapySelect.html", 10) : void appcan.window.alert("提示", "请先选择治疗方案", ["知道了"])
+  },e.openPdSelect = function(){
+      appcan.window.open("pdSelect", "pdSelect.html", 10)
   }, i();
   var m = localStorage.getItem("EDZY/YyCaseDetail.caseIdEdit");
   if (m) {
