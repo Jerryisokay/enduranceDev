@@ -15,34 +15,12 @@
     <!---->
     <link rel="stylesheet" href="../vendor/appcan-base/css/bundle.nec.size.css"/>
     <link rel="stylesheet" href="../css/lib.css"/>
-    <link rel="stylesheet" href="../css/DoctorList.css"/>
+    <link rel="stylesheet" href="../css/PatientList.css"/>
 </head>
 <body class="um-vp bc-bg vp-bg" ontouchstart ng-controller="GlbController">
 
 <div class="bd-wrap">
-    <div class="filter-info gap-b">
-        <div class="ub ub-ac filter-info-item ng-hide" ng-show="Data.hospitalName">
-            <div class="filter-info-icon fi fi-yiyuan"></div>
-            <div class="filter-info-txt" ng-bind="Data.hospitalName">南京妇幼保健第二人民医院</div>
-            <div class="filter-info-rm" ng-click="clearHospitalName()"></div>
-        </div>
-        <div class="ub ub-ac filter-info-item ng-hide" ng-show="Data.doctorName">
-            <div class="filter-info-icon fi fi-yisheng"></div>
-            <div class="filter-info-txt" ng-bind="Data.doctorName">张三</div>
-            <div class="filter-info-rm" ng-click="clearDoctorName()"></div>
-        </div>
-        <div class="ub ub-ac filter-info-item ng-hide" ng-show="Data.mobile">
-            <div class="filter-info-icon fi fi-mobile"></div>
-            <div class="filter-info-txt" ng-bind="Data.mobile">18999999999</div>
-            <div class="filter-info-rm" ng-click="clearMobile()"></div>
-        </div>
-        <div class="ub ub-ac filter-info-item">
-            <div class="filter-info-icon fi fi-all"></div>
-            <div class="filter-info-txt" ng-bind="sMAP[Data.state]">全部</div>
-            <div class="filter-info-rm ng-hide" ng-show="Data.state!==''" ng-click="clearState()"></div>
-        </div>
-    </div>
-
+    
     <div class="g-list" ng-controller="ItemListController">
         <!--spinner-->
         <div class="g-spinner" ng-hide="Data.itemList.length||Data.itemListEmpty||Data.itemListErr"><i class="fa fa-spinner fa-spin"></i></div>
@@ -50,34 +28,54 @@
         <div class="g-req-error text-muted ng-hide" ng-show="Data.itemListErr">查询失败</div>
 
         <!--row-->
-        <div class="m-doctor c-9 pd20 ng-hide" ng-click="openDetail(item)" ng-show="Data.itemList.length" ng-repeat="item in Data.itemList">
-            <div class="ub mb16">
-                <div class="ub ub-ac ub-f1">
-                    <i class="f-db w35 h35 fi fi-doctor" ng-show="!item.isProjDoc || item.state!=1"></i>
-                    <div class="icon-isProjDoc" ng-show="item.isProjDoc && item.state==1"></div>
-                    <div class="fs28 c-3 ml5 mr40" ng-bind="item.name">王医生</div>
-                    <div class="fs24" ng-bind="item.titleName">医师</div>
-                </div>
-                <div class="fs18 c-f p-sh" ng-class="{'bg-warn':item.state==0,'bg-error':item.state==2,'bg-positive':item.state==1||item.state==3,'bg-gray':item.state==4}" ng-bind="getStatTxt(item.flowType, item.state)">待审核</div>
+        <div class="m-list-group bd1 bdr-5 f-oh bg-light gap-b" ng-init="YyDetailShow=false">
+            <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+                <div class="pr18 ub-f1 fs24 c-3" ng-click="YyDetailShow=!YyDetailShow">用药周期信息</div>
+                <div class="c-positive pr30">+<span class="fs24">新增诊疗信息</span></div>
+                <div class="fa-ellipsis-h fa c-9" ng-click="YyDetailShow=!YyDetailShow"></div>
             </div>
-            <div class="ub fs18 mb4">
-                <div class="ub-f1"><span ng-bind="item.hospitalName">南京妇幼保健第二人民医院</span> | <span ng-bind="item.deptName">外科</span></div>
-                <div ng-bind="item.updateTime||item.createTime">2016/5/8 15:00</div>
+            <!--诊疗信息列表-->
+            <div ng-show="YyDetailShow">
+                <div class="" ng-repeat="item in Data.itemList">
+                    <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+                        <div class="pr18 ub-f1 fs20 c-3">诊疗信息1</div>
+                        <div class="c-positive pr30"><span class="fs20">查看</span></div>
+                        <div class="fa-ellipsis-h fa c-9"></div>
+                    </div>
+                    <!--用药周期列表-->
+                    <div class="pl20">
+                        <div class="bd-b m-list-item pt16 pb16">
+                            <div class="ub ub-ac h50 ph19">
+                                <div class="pr18 ub-f1 fs20 c-6">第一次用药</div>
+                                <div class="fs20 c-9">时间段：02-11~03-11</div>
+                            </div>
+                            <div class="ub ub-ac h50 ph19">
+                                <div class="pr18 ub-f1 fs20 c-9">支数：1支</div>
+                                <div class="c-9 fs20">产品：恩度</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ub ub-ac h48 pv16 tx-c">
+                        <div class="ub-f1 c-positive bd-r">+<span class="fs24">新增用药周期</span></div>
+                        <div class="ub-f1 fs24 c-f69">病例管理提交</div>
+                    </div>    
+                </div>
             </div>
         </div>
 
+
     </div>
 
-    <!--<div id="g-filter-page" class="g-filter-page" ng-class="{'z-active':Data.isFilterPageActive}" ng-swipe-right="Data.isFilterPageActive=false">
+    <!--<div class="g-filter-page" ng-class="{'z-active':Data.isFilterPageActive}" ng-swipe-right="Data.isFilterPageActive=false">
         <div class="m-filter-page">
-            <div class="mt43 lh46 fs24 c-3">医院</div>
-            <input type="text" readonly placeholder="未选择" ng-click="openHospitalSelect()" ng-model="Data._hospitalName" class="bd1 bdr-lg pd19 lh30 fs24 c-9 mb26 icon-arrow-r reset-input input-full"/>
-
-            <div class="lh46 fs24 c-3">医生名</div>
+            <div class="mt43 lh46 fs24 c-3">医生名</div>
             <input type="text" placeholder="未填写" ng-model="Data._doctorName" class="bd1 bdr-lg pd19 lh30 fs24 c-9 mb26 reset-input input-full"/>
 
-            <div class="lh46 fs24 c-3">手机号</div>
-            <input type="text" placeholder="未填写" ng-model="Data._mobile" class="bd1 bdr-lg pd19 lh30 fs24 c-9 mb26 reset-input input-full"/>
+            <div class="lh46 fs24 c-3">患者名</div>
+            <input type="text" placeholder="未填写" ng-model="Data._patientName" class="bd1 bdr-lg pd19 lh30 fs24 c-9 mb26 reset-input input-full"/>
+
+            <div class="lh46 fs24 c-3">癌种</div>
+            <input type="text" readonly placeholder="未选择" ng-click="openCancerSelect()" ng-model="Data._tomourName" class="bd1 bdr-lg pd19 lh30 fs24 c-9 mb26 icon-arrow-r reset-input input-full"/>
 
             <div class="lh46 fs24 c-3 mt50">状态</div>
             <div class="m-filter-page-stat fs28">
@@ -106,7 +104,7 @@
 <script src="../vendor/simcere/js/config.js"></script>
 <script src="../js/lib.js"></script>
 <script src="../js/ng.js"></script>
-<script src="../js/ng.DoctorList.js"></script>
+<script src="../js/ng.YyCaseList.js"></script>
 <script>
     appcan.ready(function () {
         appcan.frame.setBounce({
@@ -115,9 +113,9 @@
             upEndCall: function (type) {
                 //$(window).trigger('zy-list-load');
                 if(type=='0'){
-                    appcan.window.publish('EDZY/DoctorList.refresh');
+                    appcan.window.publish('EDZY/CaseList.refresh');
                 }else{
-                    appcan.window.publish('EDZY/DoctorList.load');
+                    appcan.window.publish('EDZY/CaseList.load');
                 }
 
                 appcan.frame.resetBounce(type);
@@ -125,9 +123,6 @@
         });
 
         angular.bootstrap(document.documentElement, ['myApp']);
-
-        /*var bh = $('body').height();
-        $('.g-filter-page').height(bh);*/
     });
 
 </script>

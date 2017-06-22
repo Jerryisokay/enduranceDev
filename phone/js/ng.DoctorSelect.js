@@ -13,11 +13,13 @@ angular.module("myApp", []).service("Data", function() {
     localStorage.removeItem("EDZY/DoctorSelect.hospitalId");
     var r = localStorage.getItem("EDZY/DoctorSelect.deptId") || "";
     localStorage.removeItem("EDZY/DoctorSelect.deptId");
+    var d = localStorage.getItem("EDZY/DoctorSelect.isProjDoc") || "";
+    localStorage.removeItem("EDZY/DoctorSelect.isProjDoc");
     var i = {
       rId: qlib.getUser().loginId,
       doctorName: e.keyword,
       hospitalId: o,
-      deptId: r
+      deptId: r,
     };
     console.log(i), appcan.request.ajax({
       type: "GET",

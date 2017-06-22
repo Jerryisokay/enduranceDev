@@ -43,14 +43,14 @@
             <div class="icon-arrow-r f-dn"></div>
         </div>
         <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+        <div class="ub ub-ac m-list-item h69 ph19" ng-class="{'bd-b':Data.cycle.commentsName=='PD'}">
             <div class="u-icon w32 h32 fi fi-huanzhe"></div>
             <div class="ph18 fs24 c-3">医疗评价</div>
             <input type="text" placeholder="未填写(必填)" ng-model="Data.cycle.commentsName" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>
             <div class="icon-arrow-r f-dn"></div>
         </div>
         <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.cycle.commentsName=='PD'">
+        <div class="ub ub-ac m-list-item h69 ph19 ng-hide" ng-show="Data.cycle.commentsName=='PD'">
             <div class="u-icon w32 h32 fi fi-huanzhe"></div>
             <div class="ph18 fs24 c-3">PD时间</div>
             <input type="text" placeholder="未填写(必填)" ng-model="Data.cycle.pdTime" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>

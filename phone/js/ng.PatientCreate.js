@@ -187,6 +187,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
   e.Data = i, e.openBirthdaySelect = o, e.setSelectedGender = r, e.setIsEmi = se, e.setIsRnum = sr, e.setIsLcancer = sl, e.setMiArea =sm, e.openAddressSelect = function() {
     qlib.openAddressSelect()
   }, e.openDoctorSelect = function(){
+      localStorage.setItem("EDZY/DoctorSelect.isProjDoc",'0'),
       qlib.openDoctorSelect()
   }, e.openYbTypeSelect = function() {
     qlib.openYbTypeSelect()
