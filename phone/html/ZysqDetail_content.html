@@ -21,12 +21,13 @@
 
 <div class="g-main pv32 ph20">
 
-    <!-- <div class="ub ub-ac m-list-item h69 ph19 bd1 f-oh bg-light gap-b bdr-5" ng-click="openShopSelect()">
+    <div class="ub ub-ac m-list-item h69 ph19 bd1 f-oh bg-light gap-b bdr-5" ng-click="openShopSelect()">
         <div class="pr18 fs24 c-3">领药药店</div>
-        <input type="text" ng-model="Data.shopName" readonly placeholder="未选择(必填)" class="fs24 c-9 mr12 ub-f1 tx-r reset-input"/>
+        <input type="text" ng-model="Data.pharmacy" readonly placeholder="未选择(必填)" class="fs24 c-9 mr12 ub-f1 tx-r reset-input"/>
         <div class="icon-arrow-r"></div>
-    </div> -->
-
+    </div>
+    
+    <!--患者信息-->
     <div class="m-list-group bd1  f-oh gap-b bdr-5" ng-init="isPatientDetailActive==false">
         <!--item-->
         <div class="ub ub-ac m-list-item bg-light h69 ph19 j-toggle-patient" ng-click="isPatientDetailActive=!isPatientDetailActive" ng-class="{'bd-b':isPatientDetailActive}">
@@ -77,22 +78,65 @@
     </div>
     
     <div class="n-patient-detail ng-hide" ng-show="isPatientDetailActive">
-        <div class="m-list-group bd1  f-oh gap-b bdr-5">
-            <div class="ub ub-ac m-list-item bg-light h69 ph19 bd-b">
-                <div class="pr18 fs24 c-3">医保类型</div>
+        <div class="m-list-group bd1  f-oh gap-b bdr-5 bg-light">
+            <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+                <div class="u-icon w32 h32 fi fa-money"></div>
+                <div class="ph18 fs24 c-3">夫妻双方年总收入</div>
+                <input type="text" ng-model="Data.patient.saIncome" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            </div>
+            <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+                <div class="u-icon w32 h32 fi fa-money"></div>
+                <div class="ph18 fs24 c-3">其余直系亲属年总收入</div>
+                <input type="text" ng-model="Data.patient.lcaIncome" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            </div>
+            <!--item-->
+            <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+                <div class="u-icon w32 h32 fi fi-yibaoleixing"></div>
+                <div class="ph18 fs24 c-3">是否享受医保</div>
+                <input type="text" ng-model="Data.patient.isEmiName" readonly placeholder="未选择" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+    
+                <div class="icon-arrow-r f-dn"></div>
+            </div>
+            <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+                <div class="u-icon w32 h32 fi fi-dizhi"></div>
+                <div class="ph18 fs24 c-3">医保所属地</div>
+                <input type="text" ng-model="Data.patient.miArea" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            </div>
+            <!--item-->
+            <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+                <div class="u-icon w32 h32 fi fi-yibaoleixing"></div>
+                <div class="ph18 fs24 c-3">医保类型</div>
                 <input type="text" ng-model="Data.patient.mitypeName" readonly placeholder="未选择" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+    
                 <div class="icon-arrow-r f-dn"></div>
             </div>
             <!--item-->
-            <div class="ub ub-ac m-list-item bg-light h69 ph19 gap-b">
-                <div class="pr18 fs24 c-3">其他保险名称</div>
-                <input type="text" ng-model="otherIns" readonly placeholder="未选择" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+                <div class="u-icon w32 h32 fi fi-qitabaoxianmingcheng"></div>
+                <div class="ph18 fs24 c-3">其他保险名称</div>
+                <input type="text" ng-model="Data.patient.otherIns" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+    
                 <div class="icon-arrow-r f-dn"></div>
+            </div>
+            <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+                <div class="u-icon w32 h32 fi fi-yysjd"></div>
+                <div class="ph18 fs24 c-3">是否需要预约编号</div>
+                <input type="text" ng-model="Data.patient.isRnumName" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            </div>
+            <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+                <div class="u-icon w32 h32 fi fi-aizhong"></div>
+                <div class="ph18 fs24 c-3">是否肺癌</div>
+                <input type="text" ng-model="Data.patient.isLcancerName" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            </div>
+            <div class="ub ub-ac m-list-item h69 ph19">
+                <div class="u-icon w32 h32 fi fi-yisheng"></div>
+                <div class="ph18 fs24 c-3">项目医生</div>
+                <input type="text" ng-model="Data.patient.projDocName" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
             </div>
         </div>
         
         <div class="m-list-group bd1  f-oh gap-b bdr-5">
-            <div class="g-card-img  f-oh bg-light pd22 gap-b">
+            <div class="g-card-img  f-oh bg-light pd22">
                 <div class="m-card-img">
                     <div class="mb30 fs24 c-3">身份证扫描件</div>
                     <div class="f-cb mb-quits">
@@ -105,8 +149,8 @@
                 </div>
             </div>
          </div>
-        <div class="m-list-group bd1  f-oh gap-b bdr-5">
-            <div class="g-card-img  f-oh bg-light pd22 gap-b">
+        <div class="m-list-group bd1 f-oh gap-b bdr-5">
+            <div class="g-card-img  f-oh bg-light pd22">
                 <div class="m-card-img">
                     <div class="mb30 fs24 c-3">户口本扫描件</div>
                     <div class="f-cb mb-quits">
@@ -121,7 +165,7 @@
         </div>
     </div>
     
-    
+    <!---赠药次数--->
     <!--<div class="bg-error gap-b">第一次赠药</div>-->
     <div class="fs18 pd20 bg-light bd1 bdr-5 gap-b ng-hide" ng-show="Data.zy.applys.length" ng-repeat="apply in Data.zy.applys">
         <div class="ub mb26">
@@ -133,63 +177,71 @@
             <div class="c-9">领药编码<span ng-bind="apply.givenNo">xxxxxxxxx</span></div>
         </div>
     </div>
-
-
+    
+    
+    <!--用药周期-->
+    <div class="m-list-group bd1 bdr-5 f-oh bg-light gap-b ng-hide" ng-show="Data.YyList.length" ng-init="YyDetailShow=false">
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b" ng-click="YyDetailShow=!YyDetailShow">
+            <div class="pr18 ub-f1 fs24 c-3">用药周期信息</div>
+            <div class="ml20 c-9 u-shengluehao"></div>
+        </div>
+        <!--诊疗信息列表-->
+        <div ng-show="YyDetailShow" class="g-list ng-hide" ng-controller="YyListController">
+            <div class="" ng-repeat="item in Data.YyList" ng-init="outerIndex = $index;item.onload = false; item.detailActive=false">
+                <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+                    <div class="pr18 ub-f1 fs20 c-3">诊疗信息{{$index+1}}</div>
+                    <div class="c-positive pr30" ng-click="openCaseDetail(item)"><span class="fs20">查看</span></div>
+                    <div class="ml20 c-9 u-shengluehao pv16" ng-click="getCycleList(item)"></div>
+                </div>
+                <!--用药周期列表-->
+                <div class="ng-hide" ng-show="item.detailActive">
+                    <div class="pl20 m-list-item pt16" ng-click="openCycleDetail(vm)" ng-repeat="vm in item.cycleList track by $index"  ng-init="innerIndex = $index">
+                        <div class="ub ub-ac h50 ph19">
+                            <div class="pr18 ub-f1 fs20 c-6">第{{innerIndex+1}}次用药</div>
+                            <div class="fs20 c-9">时间段：{{vm.beginDate}}~{{vm.endDate}}</div>
+                        </div>
+                        <div class="bd-b ub ub-ac h50 ph19 pb16">
+                            <div class="pr18 ub-f1 fs20 c-9">支数：{{vm.useCount}}支</div>
+                            <div class="c-9 fs20">产品：{{vm.products|joinProducts}}</div>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+        </div>
+    </div>
     
     <!---赠药周期--->
-    <div class="m-list-group bd1 bdr-5 f-oh bg-light gap-b" ng-init="isZyDetailActive=false">
+    <div class="m-list-group bd1 bdr-5 f-oh bg-light gap-b ng-hide" ng-show="Data.ZyList.length" ng-init="isZyDetailActive=false">
         <div class="ub ub-ac m-list-item h69 ph19 bd-b" ng-click="isZyDetailActive= !isZyDetailActive">
             <div class="pr18 ub-f1 fs24 c-3">赠药周期信息</div>
-            <div class="fa-ellipsis-h fa c-9"></div>
+            <div class="ml20 c-9 u-shengluehao"></div>
         </div>
         <!--诊疗信息列表-->
         <div class="ng-hide" ng-show="isZyDetailActive">
             <!--用药周期列表-->
-            <div class="pl20">
-                <div class="bd-b m-list-item pt16 pb16">
+            <div class="g-list pl20" ng-controller="ItemListController">
+                <div class="g-spinner" ng-hide="Data.itemList.length||Data.itemListEmpty||Data.itemListErr"><i class="fa fa-spinner fa-spin"></i></div>
+                <!---item--->
+                <div class="bd-b m-list-item pt16 pb16" ng-click="openZyDetail(item)" ng-show="Data.itemList.length" ng-repeat="item in Data.itemList">
                     <div class="ub ub-ac h50 ph19">
-                        <div class="pr18 ub-f1 fs20 c-6">第一次用药</div>
-                        <div class="fs20 c-9">时间段：02-11~03-11</div>
+                        <div class="pr18 ub-f1 fs20 c-6" ng-cloak>赠药周期{{$index+1}}</div>
+                        <div class="fs20 c-9">时间段：{{item.beginDate}}~{{item.endDate}}</div>
                     </div>
                     <div class="ub ub-ac h50 ph19">
-                        <div class="pr18 ub-f1 fs20 c-9">支数：1支</div>
-                        <div class="c-9 fs20">产品：恩度</div>
+                        <div class="pr18 ub-f1 fs20 c-9">支数：{{item.useCount}}支</div>
+                        <div class="c-9 fs20">产品：{{item.productValue}}</div>
                     </div>
                 </div>
-            </div>
+            </div>   
         </div>
     </div>
     
-    <!---用药周期--->
-    <div class="m-list-group bd1 bdr-5 f-oh bg-light gap-b" ng-init="isYyDetailActive=false">
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b" ng-click="isYyDetailActive= !isYyDetailActive">
-            <div class="pr18 ub-f1 fs24 c-3">用药周期信息</div>
-            <div class="fa-ellipsis-h fa c-9"></div>
-        </div>
-        <!--诊疗信息列表-->
-        <div class="ng-hide" ng-show="isYyDetailActive">
-            <div class="">
-                <div class="ub ub-ac m-list-item h69 ph19 bd-b">
-                    <div class="pr18 ub-f1 fs20 c-3">诊疗信息1</div>
-                    <div class="c-positive pr30"><span class="fs20">查看</span></div>
-                    <div class="fa-ellipsis-h fa c-9"></div>
-                </div>
-                <!--用药周期列表-->
-                <div class="pl20">
-                    <div class="bd-b m-list-item pt16 pb16">
-                        <div class="ub ub-ac h50 ph19">
-                            <div class="pr18 ub-f1 fs20 c-6">第一次用药</div>
-                            <div class="fs20 c-9">时间段：02-11~03-11</div>
-                        </div>
-                        <div class="ub ub-ac h50 ph19">
-                            <div class="pr18 ub-f1 fs20 c-9">支数：1支</div>
-                            <div class="c-9 fs20">产品：恩度</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
+    
+    
+
+
+    
     
     <div class="m-list-group bd1 f-oh bg-light bdr-5">
         <!--item-->
@@ -208,7 +260,7 @@
 <script src="../vendor/simcere/js/config.js"></script>
 <script src="../js/lib.js"></script>
 <script src="../js/ng.js"></script>
-<script src="../js/ng.ZyPatientDetail.js"></script>
+<script src="../js/ng.ZysqDetail.js"></script>
 <script>
     appcan.ready(function () {
 //        appcan.initBounce();

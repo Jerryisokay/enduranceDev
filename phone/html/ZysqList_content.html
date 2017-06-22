@@ -50,29 +50,28 @@
         <div class="g-req-error text-muted ng-hide" ng-show="Data.itemListErr">查询失败</div>
 
         <!--row-->
-        <div class="m-doctor c-9 pd20 bd1 bdr-lg bg-light gap-b">
+        <div class="m-doctor c-9 pd20 bd1 bdr-lg bg-light gap-b" ng-click="openDetail(item)" ng-repeat="item in Data.itemList">
 
             <div class="ub ub-ac mb16">
                 <div class="ub ub-ac ub-f1">
                     <i class="f-db w36 h36 fi fi-yisheng"></i>
                     <div class="fs28 c-3 ml5 w130" ng-bind="item.name">王医生</div>
                 </div>
-                <div class=""><span class="fs28 c-warn" ng-bind="item.times||0">3</span><span class="fs18 c-9">次赠药</span></div>
+                <div class="ng-hide" ng-show="Data.flag==1"><span class="fs28 c-warn" ng-bind="item.times||0">3</span><span class="fs18 c-9">次赠药</span></div>
                 <div class="icon-arrow-r ml20 ng-hide" ng-show="item.giveState==5"></div>
             </div>
             <div class="ub ub-ac mt12 fs24 c-9" ng-class="{'mb12': item.doctors.length}">
-                <div class="mr10">用药支数：<span class="c-positive" ng-bind="item.useCount||0">12</span>支</div>
-                <div class="ng-hide" ng-show="item.beginDate&&item.endDate">
-                    <span class="ng-hide">周期:</span>
-                    <span ng-bind="item.beginDate">2015-07-13</span>至<span ng-bind="item.endDate">2016-11-12</span>
-                </div>
+                <div class="mr10 ub-f1">用药支数：<span class="c-positive" ng-bind="item.useCount||0">12</span>支</div>
                 <div class="ub-f1"></div>
                 <div class="fs18 c-f p-sh" ng-class="{'bg-warn':item.giveState==0,'bg-error':item.giveState==2,'bg-positive':item.giveState==1||item.giveState==3||item.giveState==5,'bg-gray':item.giveState==4||item.giveState==6}" data-state="{{item.giveState}}" ng-bind="sMAP[item.giveState]">可申请</div>
             </div>
-            <div class="ub c-9 fs24 mb4 ng-hide" ng-show="item.doctors.length" ng-repeat="doctor in item.doctors">
-                <i class="f-db w32 h32 fi fi-yiyuan"></i>
-                <div class="ub-f1 ut-s" ng-bind="doctor.hospitalName">南京第二人民医院</div>
-                <div ng-bind="doctor.name">乔医生</div>
+            
+            <div class="ub c-9 fs24 mb4" ng-show="item.doctors.length">
+                <div class="ub-f1 ut-s ng-hide" ng-show="item.beginDate&&item.endDate">
+                    <span>周期:</span>
+                    <span ng-bind="item.beginDate">2015-07-13</span>至<span ng-bind="item.endDate">2016-11-12</span>
+                </div>
+                <div ng-bind="doctor.name" class="ng-hide" ng-show="item.doctors.length">乔医生</div>
             </div>
         </div>
 
@@ -121,7 +120,7 @@
 <script src="../vendor/simcere/js/config.js"></script>
 <script src="../js/lib.js"></script>
 <script src="../js/ng.js"></script>
-<!-- <script src="../js/ng.ZyList.js"></script> -->
+<script src="../js/ng.ZysqList.js"></script>
 <script>
     appcan.ready(function () {
         appcan.frame.setBounce({
@@ -130,16 +129,16 @@
             upEndCall: function (type) {
                 //$(window).trigger('zy-list-load');
                 if(type=='0'){
-                    appcan.window.publish('EDZY/ZyList.refresh');
+                    appcan.window.publish('EDZY/ZysqList.refresh');
                 }else{
-                    appcan.window.publish('EDZY/ZyList.load');
+                    appcan.window.publish('EDZY/ZysqList.load');
                 }
 
                 appcan.frame.resetBounce(type);
             }
     });
 
-        //angular.bootstrap(document.documentElement, ['myApp']);
+        angular.bootstrap(document.documentElement, ['myApp']);
 
         /*var bh = $('body').height();
         $('.g-filter-page').height(bh);*/

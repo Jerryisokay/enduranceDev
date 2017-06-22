@@ -29,7 +29,7 @@ angular.module("myApp", []).service("Data", function() {
     };
     console.log(i), appcan.request.ajax({
       type: "GET",
-      url: SimcereConfig.server.edzy + "med/pharmacys",
+      url: SimcereConfig.server.edzy + "pharmacys",
       data: i,
       contentType: "application/json",
       dataType: "json",
@@ -84,11 +84,11 @@ angular.module("myApp", []).service("Data", function() {
   }
 }]).service("subscribe", function() {
   return function() {
-    appcan.window.subscribe("EDZY/ZyList.refresh", function() {
+    appcan.window.subscribe("EDZY/ZysqList.refresh", function() {
       $timeout(function() {
         Data.isFilterPageActive = !1
       }), Data.itemList.length = 0, getList()
-    }), appcan.window.subscribe("EDZY/ZyList.load", function() {
+    }), appcan.window.subscribe("EDZY/ZysqList.load", function() {
       $timeout(function() {
         Data.isFilterPageActive = !1
       }), getList()

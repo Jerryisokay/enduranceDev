@@ -9,6 +9,7 @@ angular.module("myApp", ["ngTouch", "ngq"]).service("Data", function() {
     doctorName: "",
     patientName: "",
     state: "",
+    flag:"0",
     _hospitalId: "",
     _hospitalName: "",
     _doctorName: "",
@@ -22,6 +23,7 @@ angular.module("myApp", ["ngTouch", "ngq"]).service("Data", function() {
       e.loading = !0;
       var i = {
         rId: qlib.getUser().loginId,
+        flag:e.flag,
         hospitalId: e.hospitalId,
         doctorName: e.doctorName,
         patientName: e.patientName,
@@ -31,7 +33,7 @@ angular.module("myApp", ["ngTouch", "ngq"]).service("Data", function() {
       };
       console.log(i), console.log($.param(i)), appcan.request.ajax({
         type: "GET",
-        url: SimcereConfig.server.edzy + "med/given/list",
+        url: SimcereConfig.server.edzy + "given/patients",
         data: i,
         contentType: "application/json",
         dataType: "json",
@@ -53,12 +55,12 @@ angular.module("myApp", ["ngTouch", "ngq"]).service("Data", function() {
   }
 }]).service("subscribe", ["$timeout", "Data", "getList", function(t, e, i) {
   return function() {
-    appcan.window.subscribe("EDZY/ZyList.toggleFilter", function() {
+    appcan.window.subscribe("EDZY/ZysqList.toggleFilter", function() {
       t(function() {
         e.isFilterPageActive = !e.isFilterPageActive
       })
-    }), appcan.window.subscribe("EDZY/ZyList.filterChange", function() {
-      var a = localStorage.getItem("EDZY/ZyList.filter"),
+    }), appcan.window.subscribe("EDZY/ZysqList.filterChange", function() {
+      var a = localStorage.getItem("EDZY/ZysqList.filter"),
         o = JSON.parse(a);
       angular.extend(e, {
         hospitalId: o.hospitalId,
@@ -69,11 +71,16 @@ angular.module("myApp", ["ngTouch", "ngq"]).service("Data", function() {
       }), t(function() {
         e.isFilterPageActive = !1, e.itemList.length = 0, i()
       })
-    }), appcan.window.subscribe("EDZY/ZyList.refresh", function() {
+    }), appcan.window.subscribe("EDZY/ZysqList.setFlag", function() {
+      var a = localStorage.getItem("EDZY/ZysqList.flag");
+      e.flag = a, e.isFilterPageActive = !1, e.itemList.length = 0, e.itemListEmpty = !1, t(function() {
+        i()
+      })
+    }), appcan.window.subscribe("EDZY/ZysqList.refresh", function() {
       t(function() {
         e.isFilterPageActive = !1
       }), e.itemList.length = 0, i()
-    }), appcan.window.subscribe("EDZY/ZyList.load", function() {
+    }), appcan.window.subscribe("EDZY/ZysqList.load", function() {
       t(function() {
         e.isFilterPageActive = !1
       }), i()
@@ -81,7 +88,7 @@ angular.module("myApp", ["ngTouch", "ngq"]).service("Data", function() {
   }
 }]).service("openDetail", ["$timeout", "Data", function(t, e) {
   return function(t) {
-    return 4 == t.giveState ? void appcan.window.alert("提示", "无法查看封存的数据", "知道了") : (console.log("patientId: %s", t.id), localStorage.setItem("EDZY/ZyDetail.patientId", t.id), void appcan.window.open("EDZY_ZyDetail", "ZyDetail.html", 10))
+    return 4 == t.giveState ? void appcan.window.alert("提示", "无法查看封存的数据", "知道了") : (console.log("patientId: %s", t.id), localStorage.setItem("EDZY/ZysqDetail.patientId", t.id), void appcan.window.open("EDZY_ZysqDetail", "ZysqDetail.html", 10))
   }
 }]).controller("ItemListController", ["$scope", "$timeout", "Data", "getList", "openDetail", "getStatTxt", function(t, e, i, a, o, n) {
   t.openDetail = o, t.getStatTxt = n, a()

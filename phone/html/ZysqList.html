@@ -48,10 +48,10 @@
         </div>
     </div>
     <div id="tab" class="ub ub-ac tx-c ub-pc bc-white">
-        <div class="padd-tb umar-r-1 active tab-item">
+        <div class="padd-tb umar-r-1 active tab-item" data-flag="0">
             <span class="font-normal">首次赠药</span>
         </div>
-        <div class="padd-tb tab-item">
+        <div class="padd-tb tab-item" data-flag="1">
             <span class="font-normal">后续赠药</span>
         </div>
     </div>
@@ -77,7 +77,15 @@
         setTimeout(function () {
             appcan.frame.open("content", "ZysqListFilter.html", titWidth, titHeight, 'filter');
         }, 500);
-
+        
+        $("#tab .tab-item").on('tap',function(){
+            $("#tab .tab-item").removeClass("active");
+            $(this).addClass("active");
+            var flag = $(this).data("flag");
+            localStorage.setItem("EDZY/ZysqList.flag",flag);
+            appcan.window.publish('EDZY/ZysqList.setFlag','');
+        })
+        
         //关闭窗口
         $('#nav-left').on('tap', function () {
             qlib.closeCurrentWindow();
