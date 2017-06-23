@@ -53,8 +53,8 @@
         <div class="m-doctor c-9 pd20 ng-hide" ng-click="openDetail(item)" ng-show="Data.itemList.length" ng-repeat="item in Data.itemList">
             <div class="ub mb16">
                 <div class="ub ub-ac ub-f1">
-                    <i class="f-db w35 h35 fi fi-doctor" ng-show="!item.isProjDoc || item.state!=1"></i>
-                    <div class="icon-isProjDoc" ng-show="item.isProjDoc && item.state==1"></div>
+                    <i class="f-db w35 h35 fi fi-doctor" ng-show="!item.isProjDocName=='是'"></i>
+                    <div class="icon-isProjDoc" ng-show="item.isProjDocName=='是'"></div>
                     <div class="fs28 c-3 ml5 mr40" ng-bind="item.name">王医生</div>
                     <div class="fs24" ng-bind="item.titleName">医师</div>
                 </div>

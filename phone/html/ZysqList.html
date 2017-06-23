@@ -72,7 +72,7 @@
         window.onorientationchange = window.onresize = function () {
             appcan.frame.resize("content", 0, titHeight);
         };
-
+ 
         var titWidth  = $('#header').offset().width;
         setTimeout(function () {
             appcan.frame.open("content", "ZysqListFilter.html", titWidth, titHeight, 'filter');

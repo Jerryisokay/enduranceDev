@@ -52,7 +52,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
           c.idcardFilesView = n(c.idcardFiles), c.hkFilesView = n(c.hkFiles), c.ssqxView = [c.province || "", c.city || "", c.area || "", c.addr || ""].join(""), e(function() {
             t.patient = o.data;
             t.patient.miArea = t.patient.miProvince + t.patient.miCity;
-            console.log("data-----"+JSON.stringify(o.data));
+            console.log("患者详情-----"+JSON.stringify(o.data));
           });
           var l = 'qlib.setHeaderState("' + o.data.flowType + '", "' + o.data.state + '")';
           console.log(l), qlib.evalScriptInWindow("", l), localStorage.setItem("EDZY/Flow.id", o.data.flowId), console.log("FlowId: %s", o.data.flowId)
@@ -84,7 +84,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
           dataType: "json",
           timeout: REQUEST_TIMEOUT,
           success: function(i, n, s, r, c) {
-            e.loading = !1, appcan.window.closeToast(), console.log(i), "2" == i.status && (i.status = "0", i.data = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
+            e.loading = !1, appcan.window.closeToast(), console.log("ZyList "+JSON.stringify(i)), "2" == i.status && (i.status = "0", i.data = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
                 e.itemListErr = !e.itemList.length
               })) : t(function() {
                 e.itemList = e.itemList.concat(i.data), e.itemListEmpty = !e.itemList.length;
@@ -117,7 +117,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
           dataType: "json",
           timeout: REQUEST_TIMEOUT,
           success: function(i, n, s, r, c) {
-            e.Yyloading = !1, appcan.window.closeToast(), console.log(i), "2" == i.status && (i.status = "0", i.data = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
+            e.Yyloading = !1, appcan.window.closeToast(), console.log("诊疗信息列表----"+JSON.stringify(i)), "2" == i.status && (i.status = "0", i.data = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
                 e.itemListErr = !e.itemList.length
               })) : t(function() {
                 e.YyList = e.YyList.concat(i.data), e.itemListEmpty = !e.YyList.length;
@@ -145,7 +145,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
               dataType: "json",
               timeout: REQUEST_TIMEOUT,
               success: function(i, n, s, r, c) {
-                e.loading = !1, appcan.window.closeToast(), console.log(i), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error")) : t(function() {
+                e.loading = !1, appcan.window.closeToast(), console.log("用药周期列表------"+JSON.stringify(i)), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error")) : t(function() {
                     o.cycleList = i.data, o.onload = true
                   })
               },
@@ -155,7 +155,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
             })
         }
     }
-}]).service("applyZy", ["$timeout", "Data", function(e, t) { //查看诊疗信息
+}]).service("applyZy", ["$timeout", "Data", function(e, t) { //申请赠药
   return function() {
     var pId = localStorage.getItem("EDZY/ZysqDetail.patientId");
     var pName = localStorage.getItem("EDZY/ZysqDetail.patientName");

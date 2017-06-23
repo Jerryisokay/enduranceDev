@@ -20,6 +20,7 @@ angular.module("myApp", []).service("Data", function() {
       doctorName: e.keyword,
       hospitalId: o,
       deptId: r,
+      isProjDoc:d,
     };
     console.log(i), appcan.request.ajax({
       type: "GET",

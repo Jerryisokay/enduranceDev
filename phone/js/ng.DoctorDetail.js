@@ -21,7 +21,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
         if (appcan.window.closeToast(), console.log(n), "0" != n.status) appcan.window.openToast(n.msg, SimcereConfig.ui.toastDuration);
         else {
           o(function() {
-            t.doctor = n.data, t.doctor.productsView = e("joinProducts")(n.data.products), t.doctor.isProjDocName = (t.doctor.state == 1) ? t.doctor.isProjDocName : "否";
+            t.doctor = n.data, t.doctor.productsView = e("joinProducts")(n.data.products);// t.doctor.isProjDocName = (t.doctor.state == 1) ? t.doctor.isProjDocName : "否";
           });
           var s = 'qlib.setHeaderState("' + n.data.flowType + '", "' + n.data.state + '")';
           console.log("detail----"+JSON.stringify(n.data));
