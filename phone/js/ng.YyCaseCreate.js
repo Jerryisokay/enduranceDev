@@ -29,17 +29,17 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     chemoRegimenName:"",
     pd:"",
     caseRepFiles:"",            //病理报表扫描件
-    caseRepFilesView:"",
+    caseRepFilesView:[],
     chestCTBFiles:"",           //胸部CT报告（治疗前）
-    chestCTBFilesView:"",          
+    chestCTBFilesView:[],          
     chestCTFFiles:"",           //胸部CT报告（治疗后）
-    chestCTFFilesView:"",           
+    chestCTFFilesView:[],           
     assApplyFiles:"",           //首次援助申请表扫描件
-    assApplyFilesView:"",           
+    assApplyFilesView:[],           
     infNotiCirmFiles:"",        //患者告知书、患者知情同意书
-    infNotiCirmFilesView:"",        
+    infNotiCirmFilesView:[],        
     ecoEvlFiles:"",             //经济评估扫描件
-    ecoEvlFilesView:"",             
+    ecoEvlFilesView:[],             
     
   }
 }).service("serviceName", ["$timeout", "Data", function(e, t) {

@@ -8,12 +8,16 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     pharmacyId:"",
     pharmacy:"",
     apply:null,
+    state:"",
+    giveState:"",
+    flowId:"",
+    flag:"",
     patient: null,
     shopId: "",
     shopName: "",
     id:"",
   }
-}).service("subscribe", ["$timeout", "Data", "getZyList", "getYyList","applyZy", function(t, e, i, a, z) {
+}).service("subscribe", ["$timeout", "Data", "getZyList", "getYyList","applyZy", "applyResubmit", function(t, e, i, a, z, r) {
   return function() {
     appcan.window.subscribe("EDZY/ZyList.refresh", function() {
       i()
@@ -29,7 +33,8 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
       })
     }),
     appcan.window.subscribe("EDZY/ZysqDetail.apply", function() {
-      z()
+        console.log("state---"+e.state),
+      1 == e.state ? z() : r();
     })
   }
 }]).service("getPatientDetail", ["$timeout", "Data", "$filter", "getFlow", "imgSpliter", function(e, t, o, i, n) {
@@ -54,8 +59,6 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
             t.patient.miArea = t.patient.miProvince + t.patient.miCity;
             console.log("患者详情-----"+JSON.stringify(o.data));
           });
-          var l = 'qlib.setHeaderState("' + o.data.flowType + '", "' + o.data.state + '")';
-          console.log(l), qlib.evalScriptInWindow("", l), localStorage.setItem("EDZY/Flow.id", o.data.flowId), console.log("FlowId: %s", o.data.flowId)
         }
       },
       error: function(o, i, n, a) {
@@ -124,7 +127,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
               })
           },
           error: function(e, o, t, i) {
-            appcan.window.openToast("网络连接不可用", 2e3), console.error(o)
+            //appcan.window.openToast("网络连接不可用", 2e3), console.error(o)
           }
         })
     }
@@ -150,11 +153,19 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
                   })
               },
               error: function(e, o, t, i) {
-                appcan.window.openToast("网络连接不可用", 2e3), console.error(o)
+                //appcan.window.openToast("网络连接不可用", 2e3), console.error(o)
               }
             })
         }
     }
+}]).service("getZysqDetail", ["$timeout", "Data", function(t, e) {
+    //获取诊疗信息列表
+  return function() {
+    var o = localStorage.getItem("EDZY/ZysqDetail.state"), f = localStorage.getItem("EDZY/ZysqList.flag"), fl = localStorage.getItem("EDZY/ZysqDetail.flowId"), gt = localStorage.getItem("EDZY/ZysqDetail.giveState");
+      e.state = o, e.flag = f, e.flowId = fl, e.giveState = gt;
+      var l = 'setEditState()';
+          console.log(l), qlib.evalScriptInWindow("", l);
+  }
 }]).service("applyZy", ["$timeout", "Data", function(e, t) { //申请赠药
   return function() {
     var pId = localStorage.getItem("EDZY/ZysqDetail.patientId");
@@ -170,6 +181,36 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     return !param.pharmacyId ? void appcan.window.alert("提示", "请选择药店", ["知道了"]) : (appcan.window.openToast(CR.TOAST_WAITING), void appcan.request.ajax({
       type: "POST",
       url: SimcereConfig.server.edzy + "apply",
+      data: param,
+      contentType: "application/json",
+      dataType: "json",
+      timeout: REQUEST_TIMEOUT,
+      success: function(i, n, s, r, c) {
+        e.loading = !1, appcan.window.closeToast(), console.log(i), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error")) : (appcan.window.publish("EDZY/ZysqList.refresh", ""), appcan.window.openToast(i.msg || "操作失败", SimcereConfig.ui.toastDurationCb), setTimeout(function() {
+            qlib.closeCurrentWindow(-1)
+          }, SimcereConfig.ui.toastDurationCb))
+      },
+      error: function(e, o, t, i) {
+        appcan.window.openToast("网络连接不可用", 2e3), console.error(o)
+      }
+    }))
+  }
+}]).service("applyResubmit", ["$timeout", "Data", function(e, t) { //驳回再申请
+  return function() {
+    var pId = localStorage.getItem("EDZY/ZysqDetail.patientId");
+    var pName = localStorage.getItem("EDZY/ZysqDetail.patientName");
+    var param = {
+      rId: qlib.getUser().loginId,
+      patientId: pId,
+      flowId:t.flowId,
+      pharmacyId: t.pharmacyId,
+      pharmacy:t.pharmacy,
+      username:pName,
+    };
+    console.log(param);
+    return t.pharmacyId ? t.flowId || (o = "流程Id为空") : o = "请选择药店" , o ? void appcan.window.alert("提示", o, ["知道了"]) : (appcan.window.openToast(CR.TOAST_WAITING), void appcan.request.ajax({
+      type: "POST",
+      url: SimcereConfig.server.edzy + "apply/resubmit",
       data: param,
       contentType: "application/json",
       dataType: "json",
@@ -200,8 +241,8 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     e.openZyDetail = a, i();
 }]).controller("YyListController",["$scope", "$timeout", "Data","getYyList","getCycleList","openCaseDetail","openCycleDetail", function(e, o, t, i, a, n, c) {
     e.getCycleList = a,e.openCaseDetail = n,e.openCycleDetail = c, i();
-}]).controller("GlbController", ["$scope", "$timeout", "Data","getPatientDetail", "subscribe", "openFlow", "ngqViewImages","applyZy", function(e, o, t, i, c, a, n, s) {
+}]).controller("GlbController", ["$scope", "$timeout", "Data","getPatientDetail", "getZysqDetail", "subscribe", "openFlow", "ngqViewImages","applyZy","applyResubmit", function(e, o, t, i, d, c, a, n, s, r) {
   e.Data = t, e.ngqViewImages = n, e.openFlow = a, e.openShopSelect = function(){
       qlib.openShopSelect()
-  }, i(), c();
+  }, i(), c(), d();
 }]);

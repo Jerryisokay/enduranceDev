@@ -39,7 +39,7 @@ angular.module("myApp", ["ngTouch", "ngq"]).service("Data", function() {
         dataType: "json",
         timeout: REQUEST_TIMEOUT,
         success: function(i, a, o, n, s) {
-          e.loading = !1, appcan.window.closeToast(), console.log(i), "2" == i.status && (i.status = "0", i.data = {}, i.data.rows = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
+          e.loading = !1, appcan.window.closeToast(), console.log("List-----"+JSON.stringify(i)), "2" == i.status && (i.status = "0", i.data = {}, i.data.rows = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
             e.itemListErr = !e.itemList.length
           })) : t(function() {
             e.itemList = e.itemList.concat(i.data.rows), e.itemListEmpty = !e.itemList.length
@@ -88,7 +88,7 @@ angular.module("myApp", ["ngTouch", "ngq"]).service("Data", function() {
   }
 }]).service("openDetail", ["$timeout", "Data", function(t, e) {
   return function(t) {
-    return 4 == t.giveState ? void appcan.window.alert("提示", "无法查看封存的数据", "知道了") : (console.log("patientId: %s", t.id), localStorage.setItem("EDZY/ZysqDetail.patientId", t.id), void appcan.window.open("EDZY_ZysqDetail", "ZysqDetail.html", 10))
+    return 4 == t.giveState ? void appcan.window.alert("提示", "无法查看封存的数据", "知道了") : (console.log("patientId: %s", t.id), localStorage.setItem("EDZY/ZysqDetail.state", t.state), localStorage.setItem("EDZY/ZysqDetail.giveState", t.giveState), localStorage.setItem("EDZY/ZysqDetail.flowId", t.flowId),localStorage.setItem("EDZY/ZysqDetail.patientId", t.id), void appcan.window.open("EDZY_ZysqDetail", "ZysqDetail.html", 10))
   }
 }]).controller("ItemListController", ["$scope", "$timeout", "Data", "getList", "openDetail", "getStatTxt", function(t, e, i, a, o, n) {
   t.openDetail = o, t.getStatTxt = n, a()
@@ -98,10 +98,7 @@ angular.module("myApp", ["ngTouch", "ngq"]).service("Data", function() {
     0: "审核中",
     1: "通过",
     2: "驳回",
-    3: "撤销",
-    4: "已封存",
-    5: "可申请",
-    6: "不可申请"
+    3: "不可申请"
   }, t.clearHospitalName = function() {
     i.hospitalName = "", i.itemList.length = 0, o()
   }, t.clearDoctorName = function() {

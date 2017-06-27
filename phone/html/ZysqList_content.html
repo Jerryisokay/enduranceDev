@@ -63,7 +63,8 @@
             <div class="ub ub-ac mt12 fs24 c-9" ng-class="{'mb12': item.doctors.length}">
                 <div class="mr10 ub-f1">用药支数：<span class="c-positive" ng-bind="item.useCount||0">12</span>支</div>
                 <div class="ub-f1"></div>
-                <div class="fs18 c-f p-sh" ng-class="{'bg-warn':item.giveState==0,'bg-error':item.giveState==2,'bg-positive':item.giveState==1||item.giveState==3||item.giveState==5,'bg-gray':item.giveState==4||item.giveState==6}" data-state="{{item.giveState}}" ng-bind="sMAP[item.giveState]">可申请</div>
+                <div class="fs18 c-f p-sh ng-hide" ng-show="item.giveState==1" ng-class="{'bg-warn':item.state==0,'bg-error':item.state==2,'bg-positive':item.state==1||item.state==3||item.state==5,'bg-gray':item.state==4||item.state==6}" data-state="{{item.state}}" ng-bind="sMAP[item.state]">可申请</div>
+                <div class="fs18 c-f p-sh bg-error ng-hide" ng-show="item.giveState==0" ng-bind="sMAP[3]">可申请</div>
             </div>
             
             <div class="ub c-9 fs24 mb4" ng-show="item.doctors.length">

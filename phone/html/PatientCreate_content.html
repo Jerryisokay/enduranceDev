@@ -226,12 +226,12 @@
     
     function openMiArea(e) {
       if ("undefined" == typeof uexWheelPickView) return void e({
-        data: ["江苏省", "南京市", "玄武区"],
-        index: [0, 0, 0]
+        data: ["江苏省", "南京市"],
+        index: [0, 0]
       });
       var i = {
           src: "wgt://data/ssq.json",
-          select: [0, 0, 0]
+          select: [0, 0]
         },
         n = JSON.stringify(i);
       uexWheelPickView.onConfirmClick = function(i) {

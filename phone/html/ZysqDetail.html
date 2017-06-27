@@ -23,7 +23,7 @@
         </div>
         <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">恩度赠药详情页</h1>
         <div class="nav-btn" id="nav-right">
-            <div class="ub ub-ac u-btn-cx">申请赠药</div>
+            <div class="ub ub-ac u-btn-sq uhide">申请赠药</div>
         </div>
     </div>
     <!--header结束-->
@@ -49,9 +49,20 @@
     $('#nav-left').on('tap', function () {
         qlib.closeCurrentWindow();
     });
-    $('.u-btn-cx').on('tap', function () {
+    
+    function setEditState(){
+         var s = localStorage.getItem("EDZY/ZysqDetail.state"), g = localStorage.getItem("EDZY/ZysqDetail.giveState");
+        console.log(s+'-----'+g);
+        if(g != 0 && s != 0){
+            $(".u-btn-sq").removeClass("uhide")
+        }
+    }
+    
+    $('.u-btn-sq').on('tap', function () {
         appcan.window.publish("EDZY/ZysqDetail.apply","");
     });
+    
+    
     
 </script>
 </body>
