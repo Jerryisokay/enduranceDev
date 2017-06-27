@@ -10,7 +10,9 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
 }).service("subscribe", ["$timeout", "Data", "getList", function(t, e, i) {
   return function() {
     appcan.window.subscribe("EDZY/YyList.refresh", function() {
-        i(), YyDetailShow = false, $.each(e.itemList,function(id,v){
+        console.log("refresh");
+        e.itemList.length = 0, i(),
+        YyDetailShow = false, $.each(e.itemList,function(id,v){
             v.onload = !1;
             v.detailActive = !1;
         })
@@ -152,6 +154,6 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
   }
 }]).controller("ItemListController", ["$scope", "$timeout", "Data","getList","getCycleList","openCaseDetail","openCycleDetail","cycleCreate","cycleSubmit", function(e, o, t, i, a, n, d, c, m) {
     e.getCycleList = a, e.openCaseDetail = n, e.openCycleDetail = d, e.cycleCreate = c, e.cycleSubmit = m, i();
-}]).controller("GlbController", ["$scope", "$timeout", "Data","getPatientDetail","openFlow", "ngqViewImages","caseCreate", function(e, o, t, i, a, n, s) {
-  e.Data = t, e.ngqViewImages = n, e.openFlow = a, e.caseCreate = s, i();
+}]).controller("GlbController", ["$scope", "$timeout", "Data", "subscribe", "getPatientDetail","openFlow", "ngqViewImages","caseCreate", function(e, o, t, b, i, a, n, s) {
+  e.Data = t, e.ngqViewImages = n, e.openFlow = a, e.caseCreate = s, b(), i();
 }]);

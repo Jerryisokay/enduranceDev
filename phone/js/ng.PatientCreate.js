@@ -136,7 +136,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     };
     $.extend(e, t), console.log(e);
     var i = "";
-    return t.name ? t.sex == t.genderOptions[0].rowId ? i = "请选择性别" : t.idcard && !qlib.checkField("idCard", t.idcard) ? i = "身份证号格式错误" : qlib.checkField("number", t.age) ? t.province || (i = "请设置联系地址") : i = "请填写年龄" : i = "请填写姓名", i ? void appcan.window.alert("提示", i, ["知道了"]) : (appcan.window.openToast(CR.TOAST_WAITING), void appcan.request.ajax({
+    return t.name ? t.sex == t.genderOptions[0].rowId ? i = "请选择性别" : t.idcard && !qlib.checkField("idCard", t.idcard) ? i = "身份证号格式错误" : qlib.checkField("number", t.age) ? !qlib.checkField("phone", t.mobile) ? t.province || (i = "请设置联系地址") : i = "联系方式错误" : i = "请填写年龄" : i = "请填写姓名", i ? void appcan.window.alert("提示", i, ["知道了"]) : (appcan.window.openToast(CR.TOAST_WAITING), void appcan.request.ajax({
       type: "POST",
       url: SimcereConfig.server.edzy + "patient",
       data: e,
