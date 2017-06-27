@@ -25,8 +25,10 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
           l.caseRepFilesView = a(l.caseRepFiles),l.chestCTBFilesView = a(l.chestCTBFiles),l.chestCTFFilesView = a(l.chestCTFFiles), l.assApplyFilesView = a(l.assApplyFiles), l.infNotiCirmFilesView = a(l.infNotiCirmFiles), l.ecoEvlFilesView = a(l.ecoEvlFiles), e(function() {
             o.yycase = n.data , console.log("detail-----"+JSON.stringify(o)), o.yycase.RegimenName = (!l.combinedTreatName) ? l.theraRegimenName : l.theraRegimenName+"/"+l.combinedTreatName
           });
-          var u = 'qlib.setHeaderState("' + n.data.flowType + '", "' + n.data.state + '")';
-          console.log(u), qlib.evalScriptInWindow("", u), localStorage.setItem("EDZY/Flow.id", n.data.flowId), console.log("FlowId: %s", n.data.flowId)
+          //var u = 'qlib.setHeaderState("' + n.data.flowType + '", "' + n.data.state + '")';
+          //console.log(u), qlib.evalScriptInWindow("", u), localStorage.setItem("EDZY/Flow.id", n.data.flowId), console.log("FlowId: %s", n.data.flowId)
+            var u = 'setHeaderState("' + n.data.state + '")';
+            console.log(u), qlib.evalScriptInWindow("", u);
         }
       },
       error: function(t, n, a, i) {

@@ -52,6 +52,25 @@
         qlib.closeCurrentWindow();
     });
 
+    function setHeaderState(s){
+        switch(s){
+            case '0':
+               $(".u-btn-cx").removeClass("z-disabled");
+               break;
+            case '1':
+                $(".u-btn-fc").removeClass("z-disabled"),
+                $(".u-btn-bj").removeClass("z-disabled");
+                break;
+            case '2':
+                $(".u-btn-cx").removeClass("z-disabled"),
+                $(".u-btn-bj").removeClass("z-disabled");
+                break;
+            case '7':
+                $(".u-btn-bj").removeClass("z-disabled");
+                break;
+        }
+    }
+
     $('.u-btn-bj').on('tap', function () {
         var patientId = localStorage.getItem('EDZY/YyCaseDetail.CaseId');
         localStorage.setItem('EDZY/YyCaseDetail.caseIdEdit', patientId);
