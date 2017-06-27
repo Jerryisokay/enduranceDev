@@ -178,7 +178,7 @@
                 <div class="ng-hide" ng-show="item.detailActive">
                     <div class="pl20 m-list-item pt16" ng-click="openCycleDetail(vm)" ng-repeat="vm in item.cycleList track by $index"  ng-init="innerIndex = $index">
                         <div class="ub ub-ac h50 ph19">
-                            <div class="pr18 ub-f1 fs20 c-6">第{{innerIndex}}次用药</div>
+                            <div class="pr18 ub-f1 fs20 c-6">第{{innerIndex+1}}次用药</div>
                             <div class="fs20 c-9">时间段：{{vm.beginDate}}~{{vm.endDate}}</div>
                         </div>
                         <div class="bd-b ub ub-ac h50 ph19 pb16">
@@ -189,7 +189,7 @@
                 </div>
                 <div class="ub ub-ac">
                     <div class="ub-f1 ub ub-ac ub-pc c-positive h48 pv16 m-list-item" ng-class="{'bd-r':item.state=='0'}" ng-click="cycleCreate(item)">+<span class="fs24">新增用药周期</span></div>
-                    <div class="ub-f1 ub ub-ac ub-pc fs24 c-f69 h48 pv16 m-list-item ng-hide" ng-show="item.state=='0'" ng-click="cycleSubmit(item)">病例管理提交</div>
+                    <div class="ub-f1 ub ub-ac ub-pc fs24 c-f69 h48 pv16 m-list-item ng-hide" ng-show="item.state=='7'" ng-click="cycleSubmit(item)">病例管理提交</div>
                 </div>    
             </div>
         </div>
