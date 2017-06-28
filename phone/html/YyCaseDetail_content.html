@@ -95,14 +95,14 @@
             <div class="icon-arrow-r f-dn"></div>
         </div>
         <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19">
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.yycase.combinedTreatName=='化疗'">
             <div class="u-icon w32 h32 fi fi-huanzhe"></div>
             <div class="ph18 fs24 c-3">化疗方案</div>
             <input type="text" ng-model="Data.yycase.chemoRegimenName" readonly="" placeholder="未填写(必填)" value="" class="ub-f1 reset-input f-tar ph12 fs24 "/>
 
             <div class="icon-arrow-r f-dn"></div>
         </div>
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.yycase.pd">
+        <div class="ub ub-ac m-list-item h69 ph19 ng-hide" ng-show="Data.yycase.pd">
             <div class="u-icon w32 h32 fi fi-huanzhe"></div>
             <div class="ph18 fs24 c-3">诊疗周期</div>
             <input type="text" placeholder="未填写(必填)" ng-model="Data.yycase.pd" readonly class="ub-f1 reset-input f-tar ph12 fs24 "/>

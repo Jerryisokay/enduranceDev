@@ -127,6 +127,9 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     };
     $.extend(e, t), console.log(e);
     var o = "";
+    if(t.combinedTreatRowId && !t.chemoRegimenRowId){
+        void appcan.window.alert("提示", "请选择化疗方式", ["知道了"]); return; 
+    }
     //return t.doctorId ? t.patientId ? t.caseId ? t.cycleCount ? t.beginDate && t.endDate ? qlib.checkField("number", t.useCount) ? t.products.length || (o = "请选择产品") : o = "请填写用药支数" : o = "请选择用药时间段" : o = "请选择临床分期" : o = "请选择病例" : o = "请选择患者" : o = "请选择医生", o ? void appcan.window.alert("提示", o, ["知道了"]) : (appcan.window.openToast(CR.TOAST_WAITING), void appcan.request.ajax({
     return t.beginDate && t.endDate ? qlib.checkField("number", t.useCount) ? t.theraRegimenRowId || (o = "请选择治疗方案") : o = "请填写用药支数" : o = "请选择用药时间段" , o ? void appcan.window.alert("提示", o, ["知道了"]) : (appcan.window.openToast(CR.TOAST_WAITING), void appcan.request.ajax({
       type: "POST",

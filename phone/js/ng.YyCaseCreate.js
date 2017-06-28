@@ -159,6 +159,9 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     };
     $.extend(e, t), console.log(e);
     var o = "";
+    if(e.combinedTreatRowId && !e.chemoRegimenRowId){
+        void appcan.window.alert("提示", "请选择化疗方式", ["知道了"]); return; 
+    }
     return e.patientId ? e.hospitalId ? e.deptId ? e.doctorId ? e.theraRegimenRowId ? e.egrfRowId ? e.clinicalStagesRowId ? e.cytologyGradeRowId ? e.diseaseDiagRowId || (o = "请选择疾病诊断") : o = "请选择病理学/或细胞学/组织学诊断或分级" : o = "请选择临床分期" : o = "请选择EGRF检测" : o = "请选择治疗方案" : o = "请选择医生" : o = "请选择科室" : o = "请选择医院" : o = "请选择患者", o ? void appcan.window.alert("提示", o, ["知道了"]) : (appcan.window.openToast(CR.TOAST_WAITING), void appcan.request.ajax({
       type: "POST",
       url: SimcereConfig.server.edzy + "case",
@@ -167,7 +170,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
       dataType: "json",
       timeout: REQUEST_TIMEOUT,
       success: function(t, o, i, n, a) {
-        console.log(t), "0" != t.status ? (appcan.window.openToast(t.msg || "操作失败", SimcereConfig.ui.toastDuration), console.error("res error")) : (e.id && qlib.closeWindowByName("EDZY_CaseDetail"), appcan.window.publish("EDZY/YyList.refresh", ""), appcan.window.openToast(t.msg || "操作失败", SimcereConfig.ui.toastDurationCb), setTimeout(function() {
+        console.log(t), "0" != t.status ? (appcan.window.openToast(t.msg || "操作失败", SimcereConfig.ui.toastDuration), console.error("res error")) : (e.id && qlib.closeWindowByName("EDZY_YyCaseDetail"), appcan.window.publish("EDZY/YyList.refresh", ""), appcan.window.openToast(t.msg || "操作失败", SimcereConfig.ui.toastDurationCb), setTimeout(function() {
           qlib.closeCurrentWindow(-1)
         }, SimcereConfig.ui.toastDurationCb))
       },
@@ -191,7 +194,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
         if (appcan.window.closeToast(), console.log(o), "0" != o.status) appcan.window.openToast(o.msg, SimcereConfig.ui.toastDuration);
         else {
           var r = o.data;
-          r.caseRepFilesView = i(r.caseRepFiles), r.chestCTBFilesView = i(r.chestCTBFiles), r.chestCTFFilesView = i(r.chestCTFFiles), r.assApplyFilesView = i(r.assApplyFiles), r.infNotiCirmFilesView = i(r.infNotiCirmFiles), r.ecoEvlFilesView = i(r.ecoEvlFiles), e(function() {
+          r.caseRepFilesView = i(r.caseRepFiles), r.chestCTBFilesView = i(r.chestCTBFiles), r.chestCTFFilesView = i(r.chestCTFFiles), r.assApplyFilesView = i(r.assApplyFiles), r.infNotiCirmFilesView = i(r.infNotiCirmFiles), r.ecoEvlFilesView = i(r.ecoEvlFiles), r.RegimenName = (!r.combinedTreatName) ? r.theraRegimenName : r.theraRegimenName+"/"+r.combinedTreatName, e(function() {
             angular.extend(t, o.data)
           })
         }
@@ -227,7 +230,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
   }, i();
   var m = localStorage.getItem("EDZY/YyCaseDetail.caseIdEdit");
   if (m) {
-    localStorage.removeItem("EDZY/CaseDetail.caseIdEdit"), l(m);
+    localStorage.removeItem("EDZY/YyCaseDetail.caseIdEdit"), l(m);
     var I = "setTitleEdit();";
     qlib.evalScriptInWindow("", I)
   }

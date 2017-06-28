@@ -114,6 +114,11 @@
             <div class="ph18 fs24 c-3">是否需要预约编号</div>
             <input type="text" ng-model="Data.patient.isRnumName" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
         </div>
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.patient.isRnumName=='是'">
+            <div class="u-icon w32 h32 fi fi-yysjd"></div>
+            <div class="ph18 fs24 c-3">预约编号</div>
+            <input type="text" ng-model="Data.patient.rNum" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+        </div>
         <div class="ub ub-ac m-list-item h69 ph19 bd-b">
             <div class="u-icon w32 h32 fi fi-aizhong"></div>
             <div class="ph18 fs24 c-3">是否肺癌</div>
