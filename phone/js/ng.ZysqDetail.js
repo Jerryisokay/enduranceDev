@@ -91,7 +91,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
                 e.itemListErr = !e.itemList.length
               })) : t(function() {
                 e.itemList = e.itemList.concat(i.data), e.itemListEmpty = !e.itemList.length;
-                console.log("e.itemListEmpty----"+e.itemListEmpty);
+                console.log("e.itemList----"+JSON.stringify(e.itemList));
               })
           },
           error: function(e, o, t, i) {
@@ -164,7 +164,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     var o = localStorage.getItem("EDZY/ZysqDetail.state"), f = localStorage.getItem("EDZY/ZysqList.flag"), fl = localStorage.getItem("EDZY/ZysqDetail.flowId"), gt = localStorage.getItem("EDZY/ZysqDetail.giveState");
       e.state = o, e.flag = f, e.flowId = fl, e.giveState = gt;
       var l = 'setEditState()';
-          console.log(l), qlib.evalScriptInWindow("", l);
+          console.log(l), qlib.evalScriptInWindow("", l), localStorage.setItem("EDZY/Flow.id",e.flowId), console.log("FlowId: %s", e.flowId);
   }
 }]).service("applyZy", ["$timeout", "Data", function(e, t) { //申请赠药
   return function() {

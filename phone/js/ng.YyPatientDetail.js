@@ -127,7 +127,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     var p = o.id,
       n = {};
     console.log(p), appcan.window.openToast(CR.TOAST_WAITING), appcan.request.ajax({
-      type: "POST",
+      type: "GET",
       url: SimcereConfig.server.edzy + "case/submit/" + p,
       data: n,
       dataType: "json",
