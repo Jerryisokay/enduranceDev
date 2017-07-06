@@ -171,6 +171,9 @@
         </div>
         <!--诊疗信息列表-->
         <div ng-show="YyDetailShow" class="g-list ng-hide" ng-controller="ItemListController">
+            <div class="g-spinner" ng-hide="Data.itemList.length||Data.itemListEmpty||Data.itemListErr"><i class="fa fa-spinner fa-spin"></i></div>
+            <div class="g-req-empty text-muted ng-hide bd-t" ng-show="Data.itemListEmpty">暂无数据</div>
+            <div class="g-req-error text-muted ng-hide bd-t" ng-show="Data.itemListErr">查询失败</div>
             <div class="bd-t" ng-repeat="item in Data.itemList" ng-init="outerIndex = $index;item.onload = false; item.detailActive=false">
                 <div class="ub ub-ac m-list-item h69 pl20 bd-b">
                     <div class="ub ub-f1" ng-click="openCaseDetail(item)">

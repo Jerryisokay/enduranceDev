@@ -194,6 +194,9 @@
         </div>
         <!--诊疗信息列表-->
         <div ng-show="YyDetailShow" class="g-list ng-hide" ng-controller="YyListController">
+            <div class="g-spinner" ng-hide="Data.YyList.length||Data.YyListEmpty||Data.YyListErr"><i class="fa fa-spinner fa-spin"></i></div>
+            <div class="g-req-empty text-muted ng-hide" ng-show="Data.YyListEmpty">暂无数据</div>
+            <div class="g-req-error text-muted ng-hide" ng-show="Data.YyListErr">查询失败</div>
             <div class="" ng-repeat="item in Data.YyList" ng-init="outerIndex = $index;item.onload = false; item.detailActive=false">
                 <div class="ub ub-ac m-list-item h69 pl20 bd-b">
                     <div class="pr18 ub-f1 fs20 c-3">诊疗信息{{$index+1}}</div>
@@ -229,6 +232,8 @@
             <!--用药周期列表-->
             <div class="g-list pl20" ng-controller="ItemListController">
                 <div class="g-spinner" ng-hide="Data.itemList.length||Data.itemListEmpty||Data.itemListErr"><i class="fa fa-spinner fa-spin"></i></div>
+                <div class="g-req-empty text-muted ng-hide" ng-show="Data.itemListEmpty">暂无数据</div>
+                <div class="g-req-error text-muted ng-hide" ng-show="Data.itemListErr">查询失败</div>
                 <!---item--->
                 <div class="bd-b m-list-item pt16 pb16" ng-click="openZyDetail(item)" ng-show="Data.itemList.length" ng-repeat="item in Data.itemList">
                     <div class="ub ub-ac h50 ph19">

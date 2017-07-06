@@ -5,6 +5,9 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     itemListErr: !1,
     itemListLoaded: !1,
     YyList:[],
+    YyListEmpty: !1,
+    YyListErr: !1,
+    YyListLoaded: !1,
     pharmacyId:"",
     pharmacy:"",
     apply:null,
@@ -72,8 +75,8 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
 }]).service("getZyList", ["$timeout", "Data", function(t, e) {
     //获取赠药周期列表
   return function() {
-    if (!e.loading) {
-        e.loading = !0;
+    if (!e.zyLoading) {
+        e.zyLoading = !0;
         var i = localStorage.getItem("EDZY/ZysqDetail.patientId");    //EDZY/PatientDetail.patientId
         console.log("Zy patientId: %s", i);
         var n = {
@@ -88,7 +91,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
           dataType: "json",
           timeout: REQUEST_TIMEOUT,
           success: function(i, n, s, r, c) {
-            e.loading = !1, appcan.window.closeToast(), console.log("ZyList "+JSON.stringify(i)), "2" == i.status && (i.status = "0", i.data = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
+            e.zyLoading = !1, appcan.window.closeToast(), console.log("ZyList "+JSON.stringify(i)), "2" == i.status && (i.status = "0", i.data = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
                 e.itemListErr = !e.itemList.length
               })) : t(function() {
                 e.itemList = e.itemList.concat(i.data), e.itemListEmpty = !e.itemList.length;
@@ -122,13 +125,13 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
           timeout: REQUEST_TIMEOUT,
           success: function(i, n, s, r, c) {
             e.Yyloading = !1, appcan.window.closeToast(), console.log("诊疗信息列表----"+JSON.stringify(i)), "2" == i.status && (i.status = "0", i.data = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
-                e.itemListErr = !e.itemList.length
+                e.YyListErr = !e.YyList.length
               })) : t(function() {
-                e.YyList = e.YyList.concat(i.data), e.itemListEmpty = !e.YyList.length;
+                e.YyList = e.YyList.concat(i.data), e.YyListEmpty = !e.YyList.length;
               })
           },
           error: function(e, o, t, i) {
-            //appcan.window.openToast("网络连接不可用", 2e3), console.error(o)
+            appcan.window.openToast("网络连接不可用", 2e3), console.error(o)
           }
         })
     }
@@ -228,8 +231,8 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
   }
 }]).service("getApplys",["$timeout", "Data", function(t, e){
    return function(){
-     if (!e.loading) {
-        e.loading = !0;
+     if (!e.applysLoading) {
+        e.applysLoading = !0;
         var pId = localStorage.getItem("EDZY/ZysqDetail.patientId");
        var param = {
            patientId:pId,
@@ -243,10 +246,12 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
           dataType: "json",
           timeout: REQUEST_TIMEOUT,
           success: function(i, n, s, r, c) {
-            e.loading = !1, appcan.window.closeToast(), console.log("applys "+JSON.stringify(i)), "2" == i.status && (i.status = "0", i.data.rows = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
-                e.itemListErr = !e.itemList.length
+            e.applysLoading = !1, appcan.window.closeToast(), console.log("applys "+JSON.stringify(i)), "2" == i.status && (i.status = "0", i.data.rows = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
               })) : t(function() {
-                e.applys = e.applys.concat(i.data.applys), e.itemListEmpty = !e.applys.length;
+                e.applys = e.applys.concat(i.data.applys);
+                if(i.data.applys.length>0){
+                    e.pharmacy = i.data.applys[i.data.applys.length-1].pharmacy,e.pharmacyId = i.data.applys[i.data.applys.length-1].pharmacyId
+                }
               })
           },
           error: function(e, o, t, i) {

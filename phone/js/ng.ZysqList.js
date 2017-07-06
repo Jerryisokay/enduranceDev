@@ -95,7 +95,7 @@ angular.module("myApp", ["ngTouch", "ngq"]).service("Data", function() {
   t.openDetail = o, t.getStatTxt = n, a()
 }]).controller("GlbController", ["$scope", "$timeout", "Data", "subscribe", "getList", function(t, e, i, a, o) {
   t.Data = i, t.sMAP = {
-    "": "全部",
+    null: "未申请",
     0: "审核中",
     1: "通过",
     2: "驳回",

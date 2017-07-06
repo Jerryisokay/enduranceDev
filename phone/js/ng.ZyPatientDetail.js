@@ -5,6 +5,9 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     itemListErr: !1,
     itemListLoaded: !1,
     YyList:[],
+    YyListEmpty:!1,
+    YyListErr:!1,
+    YyListLoaded:!1,
     patient: null,
     shopId: "",
     shopName: "",
@@ -105,9 +108,9 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
           timeout: REQUEST_TIMEOUT,
           success: function(i, n, s, r, c) {
             e.Yyloading = !1, appcan.window.closeToast(), console.log(i), "2" == i.status && (i.status = "0", i.data = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
-                e.itemListErr = !e.itemList.length
+                e.YyListErr = !e.YyList.length
               })) : t(function() {
-                e.YyList = e.YyList.concat(i.data), e.itemListEmpty = !e.YyList.length;
+                e.YyList = e.YyList.concat(i.data), e.YyListEmpty = !e.YyList.length;
               })
           },
           error: function(e, o, t, i) {
