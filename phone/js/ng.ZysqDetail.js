@@ -61,7 +61,6 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
           c.idcardFilesView = n(c.idcardFiles), c.hkFilesView = n(c.hkFiles), c.ssqxView = [c.province || "", c.city || "", c.area || "", c.addr || ""].join(""), e(function() {
             t.patient = o.data;
             t.patient.miArea = t.patient.miProvince + t.patient.miCity;
-            console.log("患者详情-----"+JSON.stringify(o.data));
           });
         }
       },
@@ -91,11 +90,11 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
           dataType: "json",
           timeout: REQUEST_TIMEOUT,
           success: function(i, n, s, r, c) {
-            e.zyLoading = !1, appcan.window.closeToast(), console.log("ZyList "+JSON.stringify(i)), "2" == i.status && (i.status = "0", i.data = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
+            e.zyLoading = !1, appcan.window.closeToast(), console.log(i), "2" == i.status && (i.status = "0", i.data = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
                 e.itemListErr = !e.itemList.length
               })) : t(function() {
                 e.itemList = e.itemList.concat(i.data), e.itemListEmpty = !e.itemList.length;
-                console.log("e.itemList----"+JSON.stringify(e.itemList));
+                //console.log("e.itemList----"+JSON.stringify(e.itemList));
               })
           },
           error: function(e, o, t, i) {
@@ -124,14 +123,14 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
           dataType: "json",
           timeout: REQUEST_TIMEOUT,
           success: function(i, n, s, r, c) {
-            e.Yyloading = !1, appcan.window.closeToast(), console.log("诊疗信息列表----"+JSON.stringify(i)), "2" == i.status && (i.status = "0", i.data = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
+            e.Yyloading = !1, appcan.window.closeToast(), "2" == i.status && (i.status = "0", i.data = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
                 e.YyListErr = !e.YyList.length
               })) : t(function() {
                 e.YyList = e.YyList.concat(i.data), e.YyListEmpty = !e.YyList.length;
               })
           },
           error: function(e, o, t, i) {
-            appcan.window.openToast("网络连接不可用", 2e3), console.error(o)
+            //appcan.window.openToast("网络连接不可用", 2e3), console.error(o)
           }
         })
     }
@@ -152,7 +151,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
               dataType: "json",
               timeout: REQUEST_TIMEOUT,
               success: function(i, n, s, r, c) {
-                e.loading = !1, appcan.window.closeToast(), console.log("用药周期列表------"+JSON.stringify(i)), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error")) : t(function() {
+                e.loading = !1, appcan.window.closeToast(), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error")) : t(function() {
                     o.cycleList = i.data, o.onload = true
                   })
               },
@@ -165,10 +164,37 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
 }]).service("getZysqDetail", ["$timeout", "Data", function(t, e) {
     //获取诊疗信息列表
   return function() {
-    var o = localStorage.getItem("EDZY/ZysqDetail.state"), f = localStorage.getItem("EDZY/ZysqList.flag"), fl = localStorage.getItem("EDZY/ZysqDetail.flowId"), gt = localStorage.getItem("EDZY/ZysqDetail.giveState");
-      e.state = o, e.flag = f, e.flowId = fl, e.giveState = gt;
+    var s= localStorage.getItem("EDZY/ZysqDetail.state"), f = localStorage.getItem("EDZY/ZysqList.flag"), fl = localStorage.getItem("EDZY/ZysqDetail.flowId");
+      e.state = s, e.flag = f, e.flowId = fl;
       var l = 'setEditState()';
           console.log("flag----"+e.flag), qlib.evalScriptInWindow("", l), localStorage.setItem("EDZY/Flow.id",e.flowId), console.log("FlowId: %s", e.flowId);
+  }
+}]).service("getState", ["$timeout", "Data", function(t, e) {
+    //获取诊疗信息列表
+  return function() {
+    var fId = fl = localStorage.getItem("EDZY/ZysqDetail.flowId");
+    if(fId!=null&&fId!='null'){
+        var param = {
+          flowId:fId
+        };
+        console.log(param);
+        appcan.request.ajax({
+          type: "GET",
+          url: SimcereConfig.server.edzy + "given/apply",
+          data: param,
+          contentType: "application/json",
+          dataType: "json",
+          timeout: REQUEST_TIMEOUT,
+          success: function(i, n, s, r, c) {
+            e.loading = !1, appcan.window.closeToast(), console.log(i), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error")) : (appcan.window.publish("EDZY/ZysqList.refresh", ""), appcan.window.openToast(i.msg || "操作失败", SimcereConfig.ui.toastDurationCb), setTimeout(function() {
+                e.pharmacyId = i.data.pharmacyId, e.pharmacy = i.data.pharmacy;
+              }, SimcereConfig.ui.toastDurationCb))
+          },
+          error: function(e, o, t, i) {
+            appcan.window.openToast("网络连接不可用", 2e3), console.error(o)
+          }
+        })
+    }
   }
 }]).service("applyZy", ["$timeout", "Data", function(e, t) { //申请赠药
   return function() {
@@ -249,7 +275,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
             e.applysLoading = !1, appcan.window.closeToast(), console.log("applys "+JSON.stringify(i)), "2" == i.status && (i.status = "0", i.data.rows = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
               })) : t(function() {
                 e.applys = e.applys.concat(i.data.applys);
-                if(i.data.applys.length>0){
+                if(appcan.isArray(i.data.applys) && i.data.applys.length>0){
                     e.pharmacy = i.data.applys[i.data.applys.length-1].pharmacy,e.pharmacyId = i.data.applys[i.data.applys.length-1].pharmacyId
                 }
               })
@@ -278,8 +304,8 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     e.getCycleList = a,e.openCaseDetail = n,e.openCycleDetail = c, i();
 }]).controller("applysController",["$scope", "$timeout", "Data", "getApplys", function(e, o, t, i){
     i()
-}]).controller("GlbController", ["$scope", "$timeout", "Data","getPatientDetail", "getZysqDetail", "subscribe", "openFlow", "ngqViewImages","applyZy","applyResubmit", "getApplys", function(e, o, t, i, d, c, a, n, s, r, p) {
+}]).controller("GlbController", ["$scope", "$timeout", "Data","getPatientDetail", "getZysqDetail", "subscribe", "openFlow", "ngqViewImages","applyZy","applyResubmit", "getApplys","getState", function(e, o, t, i, d, c, a, n, s, r, p, g) {
   e.Data = t, e.ngqViewImages = n, e.openFlow = a, e.openShopSelect = function(){
       qlib.openShopSelect()
-  }, i(), c(), d(), p();
+  }, i(), c(), d(), p(),g();
 }]);

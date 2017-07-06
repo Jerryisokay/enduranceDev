@@ -89,7 +89,7 @@ angular.module("myApp", ["ngTouch", "ngq"]).service("Data", function() {
   }
 }]).service("openDetail", ["$timeout", "Data", function(t, e) {
   return function(t) {
-    return 4 == t.giveState ? void appcan.window.alert("提示", "无法查看封存的数据", "知道了") : (console.log("patientId: %s", t.id), localStorage.setItem("EDZY/ZysqDetail.state", t.state), localStorage.setItem("EDZY/ZysqDetail.giveState", t.giveState), localStorage.setItem("EDZY/ZysqDetail.flowId", t.flowId),localStorage.setItem("EDZY/ZysqDetail.patientId", t.id), void appcan.window.open("EDZY_ZysqDetail", "ZysqDetail.html", 10))
+    return 4 == t.state ? void appcan.window.alert("提示", "无法查看封存的数据", "知道了") : (console.log("patientId: %s", t.id), localStorage.setItem("EDZY/ZysqDetail.state", t.state),localStorage.setItem("EDZY/ZysqDetail.flowId", t.flowId),localStorage.setItem("EDZY/ZysqDetail.patientId", t.id), void appcan.window.open("EDZY_ZysqDetail", "ZysqDetail.html", 10))
   }
 }]).controller("ItemListController", ["$scope", "$timeout", "Data", "getList", "openDetail", "getStatTxt", function(t, e, i, a, o, n) {
   t.openDetail = o, t.getStatTxt = n, a()

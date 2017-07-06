@@ -51,9 +51,8 @@
     });
     
     function setEditState(){
-         var s = localStorage.getItem("EDZY/ZysqDetail.state"), g = localStorage.getItem("EDZY/ZysqDetail.giveState");
-        console.log(s+'-----'+g);
-        if(g != 0 && s != 0){
+         var s = localStorage.getItem("EDZY/ZysqDetail.state");
+        if(s != 0){
             $(".u-btn-sq").removeClass("uhide")
         }
     }
