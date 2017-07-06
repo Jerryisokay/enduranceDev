@@ -73,6 +73,7 @@ angular.module("myApp", ["ngTouch", "ngq"]).service("Data", function() {
       })
     }), appcan.window.subscribe("EDZY/ZysqList.setFlag", function() {
       var a = localStorage.getItem("EDZY/ZysqList.flag");
+      console.log("a---"+a);
       e.flag = a, e.isFilterPageActive = !1, e.itemList.length = 0, e.itemListEmpty = !1, t(function() {
         i()
       })

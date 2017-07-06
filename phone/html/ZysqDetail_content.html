@@ -123,6 +123,11 @@
                 <div class="ph18 fs24 c-3">是否需要预约编号</div>
                 <input type="text" ng-model="Data.patient.isRnumName" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
             </div>
+            <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.patient.isRnumName=='是'">
+                <div class="u-icon w32 h32 fi fi-yysjd"></div>
+                <div class="ph18 fs24 c-3">预约编号</div>
+                <input type="text" ng-model="Data.patient.rNum" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            </div>
             <div class="ub ub-ac m-list-item h69 ph19 bd-b">
                 <div class="u-icon w32 h32 fi fi-aizhong"></div>
                 <div class="ph18 fs24 c-3">是否肺癌</div>
@@ -167,15 +172,15 @@
     
     <!---赠药次数--->
     <!--<div class="bg-error gap-b">第一次赠药</div>-->
-    <div class="fs18 pd20 bg-light bd1 bdr-5 gap-b ">
-        <div>
+    <div class="ng-hide" ng-show="Data.flag==1||Data.flag=='1'">
+        <div class="fs18 pd20 bg-light bd1 bdr-5 gap-b" ng-repeat="item in Data.applys">
             <div class="ub mb26">
-                <div class="c-3 ub-f1">第<span class="fs28 c-warn"></span>次赠药</div>
-                <div class="c-9">本次赠药：<span>xx</span>支</div>
+                <div class="c-3 ub-f1"><span class="fs28 c-warn">{{$index+1}}</span>次赠药</div>
+                <div class="c-9">本次赠药：<span ng-bind="item.givenCount"></span>支</div>
             </div>
             <div class="ub">
-                <div class="c-3 ub-f1">发放时间: <span>2016-11-28</span></div>
-                <div class="c-9">领药编码<span>xxxxxxxxx</span></div>
+                <div class="c-3 ub-f1">发放时间: <span ng-bind="item.giveDate">2016-11-28</span></div>
+                <div class="c-9">领药编码<span ng-bind="item.givenNo">xxxxxxxxx</span></div>
             </div>
         </div>
     </div>
@@ -245,7 +250,7 @@
 
     
     
-    <div class="m-list-group bd1 f-oh bg-light bdr-5">
+    <div class="m-list-group bd1 f-oh bg-light bdr-5 ng-hide" ng-show="Data.flowId">
         <!--item-->
         <div class="ub ub-ac m-list-item h69 ph19 j-open-flow" ng-click="openFlow(Data.flowId)">
             <div class="u-icon w32 h32 fi fi-shenpiliucheng"></div>

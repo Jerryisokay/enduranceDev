@@ -8,6 +8,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     pharmacyId:"",
     pharmacy:"",
     apply:null,
+    applys:[],
     state:"",
     giveState:"",
     flowId:"",
@@ -164,7 +165,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     var o = localStorage.getItem("EDZY/ZysqDetail.state"), f = localStorage.getItem("EDZY/ZysqList.flag"), fl = localStorage.getItem("EDZY/ZysqDetail.flowId"), gt = localStorage.getItem("EDZY/ZysqDetail.giveState");
       e.state = o, e.flag = f, e.flowId = fl, e.giveState = gt;
       var l = 'setEditState()';
-          console.log(l), qlib.evalScriptInWindow("", l), localStorage.setItem("EDZY/Flow.id",e.flowId), console.log("FlowId: %s", e.flowId);
+          console.log("flag----"+e.flag), qlib.evalScriptInWindow("", l), localStorage.setItem("EDZY/Flow.id",e.flowId), console.log("FlowId: %s", e.flowId);
   }
 }]).service("applyZy", ["$timeout", "Data", function(e, t) { //申请赠药
   return function() {
@@ -225,6 +226,35 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
       }
     }))
   }
+}]).service("getApplys",["$timeout", "Data", function(t, e){
+   return function(){
+     if (!e.loading) {
+        e.loading = !0;
+        var pId = localStorage.getItem("EDZY/ZysqDetail.patientId");
+       var param = {
+           patientId:pId,
+           state:1,
+       };
+       console.log('applys param '+JSON.stringify(param)), appcan.window.openToast(CR.TOAST_WAITING), appcan.request.ajax({
+          type: "GET",
+          url: SimcereConfig.server.edzy + "given/applys",
+          data: param,
+          contentType: "application/json",
+          dataType: "json",
+          timeout: REQUEST_TIMEOUT,
+          success: function(i, n, s, r, c) {
+            e.loading = !1, appcan.window.closeToast(), console.log("applys "+JSON.stringify(i)), "2" == i.status && (i.status = "0", i.data.rows = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
+                e.itemListErr = !e.itemList.length
+              })) : t(function() {
+                e.applys = e.applys.concat(i.data.applys), e.itemListEmpty = !e.applys.length;
+              })
+          },
+          error: function(e, o, t, i) {
+            //appcan.window.openToast("网络连接不可用", 2e3), console.error(o)
+          }
+        })
+    }
+  } 
 }]).service("openCaseDetail", ["$timeout", "Data", function(e, t) { //查看诊疗信息
   return function(o) {
     localStorage.setItem("EDZY/YyCaseDetail.CaseId", o.id), void appcan.window.open("EDZY_YyCaseDetail", "YyCaseDetail.html", 10)
@@ -241,8 +271,10 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     e.openZyDetail = a, i();
 }]).controller("YyListController",["$scope", "$timeout", "Data","getYyList","getCycleList","openCaseDetail","openCycleDetail", function(e, o, t, i, a, n, c) {
     e.getCycleList = a,e.openCaseDetail = n,e.openCycleDetail = c, i();
-}]).controller("GlbController", ["$scope", "$timeout", "Data","getPatientDetail", "getZysqDetail", "subscribe", "openFlow", "ngqViewImages","applyZy","applyResubmit", function(e, o, t, i, d, c, a, n, s, r) {
+}]).controller("applysController",["$scope", "$timeout", "Data", "getApplys", function(e, o, t, i){
+    i()
+}]).controller("GlbController", ["$scope", "$timeout", "Data","getPatientDetail", "getZysqDetail", "subscribe", "openFlow", "ngqViewImages","applyZy","applyResubmit", "getApplys", function(e, o, t, i, d, c, a, n, s, r, p) {
   e.Data = t, e.ngqViewImages = n, e.openFlow = a, e.openShopSelect = function(){
       qlib.openShopSelect()
-  }, i(), c(), d();
+  }, i(), c(), d(), p();
 }]);
