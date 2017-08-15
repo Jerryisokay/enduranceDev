@@ -86,16 +86,16 @@
         <div class="ub ub-ac m-list-item h69 ph19 bd-b">
             <div class="u-icon w32 h32 fi fa-money"></div>
             <div class="ph18 fs24 c-3">夫妻双方年总收入</div>
-            <input type="text" ng-model="Data.saIncome" placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
-
+            <input type="number" onkeyup="value=value.replace(/[^\-?\d.]/g,'')" ng-model="Data.saIncome" placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <div class="fs24 c-3">万元</div>
             <div class="icon-arrow-r f-ivh"></div>
         </div>
         <!--item-->
         <div class="ub ub-ac m-list-item h69 ph19 bd-b">
             <div class="u-icon w32 h32 fi fa-money"></div>
             <div class="ph18 fs24 c-3">其余直系亲属年总收入</div>
-            <input type="text" ng-model="Data.lcaIncome" placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
-
+            <input type="number" onkeyup="value=value.replace(/[^\-?\d.]/g,'')" ng-model="Data.lcaIncome" placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <div class="fs24 c-3">万元</div>
             <div class="icon-arrow-r f-ivh"></div>
         </div>
         <!--item-->

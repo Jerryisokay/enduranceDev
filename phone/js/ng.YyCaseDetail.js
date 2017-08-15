@@ -26,7 +26,8 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
             o.yycase = n.data , console.log("detail-----"+JSON.stringify(o)), o.yycase.RegimenName = (!l.combinedTreatName) ? l.theraRegimenName : l.theraRegimenName+"/"+l.combinedTreatName
           });
           //var u = 'qlib.setHeaderState("' + n.data.flowType + '", "' + n.data.state + '")';
-          //console.log(u), qlib.evalScriptInWindow("", u), localStorage.setItem("EDZY/Flow.id", n.data.flowId), console.log("FlowId: %s", n.data.flowId)
+          //console.log(u), qlib.evalScriptInWindow("", u), 
+          localStorage.setItem("EDZY/Flow.id", n.data.flowId), console.log("FlowId: %s", n.data.flowId);
             var u = 'setHeaderState("' + n.data.state + '")';
             console.log(u), qlib.evalScriptInWindow("", u);
         }
