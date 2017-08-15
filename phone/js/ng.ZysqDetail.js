@@ -238,6 +238,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
       username:pName,
     };
     console.log(param);
+    var o = "";
     return t.pharmacyId ? t.flowId || (o = "流程Id为空") : o = "请选择药店" , o ? void appcan.window.alert("提示", o, ["知道了"]) : (appcan.window.openToast(CR.TOAST_WAITING), void appcan.request.ajax({
       type: "POST",
       url: SimcereConfig.server.edzy + "apply/resubmit",
