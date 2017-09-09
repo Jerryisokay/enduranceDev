@@ -25,7 +25,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
 }]).service("getPatientDetail", ["$timeout", "Data", "$filter", "getFlow", "imgSpliter", function(e, t, o, i, n) {
     //获取患者详情
   return function() {
-    var o = localStorage.getItem("EDZY/ZysqDetail.patientId");
+    var o = localStorage.getItem("EDZY/PatientDetail.patientId");
     console.log("patientId: %s", o);
     var i = {};
     console.log(i), appcan.window.openToast(CR.TOAST_WAITING), appcan.request.ajax({
@@ -147,11 +147,11 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     }
 }]).service("openCaseDetail", ["$timeout", "Data", function(e, t) { //查看诊疗信息
   return function(o) {
-    localStorage.setItem("EDZY/YyCaseDetail.CaseId", o.id), void appcan.window.open("EDZY_YyCaseDetail", "YyCaseDetail.html", 10)
+    localStorage.setItem("EDZY/YyCaseDetail.CaseId", o.id), localStorage.setItem("EDZY/yyEdit", ""), void appcan.window.open("EDZY_YyCaseDetail", "YyCaseDetail.html", 10)
   }
 }]).service("openCycleDetail", ["$timeout", "Data", function(e, t) {    //查看用药周期详情
   return function(o) {
-    localStorage.setItem("EDZY/YyCycleDetail.cycleId", o.id), void appcan.window.open("EDZY_YyCycleDetail", "YyCycleDetail.html", 10)
+    localStorage.setItem("EDZY/YyCycleDetail.cycleId", o.id),localStorage.setItem("EDZY/yyEdit", ""), void appcan.window.open("EDZY_YyCycleDetail", "YyCycleDetail.html", 10)
   }
 }]).service("addZy", ["$timeout", "Data", function(e, t) {
   return function() {
@@ -159,7 +159,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
   }
 }]).service("openZyDetail", ["$timeout", "Data", function(t, e) {
   return function(t) {var n = localStorage.getItem("EDZY/ZyzqDetail.ZyzqId");
-    return console.log("ZyzqId: %s", t.id), localStorage.setItem("EDZY/ZyzqDetail.ZyzqId", t.id), void appcan.window.open("EDZY_ZyzqDetail", "ZyzqDetail.html", 10)
+    return console.log("ZyzqId: %s", t.id), localStorage.setItem("EDZY/ZyzqDetail.ZyzqId", t.id),localStorage.setItem("EDZY/zyEdit", true), void appcan.window.open("EDZY_ZyzqDetail", "ZyzqDetail.html", 10)
   }
 }]).controller("ItemListController", ["$scope", "$timeout", "Data","getZyList","openZyDetail", function(e, o, t, i, a) {
     e.openZyDetail = a, i();

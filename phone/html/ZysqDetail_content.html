@@ -83,11 +83,13 @@
                 <div class="u-icon w32 h32 fi fa-money"></div>
                 <div class="ph18 fs24 c-3">夫妻双方年总收入</div>
                 <input type="text" ng-model="Data.patient.saIncome" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+                <div class="fs24 c-9 ng-hide" ng-show="Data.patient.saIncome">万元</div>
             </div>
             <div class="ub ub-ac m-list-item h69 ph19 bd-b">
                 <div class="u-icon w32 h32 fi fa-money"></div>
                 <div class="ph18 fs24 c-3">其余直系亲属年总收入</div>
                 <input type="text" ng-model="Data.patient.lcaIncome" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+                <div class="fs24 c-9 ng-hide" ng-show="Data.patient.lcaIncome">万元</div>
             </div>
             <!--item-->
             <div class="ub ub-ac m-list-item h69 ph19 bd-b">
@@ -111,7 +113,7 @@
                 <div class="icon-arrow-r f-dn"></div>
             </div>
             <!--item-->
-            <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+            <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.patient.mitypeName=='其他保险'">
                 <div class="u-icon w32 h32 fi fi-qitabaoxianmingcheng"></div>
                 <div class="ph18 fs24 c-3">其他保险名称</div>
                 <input type="text" ng-model="Data.patient.otherIns" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>

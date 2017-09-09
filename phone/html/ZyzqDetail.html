@@ -23,9 +23,11 @@
         </div>
         <h1 class="ut ub-f1 ulev-3 ut-s tx-c" tabindex="0">赠药周期详情</h1>
         <div class="nav-btn" id="nav-right">
-            <div class="ub ub-ac u-btn-cx z-disabled">撤消</div>
-            <div class="ub ub-ac u-btn-fc z-disabled">封存</div>
-            <div class="ub ub-ac u-btn-bj z-disabled">编辑</div>
+            <div class="ub ub-ac btn-group btn-hide">
+                <div class="ub ub-ac u-btn-cx z-disabled">撤消</div>
+                <div class="ub ub-ac u-btn-fc z-disabled">封存</div>
+                <div class="ub ub-ac u-btn-bj z-disabled">编辑</div>
+            </div>
         </div>
     </div>
     <!--header结束-->
@@ -46,7 +48,14 @@
         window.onorientationchange = window.onresize = function () {
             appcan.frame.resize("content", 0, titHeight);
         }
+        setHide();
     });
+    function setHide(){
+        var fl = localStorage.getItem("EDZY/zyEdit");
+        if(fl == true || fl == 'true'){
+            $("#nav-right .btn-group").removeClass("btn-hide");
+        }
+    }
     //关闭窗口
     $('#nav-left').on('tap', function () {
         qlib.closeCurrentWindow();

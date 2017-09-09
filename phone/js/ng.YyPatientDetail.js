@@ -112,11 +112,11 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     }
 }]).service("openCaseDetail", ["$timeout", "Data", function(e, t) { //查看诊疗信息
   return function(o) {
-    localStorage.setItem("EDZY/YyCaseDetail.CaseId", o.id), void appcan.window.open("EDZY_YyCaseDetail", "YyCaseDetail.html", 10)
+    localStorage.setItem("EDZY/YyCaseDetail.CaseId", o.id), localStorage.setItem("EDZY/yyEdit", true),  void appcan.window.open("EDZY_YyCaseDetail", "YyCaseDetail.html", 10)
   }
 }]).service("openCycleDetail", ["$timeout", "Data", function(e, t) {    //查看用药周期详情
   return function(o) {
-    localStorage.setItem("EDZY/YyCycleDetail.cycleId", o.id), void appcan.window.open("EDZY_YyCycleDetail", "YyCycleDetail.html", 10)
+    localStorage.setItem("EDZY/YyCycleDetail.cycleId", o.id),localStorage.setItem("EDZY/yyEdit", true), void appcan.window.open("EDZY_YyCycleDetail", "YyCycleDetail.html", 10)
   }
 }]).service("cycleCreate", ["$timeout", "Data", function(e, t) {    //新增用药周期
   return function(o) {

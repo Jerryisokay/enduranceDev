@@ -53,31 +53,32 @@
         <div class="m-doctor c-9 pd20 ng-hide" ng-click="openDetail(item)" ng-show="Data.itemList.length" ng-repeat="item in Data.itemList">
             <div class="ub mb16">
                 <div class="ub ub-ac ub-f1">
-                    <i class="f-db w35 h35 fi fi-doctor" ng-show="item.isProjDocName=='否'"></i>
-                    <div class="icon-isProjDoc" ng-show="item.isProjDocName=='是'"></div>
-                    <div class="fs28 c-3 ml5 mr40" ng-bind="item.name">王医生</div>
-                    <div class="fs24" ng-bind="item.titleName">医师</div>
+                    <i class="f-db w35 h35 fi fi-huanzhe"></i>
+                    <div class="fs28 c-3 ml5 mr40" ng-bind="item.patientName">李四</div>
+                    <div class="fs24" ng-bind="item.products|joinProducts">产品产品</div>
                 </div>
                 <div class="fs18 c-f p-sh" ng-class="{'bg-warn':item.state==0,'bg-error':item.state==2,'bg-positive':item.state==1||item.state==3,'bg-gray':item.state==4}" ng-bind="getStatTxt(item.flowType, item.state)">待审核</div>
             </div>
-            <div class="ub fs18 mb4">
-                <div class="ub-f1"><span ng-bind="item.hospitalName">南京妇幼保健第二人民医院</span> | <span ng-bind="item.deptName">外科</span></div>
+            <div class="ub ub-f1 ub-ac fs18">
+                <i class="f-db w35 h35 fi fi-yisheng"></i>
+                <div class="ub-f1 ml5" ng-bind="item.doctorName">张医生</div>
                 <div ng-bind="item.updateTime||item.createTime">2016/5/8 15:00</div>
             </div>
         </div>
 
+
     </div>
 
-    <!--<div id="g-filter-page" class="g-filter-page" ng-class="{'z-active':Data.isFilterPageActive}" ng-swipe-right="Data.isFilterPageActive=false">
+    <!--<div class="g-filter-page" ng-class="{'z-active':Data.isFilterPageActive}" ng-swipe-right="Data.isFilterPageActive=false">
         <div class="m-filter-page">
-            <div class="mt43 lh46 fs24 c-3">医院</div>
-            <input type="text" readonly placeholder="未选择" ng-click="openHospitalSelect()" ng-model="Data._hospitalName" class="bd1 bdr-lg pd19 lh30 fs24 c-9 mb26 icon-arrow-r reset-input input-full"/>
-
-            <div class="lh46 fs24 c-3">医生名</div>
+            <div class="mt43 lh46 fs24 c-3">医生名</div>
             <input type="text" placeholder="未填写" ng-model="Data._doctorName" class="bd1 bdr-lg pd19 lh30 fs24 c-9 mb26 reset-input input-full"/>
 
-            <div class="lh46 fs24 c-3">手机号</div>
-            <input type="text" placeholder="未填写" ng-model="Data._mobile" class="bd1 bdr-lg pd19 lh30 fs24 c-9 mb26 reset-input input-full"/>
+            <div class="lh46 fs24 c-3">患者名</div>
+            <input type="text" placeholder="未填写" ng-model="Data._patientName" class="bd1 bdr-lg pd19 lh30 fs24 c-9 mb26 reset-input input-full"/>
+
+            <div class="lh46 fs24 c-3">癌种</div>
+            <input type="text" readonly placeholder="未选择" ng-click="openCancerSelect()" ng-model="Data._tomourName" class="bd1 bdr-lg pd19 lh30 fs24 c-9 mb26 icon-arrow-r reset-input input-full"/>
 
             <div class="lh46 fs24 c-3 mt50">状态</div>
             <div class="m-filter-page-stat fs28">
@@ -106,7 +107,7 @@
 <script src="../vendor/simcere/js/config.js"></script>
 <script src="../js/lib.js"></script>
 <script src="../js/ng.js"></script>
-<script src="../js/ng.DoctorList.js"></script>
+<script src="../js/ng.CycleList.js"></script>
 <script>
     appcan.ready(function () {
         appcan.frame.setBounce({
@@ -115,9 +116,9 @@
             upEndCall: function (type) {
                 //$(window).trigger('zy-list-load');
                 if(type=='0'){
-                    appcan.window.publish('EDZY/DoctorList.refresh');
+                    appcan.window.publish('EDZY/CycleList.refresh');
                 }else{
-                    appcan.window.publish('EDZY/DoctorList.load');
+                    appcan.window.publish('EDZY/CycleList.load');
                 }
 
                 appcan.frame.resetBounce(type);
@@ -125,9 +126,6 @@
         });
 
         angular.bootstrap(document.documentElement, ['myApp']);
-
-        /*var bh = $('body').height();
-        $('.g-filter-page').height(bh);*/
     });
 
 </script>
