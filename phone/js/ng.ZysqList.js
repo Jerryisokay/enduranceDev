@@ -21,6 +21,7 @@ angular.module("myApp", ["ngTouch", "ngq"]).service("Data", function() {
   return function() {
     if (!e.loading) {
       e.loading = !0;
+      appcan.window.publish("EDZY/zysqLoad",!1);
       var i = {
         rId: qlib.getUser().loginId,
         flag:e.flag,
@@ -40,9 +41,9 @@ angular.module("myApp", ["ngTouch", "ngq"]).service("Data", function() {
         timeout: REQUEST_TIMEOUT,
         success: function(i, a, o, n, s) {
           e.loading = !1, appcan.window.closeToast(), console.log("List-----"+JSON.stringify(i)), "2" == i.status && (i.status = "0", i.data = {}, i.data.rows = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
-            e.itemListErr = !e.itemList.length
+            e.itemListErr = !e.itemList.length;
           },100)) : t(function() {
-            e.itemList = e.itemList.concat(i.data.rows), e.itemListEmpty = !e.itemList.length, e.itemListErr = !1;
+            e.itemList = e.itemList.concat(i.data.rows), e.itemListEmpty = !e.itemList.length, e.itemListErr = !1,  appcan.window.publish("EDZY/zysqLoad",1);
           })
         },
         error: function(i, a, o, n) {

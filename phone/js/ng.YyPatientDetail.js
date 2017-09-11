@@ -112,11 +112,11 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     }
 }]).service("openCaseDetail", ["$timeout", "Data", function(e, t) { //查看诊疗信息
   return function(o) {
-    localStorage.setItem("EDZY/YyCaseDetail.CaseId", o.id), localStorage.setItem("EDZY/yyEdit", true),  void appcan.window.open("EDZY_YyCaseDetail", "YyCaseDetail.html", 10)
+    localStorage.setItem("EDZY/YyCaseDetail.CaseId", o.id), localStorage.setItem("EDZY/yyEdit", true), void appcan.window.open("EDZY_YyCaseDetail", "YyCaseDetail.html", 10)
   }
 }]).service("openCycleDetail", ["$timeout", "Data", function(e, t) {    //查看用药周期详情
   return function(o) {
-    localStorage.setItem("EDZY/YyCycleDetail.cycleId", o.id),localStorage.setItem("EDZY/yyEdit", true), void appcan.window.open("EDZY_YyCycleDetail", "YyCycleDetail.html", 10)
+    localStorage.setItem("EDZY/YyCycleDetail.cycleId", o.id), localStorage.setItem("EDZY/yyEdit", true), void appcan.window.open("EDZY_YyCycleDetail", "YyCycleDetail.html", 10)
   }
 }]).service("cycleCreate", ["$timeout", "Data", function(e, t) {    //新增用药周期
   return function(o) {
@@ -155,5 +155,15 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
 }]).controller("ItemListController", ["$scope", "$timeout", "Data","getList","getCycleList","openCaseDetail","openCycleDetail","cycleCreate","cycleSubmit", function(e, o, t, i, a, n, d, c, m) {
     e.getCycleList = a, e.openCaseDetail = n, e.openCycleDetail = d, e.cycleCreate = c, e.cycleSubmit = m, i();
 }]).controller("GlbController", ["$scope", "$timeout", "Data", "subscribe", "getPatientDetail","openFlow", "ngqViewImages","caseCreate", function(e, o, t, b, i, a, n, s) {
-  e.Data = t, e.ngqViewImages = n, e.openFlow = a, e.caseCreate = s, b(), i();
+  e.Data = t,e.sMAP = {
+    "": "全部",
+    0: "待审核",
+    1: "通过",
+    2: "驳回",
+    3: "撤销",
+    4: "封存",
+    5: "可赠药",
+    6: "不可赠药",
+    7: "未提交"
+  }, e.ngqViewImages = n, e.openFlow = a, e.caseCreate = s, b(), i();
 }]);

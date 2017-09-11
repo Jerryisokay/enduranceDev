@@ -159,7 +159,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     };
     $.extend(e, t), console.log(e);
     var o = "";
-    if(e.combinedTreatRowId && !e.chemoRegimenRowId){
+    if(e.combinedTreatName == '化疗' && !e.chemoRegimenRowId){
         void appcan.window.alert("提示", "请选择化疗方式", ["知道了"]); return; 
     }
     return e.patientId ? e.hospitalId ? e.deptId ? e.doctorId ? e.theraRegimenRowId ? e.egrfRowId ? e.clinicalStagesRowId ? e.cytologyGradeRowId ? e.diseaseDiagRowId || (o = "请选择疾病诊断") : o = "请选择病理学/或细胞学/组织学诊断或分级" : o = "请选择临床分期" : o = "请选择EGRF检测" : o = "请选择治疗方案" : o = "请选择医生" : o = "请选择科室" : o = "请选择医院" : o = "请选择患者", o ? void appcan.window.alert("提示", o, ["知道了"]) : (appcan.window.openToast(CR.TOAST_WAITING), void appcan.request.ajax({

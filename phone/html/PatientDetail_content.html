@@ -90,13 +90,13 @@
 
             <div class="icon-arrow-r f-dn"></div>
         </div>
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.patient.isEmiName=='是'">
             <div class="u-icon w32 h32 fi fi-dizhi"></div>
             <div class="ph18 fs24 c-3">医保所属地</div>
             <input type="text" ng-model="Data.patient.miArea" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
         </div>
         <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.patient.isEmiName=='是'">
             <div class="u-icon w32 h32 fi fi-yibaoleixing"></div>
             <div class="ph18 fs24 c-3">医保类型</div>
             <input type="text" ng-model="Data.patient.mitypeName" readonly placeholder="未选择" class="ub-f1 reset-input f-tar ph12 fs24 "/>

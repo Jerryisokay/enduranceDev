@@ -78,12 +78,22 @@
             appcan.frame.open("content", "ZysqListFilter.html", titWidth, titHeight, 'filter');
         }, 500);
         
+        var isClick = !1;
+        
+        
+        appcan.window.subscribe("EDZY/zysqLoad", function(msg){
+            isClick = msg;
+        })
+        
         $("#tab .tab-item").on('tap',function(){
-            $("#tab .tab-item").removeClass("active");
-            $(this).addClass("active");
-            var flag = $(this).data("flag");
-            localStorage.setItem("EDZY/ZysqList.flag",flag);
-            appcan.window.publish('EDZY/ZysqList.setFlag','');
+            //console.log("isClick "+isClick);
+            if(isClick == 1){
+                $("#tab .tab-item").removeClass("active");
+                $(this).addClass("active");
+                var flag = $(this).data("flag");
+                localStorage.setItem("EDZY/ZysqList.flag",flag);
+                appcan.window.publish('EDZY/ZysqList.setFlag','');
+            }
         })
         
         //关闭窗口

@@ -16,9 +16,11 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
 }).service("subscribe", ["$timeout", "Data", "getZyList", "getYyList", function(t, e, i, a) {
   return function() {
     appcan.window.subscribe("EDZY/ZyList.refresh", function() {
+      e.itemList.length = 0, console.log("ZyList.refresh");
       i()
     })
     appcan.window.subscribe("EDZY/YyList.refresh", function() {
+      e.YyList.length = 0, console.log("YyList.refresh");
       a()
     })
   }
@@ -165,6 +167,16 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     e.openZyDetail = a, i();
 }]).controller("YyListController",["$scope", "$timeout", "Data","getYyList","getCycleList","openCaseDetail","openCycleDetail", function(e, o, t, i, a, n, c) {
     e.getCycleList = a,e.openCaseDetail = n,e.openCycleDetail = c, i();
-}]).controller("GlbController", ["$scope", "$timeout", "Data","getPatientDetail","openFlow", "ngqViewImages","addZy", function(e, o, t, i, a, n, s) {
-  e.Data = t, e.ngqViewImages = n, e.openFlow = a, e.addZy = s, i();
+}]).controller("GlbController", ["$scope", "$timeout", "Data","subscribe","getPatientDetail","openFlow", "ngqViewImages","addZy", function(e, o, t, sc, i, a, n, s) {
+  e.Data = t,e.sMAP = {
+    "": "全部",
+    0: "待审核",
+    1: "通过",
+    2: "驳回",
+    3: "撤销",
+    4: "封存",
+    5: "可赠药",
+    6: "不可赠药",
+    7: "未提交"
+  }, e.ngqViewImages = n, e.openFlow = a, e.addZy = s, i(), sc();
 }]);

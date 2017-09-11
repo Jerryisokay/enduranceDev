@@ -98,13 +98,13 @@
     
                 <div class="icon-arrow-r f-dn"></div>
             </div>
-            <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+            <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.patient.isEmiName=='是'">
                 <div class="u-icon w32 h32 fi fi-dizhi"></div>
                 <div class="ph18 fs24 c-3">医保所属地</div>
                 <input type="text" ng-model="Data.patient.miArea" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
             </div>
             <!--item-->
-            <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+            <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.patient.isEmiName=='是'">
                 <div class="u-icon w32 h32 fi fi-yibaoleixing"></div>
                 <div class="ph18 fs24 c-3">医保类型</div>
                 <input type="text" ng-model="Data.patient.mitypeName" readonly placeholder="未选择" class="ub-f1 reset-input f-tar ph12 fs24 "/>
@@ -183,7 +183,10 @@
             <div class="g-req-error text-muted ng-hide" ng-show="Data.YyListErr">查询失败</div>
             <div class="" ng-repeat="item in Data.YyList" ng-init="outerIndex = $index;item.onload = false; item.detailActive=false">
                 <div class="ub ub-ac m-list-item h69 pl20 bd-b">
-                    <div class="pr18 ub-f1 fs20 c-3" ng-click="openCaseDetail(item)">诊疗信息{{$index+1}}</div>
+                    <div class="pr18 fs20 c-3" ng-click="openCaseDetail(item)">诊疗信息{{$index+1}}</div>
+                    <div class="ub-f1 ub ub-ac">
+                        <div class="fs18 c-f p-sh pr18" ng-class="{'bg-warn':item.state==0,'bg-error':item.state==2,'bg-positive':item.state==1||item.state==3||item.state==7,'bg-gray':item.state==4}" ng-bind="sMAP[item.state]">待审核</div>
+                    </div>
                     <div class="c-positive pr30" ng-click="openCaseDetail(item)"><span class="fs20">查看</span></div>
                     <div class="ml20 c-9 icon-arrow-r fa-rotate-90 pv16 ph19" ng-class="{'fa-rotate-270':item.detailActive}" ng-click="getCycleList(item)"></div>
                 </div>
@@ -220,11 +223,14 @@
                 <!---item--->
                 <div class="bd-b m-list-item pt16 pb16" ng-click="openZyDetail(item)" ng-show="Data.itemList.length" ng-repeat="item in Data.itemList">
                     <div class="ub ub-ac h50 ph19">
-                        <div class="pr18 ub-f1 fs20 c-6" ng-cloak>赠药周期{{$index+1}}</div>
+                        <div class="pr18 fs20 c-6" ng-cloak>赠药周期{{$index+1}}</div>
                         <div class="fs20 c-9">时间段：{{item.beginDate}}~{{item.endDate}}</div>
                     </div>
                     <div class="ub ub-ac h50 ph19">
-                        <div class="pr18 ub-f1 fs20 c-9">支数：{{item.useCount}}支</div>
+                        <div class="ub-f1 ub ub-ac">
+                            <div class="fs18 c-f p-sh pr18" ng-class="{'bg-warn':item.state==0,'bg-error':item.state==2,'bg-positive':item.state==1||item.state==3||item.state==7,'bg-gray':item.state==4}" ng-bind="sMAP[item.state]">待审核</div>
+                        </div>
+                        <div class="pr18 fs20 c-9">支数：{{item.useCount}}支</div>
                         <div class="c-9 fs20">产品：{{item.productValue}}</div>
                     </div>
                 </div>

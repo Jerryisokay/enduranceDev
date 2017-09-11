@@ -306,8 +306,8 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
           success: function(i, n, s, r, c) {
             e.applysLoading = !1, appcan.window.closeToast(), console.log("applys "+JSON.stringify(i)), "2" == i.status && (i.status = "0", i.data.rows = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
               })) : t(function() {
-                e.applys = e.applys.concat(i.data.applys);
-                if(appcan.isArray(i.data.applys) && i.data.applys.length>0){
+                e.applys = e.applys.concat(i.data.rows);
+                if(appcan.isArray(i.data.rows) && i.data.rows.length>0){
                     //e.pharmacy = i.data.applys[i.data.applys.length-1].pharmacy,e.pharmacyId = i.data.applys[i.data.applys.length-1].pharmacyId
                 }
               })
@@ -337,7 +337,17 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
 }]).controller("applysController",["$scope", "$timeout", "Data", "getApplys", function(e, o, t, i){
     //i()
 }]).controller("GlbController", ["$scope", "$timeout", "Data","getPatientDetail", "getZysqDetail", "subscribe", "openFlow", "ngqViewImages","applyZy","applyResubmit", "getApplys", function(e, o, t, i, d, c, a, n, s, r, p) {
-  e.Data = t, e.ngqViewImages = n, e.openFlow = a, e.openShopSelect = function(){
+  e.Data = t,e.sMAP = {
+    "": "全部",
+    0: "待审核",
+    1: "通过",
+    2: "驳回",
+    3: "撤销",
+    4: "封存",
+    5: "可赠药",
+    6: "不可赠药",
+    7: "未提交"
+  }, e.ngqViewImages = n, e.openFlow = a, e.openShopSelect = function(){
       qlib.openShopSelect()
   }, i(), c(), d(), p();
 }]);

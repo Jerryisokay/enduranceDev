@@ -91,13 +91,13 @@
     
                 <div class="icon-arrow-r f-dn"></div>
             </div>
-            <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+            <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.patient.isEmiName=='是'">
                 <div class="u-icon w32 h32 fi fi-dizhi"></div>
                 <div class="ph18 fs24 c-3">医保所属地</div>
                 <input type="text" ng-model="Data.patient.miArea" readonly placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
             </div>
             <!--item-->
-            <div class="ub ub-ac m-list-item h69 ph19 bd-b">
+            <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.patient.isEmiName=='是'">
                 <div class="u-icon w32 h32 fi fi-yibaoleixing"></div>
                 <div class="ph18 fs24 c-3">医保类型</div>
                 <input type="text" ng-model="Data.patient.mitypeName" readonly placeholder="未选择" class="ub-f1 reset-input f-tar ph12 fs24 "/>
@@ -178,8 +178,12 @@
             <div class="g-req-error text-muted ng-hide bd-t" ng-show="Data.itemListErr">查询失败</div>
             <div class="bd-t" ng-repeat="item in Data.itemList" ng-init="outerIndex = $index;item.onload = false; item.detailActive=false">
                 <div class="ub ub-ac m-list-item h69 pl20 bd-b">
-                    <div class="ub ub-f1" ng-click="openCaseDetail(item)">
-                        <div class="pr18 ub-f1 fs20 c-3">诊疗信息{{$index+1}}</div>
+                    <div class="ub ub-f1 ub-ac" ng-click="openCaseDetail(item)">
+                        <div class="pr18 fs20 c-3">诊疗信息{{$index+1}}</div>
+                        <!-- <div class="ub-f1 pr18 fs20 c-9" ng-bind="sMAP[item.state]">全部</div> -->
+                        <div class="ub-f1 ub ub-ac">
+                            <div class="fs18 c-f p-sh pr18" ng-class="{'bg-warn':item.state==0,'bg-error':item.state==2,'bg-positive':item.state==1||item.state==3||item.state==7,'bg-gray':item.state==4}" ng-bind="sMAP[item.state]">待审核</div>
+                        </div>
                         <div class="c-positive pr30"><span class="fs20">查看</span></div>
                     </div>
                     <div class="ml20 c-9 icon-arrow-r fa-rotate-90 pv16 ph19" ng-class="{'fa-rotate-270':item.detailActive}" ng-click="getCycleList(item)"></div>
@@ -197,9 +201,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="ub ub-ac">
+                <div class="ub ub-ac ng-hide" ng-show="item.state!=0 && item.state!=4">
                     <div class="ub-f1 ub ub-ac ub-pc c-positive h48 pv16 m-list-item" ng-class="{'bd-r':item.state=='7'}" ng-click="cycleCreate(item)">+<span class="fs24">新增用药周期</span></div>
-                    <div class="ub-f1 ub ub-ac ub-pc fs24 c-f69 h48 pv16 m-list-item ng-hide" ng-show="item.state=='7'" ng-click="cycleSubmit(item)">病例管理提交</div>
+                    <div class="ub-f1 ub ub-ac ub-pc fs24 c-f69 h48 pv16 m-list-item" ng-click="cycleSubmit(item)">病例管理提交</div>
                 </div>    
             </div>
         </div>
