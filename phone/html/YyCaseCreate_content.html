@@ -96,7 +96,7 @@
             <div class="icon-arrow-r"></div>
         </div>
         <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.combinedTreatName=='化疗'" ng-click="openChemotherapySelect()">
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b ng-hide" ng-show="Data.theraRegimenName=='联合治疗' && Data.combinedTreatName=='化疗'" ng-click="openChemotherapySelect()">
             <div class="u-icon w32 h32 fi fi-bingli"></div>
             <div class="ph18 fs24 c-3">化疗方案</div>
             <input type="text" ng-model="Data.chemoRegimenName" readonly="" placeholder="未填写(必填)" value="" class="ub-f1 reset-input f-tar ph12 fs24 "/>
@@ -106,7 +106,7 @@
         <div class="ub ub-ac m-list-item h69 ph19" ng-click="openPdSelect()">
             <div class="u-icon w32 h32 fi fi-fenqi"></div>
             <div class="ph18 fs24 c-3">诊疗周期</div>
-            <input type="text" ng-model="Data.pd" readonly="" placeholder="未填写(必填)" value="" class="ub-f1 reset-input f-tar ph12 fs24 "/>
+            <input type="text" ng-model="Data.pdName" readonly="" placeholder="未填写(必填)" value="" class="ub-f1 reset-input f-tar ph12 fs24 "/>
 
             <div class="icon-arrow-r"></div>
         </div>

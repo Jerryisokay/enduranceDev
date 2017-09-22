@@ -190,7 +190,7 @@
                 </div>
                 <!--用药周期列表-->
                 <div class="ng-hide" ng-show="item.detailActive">
-                    <div class="pl20 m-list-item pt16" ng-click="openCycleDetail(vm)" ng-repeat="vm in item.cycleList track by $index"  ng-init="innerIndex = $index">
+                    <div class="pl20 m-list-item pt16" ng-click="openCycleDetail(vm,item.state)" ng-repeat="vm in item.cycleList track by $index"  ng-init="innerIndex = $index">
                         <div class="ub ub-ac h50 ph19">
                             <div class="pr18 ub-f1 fs20 c-6">第{{innerIndex+1}}次用药</div>
                             <div class="fs20 c-9">时间段：{{vm.beginDate}}~{{vm.endDate}}</div>

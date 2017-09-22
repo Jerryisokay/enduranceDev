@@ -22,7 +22,7 @@ var SimcereConfig = {
     "emmLoginDomain": "simcere"
 };
 
-var REQUEST_TIMEOUT = 15000;
+var REQUEST_TIMEOUT = 30000;
 var IMG_BASE_URL = 'http://modev.isimcere.com:8888/uploads/enduzengyao/';
 //文案
 var CR = {

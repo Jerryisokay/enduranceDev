@@ -28,6 +28,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     chemoRegimenRowId:"",       //化疗Id
     chemoRegimenName:"",
     pd:"",
+    pdName:"",
     caseRepFiles:"",            //病理报表扫描件
     caseRepFilesView:[],
     chestCTBFiles:"",           //胸部CT报告（治疗前）
@@ -92,7 +93,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
       var o = localStorage.getItem("EDZY/DiseaseSelect.item"),
         i = angular.fromJson(o);
       e(function() {
-        t.diseaseDiagRowId = i.id, t.diseaseDiagName = i.name
+        t.diseaseDiagRowId = i.id, t.diseaseDiagName = i.name, t.cytologyGradeRowId = "", t.cytologyGradeName = "", t.clinicalStagesRowId = "", t.clinicalStagesName = "";
       })
     }), appcan.window.subscribe("EDZY/CytologySelect.selected", function() {
       //病理学/或细胞学/组织学诊断或分级
@@ -157,12 +158,12 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
       patientId: pId,
       patientRowId: pRowId,
     };
-    $.extend(e, t), console.log(e);
+    $.extend(e, t), console.log(JSON.stringify(e));
     var o = "";
     if(e.combinedTreatName == '化疗' && !e.chemoRegimenRowId){
         void appcan.window.alert("提示", "请选择化疗方式", ["知道了"]); return; 
     }
-    return e.patientId ? e.hospitalId ? e.deptId ? e.doctorId ? e.theraRegimenRowId ? e.egrfRowId ? e.clinicalStagesRowId ? e.cytologyGradeRowId ? e.diseaseDiagRowId || (o = "请选择疾病诊断") : o = "请选择病理学/或细胞学/组织学诊断或分级" : o = "请选择临床分期" : o = "请选择EGRF检测" : o = "请选择治疗方案" : o = "请选择医生" : o = "请选择科室" : o = "请选择医院" : o = "请选择患者", o ? void appcan.window.alert("提示", o, ["知道了"]) : (appcan.window.openToast(CR.TOAST_WAITING), void appcan.request.ajax({
+    return e.patientId ? e.hospitalId ? e.deptId ? e.doctorId ? e.theraRegimenRowId ? e.egrfRowId ? e.clinicalStagesRowId ? e.cytologyGradeRowId ? e.diseaseDiagRowId　? (e.pd != '' && e.pd != null && e.pd != 'null' ) ||(o = '请选择诊疗周期') : (o = "请选择疾病诊断") : o = "请选择病理学/或细胞学/组织学诊断或分级" : o = "请选择临床分期" : o = "请选择EGRF检测" : o = "请选择治疗方案" : o = "请选择医生" : o = "请选择科室" : o = "请选择医院" : o = "请选择患者", o ? void appcan.window.alert("提示", o, ["知道了"]) : (appcan.window.openToast(CR.TOAST_WAITING), void appcan.request.ajax({
       type: "POST",
       url: SimcereConfig.server.edzy + "case",
       data: e,
@@ -194,7 +195,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
         if (appcan.window.closeToast(), console.log(o), "0" != o.status) appcan.window.openToast(o.msg, SimcereConfig.ui.toastDuration);
         else {
           var r = o.data;
-          r.caseRepFilesView = i(r.caseRepFiles), r.chestCTBFilesView = i(r.chestCTBFiles), r.chestCTFFilesView = i(r.chestCTFFiles), r.assApplyFilesView = i(r.assApplyFiles), r.infNotiCirmFilesView = i(r.infNotiCirmFiles), r.ecoEvlFilesView = i(r.ecoEvlFiles), r.RegimenName = (!r.combinedTreatName) ? r.theraRegimenName : r.theraRegimenName+"/"+r.combinedTreatName, e(function() {
+          r.caseRepFilesView = i(r.caseRepFiles), r.chestCTBFilesView = i(r.chestCTBFiles), r.chestCTFFilesView = i(r.chestCTFFiles), r.assApplyFilesView = i(r.assApplyFiles), r.infNotiCirmFilesView = i(r.infNotiCirmFiles), r.ecoEvlFilesView = i(r.ecoEvlFiles), r.RegimenName = (!r.combinedTreatName) ? r.theraRegimenName : r.theraRegimenName+"/"+r.combinedTreatName, r.pdName = (r.pd==0||r.pd=='0')? "其他" : r.pd+'赠PD', e(function() {
             angular.extend(t, o.data)
           })
         }
