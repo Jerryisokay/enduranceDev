@@ -126,7 +126,10 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
 }]).service("setMiArea",["$timeout", "Data", function(e, t) {
   return function(i) {
     openMiArea(function (data) {
-        console.log(data),t.miProvince = data.data[0],t.miCity = data.data[1],t.miArea = t.miProvince + t.miCity
+        setTimeout(function(){
+            console.log(data),t.miProvince = data.data[0],t.miCity = data.data[1],t.miArea = t.miProvince + t.miCity    
+        },100);
+        
     })
   }
 }]).service("submitPatient", ["$timeout", "Data", function(e, t) {

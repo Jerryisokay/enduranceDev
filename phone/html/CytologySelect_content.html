@@ -38,7 +38,14 @@
     appcan.ready(function () {
 //        appcan.initBounce();
 
-        var list = qlib.getDict()[DICT_KEY.CYTOLOGY];
+        var listA = qlib.getDict()[DICT_KEY.CYTOLOGY], list = [] , parentId = localStorage.getItem("EDZY/CytologySelect/parentId");
+        $.each(listA, function(i,v){
+            if(v.parentId==parentId){
+                list.push(v);
+            }
+        })
+        localStorage.removeItem("EDZY/CytologySelect/parentId");
+        console.log(JSON.stringify(list));
         var tpl = $('#tpl_list').html();
         var compiler = _.template(tpl);
         var html = list.map(function (data) {

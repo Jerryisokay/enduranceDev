@@ -75,8 +75,6 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
       e(function() {
         t.comments = n.id, t.commentsName = n.name
       })
-    }), appcan.window.subscribe("EDZY/ZyzqCreate.submit", function() {
-      o()
     })
   }
 }]).service("getCycleDetail", ["$timeout", "Data", "$filter", "getFlow", "imgSpliter", function(e, o, t, n, a) {
@@ -157,7 +155,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
         o.beginDate = e.begin, o.endDate = e.end, o.begin_end_View = e.begin + " ~ " + e.end
       })
     };
-    qlib.openDateRangeSelect(e, "2", "0")
+    qlib.openDateRangeSelect(e, "2", "1")
   }, e.openProductSelect = function() {
     qlib.openScopedProductSelect()
   }, e.openYlpjSelect = function() {

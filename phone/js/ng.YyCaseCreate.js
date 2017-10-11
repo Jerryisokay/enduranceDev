@@ -163,7 +163,13 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     if(e.combinedTreatName == '化疗' && !e.chemoRegimenRowId){
         void appcan.window.alert("提示", "请选择化疗方式", ["知道了"]); return; 
     }
-    return e.patientId ? e.hospitalId ? e.deptId ? e.doctorId ? e.theraRegimenRowId ? e.egrfRowId ? e.clinicalStagesRowId ? e.cytologyGradeRowId ? e.diseaseDiagRowId　? (e.pd != '' && e.pd != null && e.pd != 'null' ) ||(o = '请选择诊疗周期') : (o = "请选择疾病诊断") : o = "请选择病理学/或细胞学/组织学诊断或分级" : o = "请选择临床分期" : o = "请选择EGRF检测" : o = "请选择治疗方案" : o = "请选择医生" : o = "请选择科室" : o = "请选择医院" : o = "请选择患者", o ? void appcan.window.alert("提示", o, ["知道了"]) : (appcan.window.openToast(CR.TOAST_WAITING), void appcan.request.ajax({
+    if( e.diseaseDiagRowId !="1@56013470" && e.diseaseDiagRowId != '1@56013471' && !e.cytologyGradeRowId){
+        void appcan.window.alert("提示", "请选择病理学/或细胞学/组织学诊断或升级", ["知道了"]); return; 
+    }
+    if( e.diseaseDiagRowId != '1@56013471' && !e.clinicalStagesRowId){
+        void appcan.window.alert("提示", "请选择临床分期", ["知道了"]); return; 
+    }
+    return e.patientId ? e.hospitalId ? e.deptId ? e.doctorId ? e.theraRegimenRowId ? e.egrfRowId   ? e.diseaseDiagRowId　? (e.pd != '' && e.pd != null && e.pd != 'null' ) ||(o = '请选择诊疗周期') : (o = "请选择疾病诊断") : o = "请选择EGRF检测" : o = "请选择治疗方案" : o = "请选择医生" : o = "请选择科室" : o = "请选择医院" : o = "请选择患者", o ? void appcan.window.alert("提示", o, ["知道了"]) : (appcan.window.openToast(CR.TOAST_WAITING), void appcan.request.ajax({
       type: "POST",
       url: SimcereConfig.server.edzy + "case",
       data: e,
@@ -215,9 +221,9 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
   }, e.openDoctorSelect = function() {
     return localStorage.setItem("EDZY/DoctorSelect.hospitalId", o.hospitalId), localStorage.setItem("EDZY/DoctorSelect.deptId", o.deptId), o.deptId ? void qlib.openDoctorSelect() : void appcan.window.alert("提示", "请先选择科室", ["知道了"])
   },e.openLcfqSelect = function() {
-    qlib.openLcfqSelect();
+    return localStorage.setItem("EDZY/LcfqSelect/parentId", o.diseaseDiagRowId), o.diseaseDiagRowId ? qlib.openLcfqSelect() : void appcan.window.alert("提示", "请先选择疾病诊断", ["知道了"]);
   },e.openCytologySelect = function(){
-      appcan.window.open("CytologySelect", "CytologySelect.html", 10)
+      return localStorage.setItem("EDZY/CytologySelect/parentId", o.diseaseDiagRowId), o.diseaseDiagRowId ? void appcan.window.open("CytologySelect", "CytologySelect.html", 10) : void appcan.window.alert("提示", "请先选择疾病诊断", ["知道了"]);
   },e.openEGFRSelect = function(){
       appcan.window.open("EGRFSelect", "EGRFSelect.html", 10)
   },e.openDiseaseSelect = function() {

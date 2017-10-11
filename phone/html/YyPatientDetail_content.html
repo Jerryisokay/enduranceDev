@@ -137,7 +137,7 @@
         <div class="m-list-group bd1  f-oh gap-b bdr-5">
             <div class="g-card-img  f-oh bg-light pd22">
                 <div class="m-card-img">
-                    <div class="mb30 fs24 c-3">身份证扫描件</div>
+                    <div class="mb30 fs24 c-3">身份证正反面照</div>
                     <div class="f-cb mb-quits">
                         <!--item-->
                         <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.patient.idcardFilesView.length" ng-repeat="item in Data.patient.idcardFilesView">
@@ -151,7 +151,7 @@
         <div class="m-list-group bd1 f-oh gap-b bdr-5">
             <div class="g-card-img  f-oh bg-light pd22">
                 <div class="m-card-img">
-                    <div class="mb30 fs24 c-3">户口本扫描件</div>
+                    <div class="mb30 fs24 c-3">户口簿首页照、患者本人页和直系亲属页照</div>
                     <div class="f-cb mb-quits">
                         <!--item-->
                         <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.patient.hkFilesView.length" ng-repeat="item in Data.patient.hkFilesView">
@@ -165,7 +165,7 @@
     </div>
     
     
-    <div class="m-list-group bd1 bdr-5 f-oh bg-light gap-b" ng-init="YyDetailShow=false">
+    <div class="m-list-group bd1 bdr-5 f-oh bg-light gap-b" ng-init="YyDetailShow=true">
         <div class="ub ub-ac m-list-item h69 pl20">
             <div class="pr18 ub-f1 fs24 c-3" ng-click="YyDetailShow=!YyDetailShow">用药周期信息</div>
             <div class="c-positive pr30" ng-click="caseCreate()">+<span class="fs24">新增诊疗信息</span></div>

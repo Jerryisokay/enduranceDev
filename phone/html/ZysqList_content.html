@@ -57,11 +57,11 @@
                     <i class="f-db w36 h36 fi fi-yisheng"></i>
                     <div class="fs28 c-3 ml5" ng-bind="item.name">王医生</div>
                 </div>
-                <div class="ng-hide" ng-show="Data.flag==1"><span class="fs28 c-warn" ng-bind="item.times||0">3</span><span class="fs18 c-9">次赠药</span></div>
+                <div class="ng-hide" ng-show="Data.flag==1"><span class="fs18 c-9">已</span><span class="fs28 c-warn" ng-bind="item.times||0">3</span><span class="fs18 c-9">次赠药</span></div>
                 <div class="icon-arrow-r ml20 ng-hide" ng-show="item.giveState==5"></div>
             </div>
             <div class="ub ub-ac mt12 fs24 c-9">
-                <div class="mr10 ub-f1">用药支数：<span class="c-positive" ng-bind="item.useCount||0">12</span>支</div>
+                <div class="mr10 ub-f1">本次用药支数：<span class="c-positive" ng-bind="item.useCount||0">12</span>支</div>
                 <div class="ub-f1"></div>
                 <div class="fs18 c-f p-sh ng-hide" ng-show="item.giveState==1" ng-class="{'bg-warn':item.state==0,'bg-error':item.state==2,'bg-positive':item.state==1||item.state==3||item.state==null,'bg-gray':item.state==4||item.state==6}" data-state="{{item.state}}" ng-bind="sMAP[item.state]">可申请</div>
                 <div class="fs18 c-f p-sh bg-error ng-hide" ng-show="item.giveState==0" ng-bind="sMAP[3]">可申请</div>

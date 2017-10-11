@@ -4,6 +4,10 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
     itemListEmpty: !1,
     itemListErr: !1,
     itemListLoaded: !1,
+    HistoryList:[],
+    HistoryEmpty:!1,
+    HistoryErr:!1,
+    HistoryLoaded:!1,
     YyList:[],
     YyListEmpty: !1,
     YyListErr: !1,
@@ -37,8 +41,8 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
       })
     }),
     appcan.window.subscribe("EDZY/ZysqDetail.apply", function() {
-        console.log("state---"+e.state),
-        1 == e.state ? z() : r();
+        console.log("state---"+e.state);
+        2 == e.state ? r() : z();
     })
   }
 }]).service("getPatientDetail", ["$timeout", "Data", "$filter", "getFlow", "imgSpliter", function(e, t, o, i, n) {
@@ -59,7 +63,7 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
         else {
           var c = o.data;
           c.idcardFilesView = n(c.idcardFiles), c.hkFilesView = n(c.hkFiles), c.ssqxView = [c.province || "", c.city || "", c.area || "", c.addr || ""].join(""), e(function() {
-            t.patient = o.data, t.state = o.data.state;
+            t.patient = o.data;
             t.patient.miArea = t.patient.miProvince + t.patient.miCity;
           });
         }
@@ -84,16 +88,24 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
         };
         console.log(n), appcan.window.openToast(CR.TOAST_WAITING), appcan.request.ajax({
           type: "GET",
-          url: SimcereConfig.server.edzy + "givencyc",
+          url: SimcereConfig.server.edzy + "givencyc/apply",
           data: n,
           contentType: "application/json",
           dataType: "json",
           timeout: REQUEST_TIMEOUT,
           success: function(i, n, s, r, c) {
-            e.zyLoading = !1, appcan.window.closeToast(), console.log(i), "2" == i.status && (i.status = "0", i.data = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
-                e.itemListErr = !e.itemList.length
+            e.zyLoading = !1, appcan.window.closeToast(), console.log(JSON.stringify(i)), "2" == i.status && (i.status = "0", i.data = []), "0" != i.status ? (appcan.window.openToast(i.msg, SimcereConfig.ui.toastDuration), console.error("res error"), t(function() {
+                e.itemListErr = !e.itemList.length, e.HistoryListErr = !e.HistoryList.length
               })) : t(function() {
-                e.itemList = e.itemList.concat(i.data), e.itemListEmpty = !e.itemList.length;
+                //本次赠药
+                if(appcan.isArray(i.data.newCycs)){
+                    e.itemList = e.itemList.concat(i.data.newCycs), e.itemListEmpty = !e.itemList.length;
+                }
+                //历史赠药
+                if(appcan.isArray(i.data.oldCycs)){
+                    e.HistoryList = e.HistoryList.concat(i.data.oldCycs), e.HistoryListEmpty = !e.HistoryList.length;
+                }
+                 //HistoryList
                 //console.log("e.itemList----"+JSON.stringify(e.itemList));
               })
           },
@@ -164,9 +176,9 @@ angular.module("myApp", ["ngq"]).service("Data", function() {
 }]).service("getZysqDetail", ["$timeout", "Data", function(t, e) {
     //获取诊疗信息列表
   return function() {
-    var f = localStorage.getItem("EDZY/ZysqList.flag"), fl = localStorage.getItem("EDZY/ZysqDetail.flowId");
+    var f = localStorage.getItem("EDZY/ZysqList.flag"), fl = localStorage.getItem("EDZY/ZysqDetail.flowId"), st = localStorage.getItem("EDZY/ZysqDetail.state");
     //var s= localStorage.getItem("EDZY/ZysqDetail.state"), f = localStorage.getItem("EDZY/ZysqList.flag"), fl = localStorage.getItem("EDZY/ZysqDetail.flowId");
-      e.flag = f, e.flowId = fl;
+      e.flag = f, e.flowId = fl, e.state = st;
       var l = 'setEditState()';
           console.log("flag----"+e.flag), qlib.evalScriptInWindow("", l), localStorage.setItem("EDZY/Flow.id",e.flowId), console.log("FlowId: %s", e.flowId);
         if(fl!=null&&fl!='null'){

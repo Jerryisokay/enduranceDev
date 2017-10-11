@@ -144,7 +144,7 @@
         <div class="m-list-group bd1  f-oh gap-b bdr-5">
             <div class="g-card-img  f-oh bg-light pd22">
                 <div class="m-card-img">
-                    <div class="mb30 fs24 c-3">身份证扫描件</div>
+                    <div class="mb30 fs24 c-3">身份证正反面照</div>
                     <div class="f-cb mb-quits">
                         <!--item-->
                         <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.patient.idcardFilesView.length" ng-repeat="item in Data.patient.idcardFilesView">
@@ -158,7 +158,7 @@
         <div class="m-list-group bd1 f-oh gap-b bdr-5">
             <div class="g-card-img  f-oh bg-light pd22">
                 <div class="m-card-img">
-                    <div class="mb30 fs24 c-3">户口本扫描件</div>
+                    <div class="mb30 fs24 c-3">户口簿首页照、患者本人页和直系亲属页照</div>
                     <div class="f-cb mb-quits">
                         <!--item-->
                         <div class="u-card-img-item bdr-lg bd1 ng-hide" ng-show="Data.patient.hkFilesView.length" ng-repeat="item in Data.patient.hkFilesView">
@@ -171,7 +171,7 @@
         </div>
     </div>
     
-    <div class="m-list-group bd1 bdr-5 f-oh bg-light gap-b" ng-init="YyDetailShow=false">
+    <div class="m-list-group bd1 bdr-5 f-oh bg-light gap-b" ng-init="YyDetailShow=true">
         <div class="ub ub-ac m-list-item h69 pl20 bd-b" ng-click="YyDetailShow=!YyDetailShow">
             <div class="pr18 ub-f1 fs24 c-3">用药周期信息</div>
             <div class="ml20 c-9 icon-arrow-r fa-rotate-90 pv16 ph19" ng-class="{'fa-rotate-270':YyDetailShow}"></div>
@@ -227,10 +227,10 @@
                         <div class="fs20 c-9">时间段：{{item.beginDate}}~{{item.endDate}}</div>
                     </div>
                     <div class="ub ub-ac h50 ph19">
-                        <div class="ub-f1 ub ub-ac">
+                        <!-- <div class="ub-f1 ub ub-ac">
                             <div class="fs18 c-f p-sh pr18" ng-class="{'bg-warn':item.state==0,'bg-error':item.state==2,'bg-positive':item.state==1||item.state==3||item.state==7,'bg-gray':item.state==4}" ng-bind="sMAP[item.state]">待审核</div>
-                        </div>
-                        <div class="pr18 fs20 c-9">支数：{{item.useCount}}支</div>
+                        </div> -->
+                        <div class="pr18 fs20 c-9 ub-f1">支数：{{item.useCount}}支</div>
                         <div class="c-9 fs20">产品：{{item.productValue}}</div>
                     </div>
                 </div>
@@ -241,7 +241,7 @@
         </div>
     </div>
     
-    <div class="m-list-group bd1 f-oh bg-light bdr-5">
+    <div class="m-list-group bd1 f-oh bg-light bdr-5 ng-hide">
         <!--item-->
         <div class="ub ub-ac m-list-item h69 ph19 j-open-flow" ng-click="openFlow()">
             <div class="u-icon w32 h32 fi fi-shenpiliucheng"></div>

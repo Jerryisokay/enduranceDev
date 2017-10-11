@@ -105,9 +105,9 @@
             upEndCall: function (type) {
                 //$(window).trigger('zy-list-load');
                 if(type=='0'){
-                    appcan.window.publish('EDZY/YyPatientList.refresh');
+                    appcan.window.publish('EDZY/PatientList.refresh');
                 }else{
-                    appcan.window.publish('EDZY/YyPatientList.load');
+                    appcan.window.publish('EDZY/PatientList.load');
                 }
 
                 appcan.frame.resetBounce(type);

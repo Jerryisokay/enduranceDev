@@ -64,7 +64,7 @@
 
     <div class="m-list-group bd1 bdr-5 f-oh bg-light gap-b">
         <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b" ng-click="openCytologySelect()">
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b" ng-hide="Data.diseaseDiagRowId == '1@56013470' || Data.diseaseDiagRowId == '1@56013471' " ng-click="openCytologySelect()">
             <div class="u-icon w32 h32 fi fi-bingli"></div>
             <div class="ph18 fs24 c-3">病理学/或细胞学/组织学诊断或升级</div>
             <input type="text" ng-model="Data.cytologyGradeName" readonly="" placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>
@@ -72,7 +72,7 @@
             <div class="icon-arrow-r"></div>
         </div>
         <!--item-->
-        <div class="ub ub-ac m-list-item h69 ph19 bd-b" ng-click="openLcfqSelect()">
+        <div class="ub ub-ac m-list-item h69 ph19 bd-b" ng-hide="Data.diseaseDiagRowId == '1@56013471'" ng-click="openLcfqSelect()">
             <div class="u-icon w32 h32 fi fi-fenqi"></div>
             <div class="ph18 fs24 c-3">临床分期</div>
             <input type="text" ng-model="Data.clinicalStagesName" readonly="" placeholder="未填写" class="ub-f1 reset-input f-tar ph12 fs24 "/>

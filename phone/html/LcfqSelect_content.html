@@ -38,7 +38,13 @@
     appcan.ready(function () {
 //        appcan.initBounce();
 
-        var list = qlib.getDict()[DICT_KEY.CLINICAL_STAGES];
+        var listA = qlib.getDict()[DICT_KEY.CLINICAL_STAGES], list = [] , parentId = localStorage.getItem("EDZY/LcfqSelect/parentId");
+        $.each(listA, function(i,v){
+            if(v.parentId==parentId){
+                list.push(v);
+            }
+        })
+        localStorage.removeItem("EDZY/LcfqSelect/parentId");
         var tpl = $('#tpl_list').html();
         var compiler = _.template(tpl);
         var html = list.map(function (data) {
